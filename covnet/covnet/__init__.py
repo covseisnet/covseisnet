@@ -3,8 +3,8 @@
 # flake8: noqa
 
 __all__ = [
-    'covariance',
-    'data',
+    "covariance",
+    "data",
 ]
 
 from . import *

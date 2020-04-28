@@ -67,7 +67,7 @@ class CovarianceMatrix(np.ndarray):
         obj = np.asarray(input_array, dtype=complex).view(cls)
         return obj
 
-    def coherence(self, kind='spectral_width', epsilon=1e-10):
+    def coherence(self, kind="spectral_width", epsilon=1e-10):
         r"""Covariance-based coherence estimation.
 
         The measured is performed onto all the covariance matrices from
@@ -112,16 +112,16 @@ class CovarianceMatrix(np.ndarray):
             The spectral width of maximal shape ``(n_times, n_frequencies)``.
 
         """
-        if kind == 'spectral_width':
+        if kind == "spectral_width":
             eigenvalues = self.eigenvalues(norm=sum)
             indices = np.arange(self.shape[-1])
             return np.multiply(eigenvalues, indices).sum(axis=-1)
-        elif kind == 'coherence':
+        elif kind == "coherence":
             eigenvalues = self.eigenvalues(norm=sum)
             log_eigenvalues = np.log(eigenvalues + epsilon)
-            return - np.sum(eigenvalues * log_eigenvalues, axis=-1)
+            return -np.sum(eigenvalues * log_eigenvalues, axis=-1)
         else:
-            print('Error: {} is not an available option for kind.')
+            print("Error: {} is not an available option for kind.")
             pass
 
     def eigenvalues(self, norm=max):
@@ -190,8 +190,7 @@ class CovarianceMatrix(np.ndarray):
         """
         # Initialization
         matrices = self._flat()
-        eigenvectors = np.zeros((matrices.shape[0], matrices.shape[-1]),
-                                dtype=complex)
+        eigenvectors = np.zeros((matrices.shape[0], matrices.shape[-1]), dtype=complex)
 
         # Calculation over submatrices
         for i, m in enumerate(matrices):
@@ -248,8 +247,7 @@ class CovarianceMatrix(np.ndarray):
         return self[..., trii, trij]
 
 
-def calculate(stream, window_duration_sec, average, average_step=None,
-              **kwargs):
+def calculate(stream, window_duration_sec, average, average_step=None, **kwargs):
     """Calculate covariance matrix from the streams.
 
     Arguments
@@ -320,7 +318,7 @@ def calculate(stream, window_duration_sec, average, average_step=None,
     # Times
     t_end = times[-1]
     times = times[:-1]
-    times = times[:1 - average:step]
+    times = times[: 1 - average : step]
     n_average = len(times)
     times = np.hstack((times, t_end))
 
@@ -332,18 +330,22 @@ def calculate(stream, window_duration_sec, average, average_step=None,
     for t in range(n_average):
         covariance[t] = xcov(t, spectra, step, average)
 
-    return times, frequencies, covariance.view(
-        CovarianceMatrix).transpose([0, -1, 1, 2])
+    return (
+        times,
+        frequencies,
+        covariance.view(CovarianceMatrix).transpose([0, -1, 1, 2]),
+    )
 
 
 def stft(
-        stream,
-        window_duration_sec,
-        bandwidth=None,
-        window_step_sec=None,
-        window=np.hanning,
-        times_kw=dict(),
-        **kwargs):
+    stream,
+    window_duration_sec,
+    bandwidth=None,
+    window_step_sec=None,
+    window=np.hanning,
+    times_kw=dict(),
+    **kwargs
+):
     """Short-time fourier transform.
 
     Arguments
@@ -399,14 +401,14 @@ def stft(
     fs = stream[0].stats.sampling_rate
     npts = int(window_duration_sec * fs)
     step = npts // 2 if window_step_sec is None else int(window_step_sec * fs)
-    times_kw.setdefault('type', 'relative')
-    times_kw.setdefault('reftime', None)
-    times = stream.times(**times_kw)[:1 - npts:step]
+    times_kw.setdefault("type", "relative")
+    times_kw.setdefault("reftime", None)
+    times = stream.times(**times_kw)[: 1 - npts : step]
     n_times = len(times)
 
     # Frequency vector
-    kwargs.setdefault('n', 2 * npts - 1)
-    frequencies = np.linspace(0, fs, kwargs['n'])
+    kwargs.setdefault("n", 2 * npts - 1)
+    frequencies = np.linspace(0, fs, kwargs["n"])
 
     if bandwidth is not None:
         fin = (frequencies >= bandwidth[0]) & (frequencies <= bandwidth[1])

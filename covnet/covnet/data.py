@@ -92,8 +92,9 @@ class ArrayStream(obspy.core.stream.Stream):
         endtime = obspy.UTCDateTime(endtime)
         self.trim(starttime, endtime, **kwargs)
 
-    def normalize(self, method='onebit', smooth_length=None,
-                  smooth_order=None, epsilon=1e-10):
+    def normalize(
+        self, method="onebit", smooth_length=None, smooth_order=None, epsilon=1e-10
+    ):
         r"""Normalize the seismic traces in temporal domain.
 
         Considering :math:`x_i(t)` being the seismic trace :math:`x_i(t)`, the
@@ -143,22 +144,28 @@ class ArrayStream(obspy.core.stream.Stream):
             Regularization parameter in division, set to ``1e-10`` by default.
 
         """
-        if method == 'onebit':
+        if method == "onebit":
             for trace in self:
                 trace.data = trace.data / (np.abs(trace.data) + epsilon)
 
-        if method == 'smooth':
+        if method == "smooth":
             for trace in self:
                 trace_env_smooth = signal.savgol_filter(
-                    np.abs(trace.data), smooth_length, smooth_order)
+                    np.abs(trace.data), smooth_length, smooth_order
+                )
                 trace.data = trace.data / (trace_env_smooth + epsilon)
 
-        if method == 'demad':
+        if method == "demad":
             for trace in self:
-                trace.data /= (signal.mad(trace.data) + epsilon)
+                trace.data /= signal.mad(trace.data) + epsilon
 
-    def synchronize(self, sampling_rate=20.0, method='linear',
-                    start='2010-01-01', npts=24 * 3600 * 20):
+    def synchronize(
+        self,
+        sampling_rate=20.0,
+        method="linear",
+        start="2010-01-01",
+        npts=24 * 3600 * 20,
+    ):
         r"""Synchronize seismic traces into the same times.
 
         So far, this function uses the
@@ -238,7 +245,7 @@ class ArrayStream(obspy.core.stream.Stream):
         """
         return self[0].times(**kwargs)
 
-    def whiten(self, segment_duration_sec, method='pure', smooth=11):
+    def whiten(self, segment_duration_sec, method="pure", smooth=11):
         """Spectral normalization of the traces.
 
         Parameters
@@ -257,9 +264,9 @@ class ArrayStream(obspy.core.stream.Stream):
 
         """
         # Define method
-        if method == 'pure':
+        if method == "pure":
             whiten_method = signal.phase
-        elif method == 'smooth':
+        elif method == "smooth":
             whiten_method = signal.detrend_spectrum
 
         # Initialize for waitbar
@@ -277,8 +284,12 @@ class ArrayStream(obspy.core.stream.Stream):
             trace.data = data
 
         # Trim
-        self.cut(pad=True, fill_value=0, starttime=self[0].stats.starttime,
-                 endtime=self[0].stats.starttime + duration)
+        self.cut(
+            pad=True,
+            fill_value=0,
+            starttime=self[0].stats.starttime,
+            endtime=self[0].stats.starttime + duration,
+        )
 
 
 def read(pathname_or_url=None, **kwargs):
