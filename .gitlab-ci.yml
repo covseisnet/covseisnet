@@ -3,11 +3,11 @@
 pages:
   stage: deploy
   script:
-    - mkdir .docs
-    - cp -r * .docs
-    - mv .docs docs
+    - mkdir .docs/build/html
+    - cp -r * .docs/build/html
+    - mv .docs/build/html docs/build/html
   artifacts:
     paths:
-      - docs
+      - docs/build/html
   only:
     - master
