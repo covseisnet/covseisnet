@@ -1,0 +1,4 @@
+lon, lat, name, to_use
+45.4, 12.7, UYSD, False
+45.1, 13.7, FHJK, True
+43.4, 11.2, SLD, True

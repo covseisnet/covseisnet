@@ -1,0 +1,7 @@
+README.md
+setup.py
+covnet.egg-info/PKG-INFO
+covnet.egg-info/SOURCES.txt
+covnet.egg-info/dependency_links.txt
+covnet.egg-info/requires.txt
+covnet.egg-info/top_level.txt
