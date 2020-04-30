@@ -7,19 +7,6 @@ before_script:
    - pip install twine
    - python setup.py sdist bdist_wheel
 
-deploy_production:
-  stage: deploy
-  variables:
-    TWINE_USERNAME: $PYPI_USERNAME
-    TWINE_PASSWORD: $PYPI_PASSWORD
-  script:
-    - twine upload --repository-url $PYPI_REPOSITORY_URL dist/*
-  only:
-    - tags
-
-
-# This file is a template, and might need editing before it works on your project.
-# Full project: https://gitlab.com/pages/plain-html
 pages:
   stage: deploy
   script:
@@ -31,3 +18,13 @@ pages:
       - public
   only:
     - master
+
+deploy_production:
+  stage: deploy
+  variables:
+    TWINE_USERNAME: $PYPI_USERNAME
+    TWINE_PASSWORD: $PYPI_PASSWORD
+  script:
+    - twine upload --repository-url $PYPI_REPOSITORY_URL dist/*
+  only:
+    - tags
