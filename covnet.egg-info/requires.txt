@@ -1,9 +1,0 @@
-numpy
-scipy
-obspy
-
-[dev]
-check-manifest
-
-[test]
-coverage
