@@ -9,7 +9,6 @@ deploy_to_PyPI:
     TWINE_PASSWORD: $PYPI_PASSWORD
   script:
     - pip install twine
-    - echo $CI_COMMIT_TAG
     - python setup.py sdist bdist_wheel
     - twine upload --repository-url $PYPI_REPOSITORY_URL dist/*
   only:
@@ -24,9 +23,9 @@ deploy_to_Conda:
   script:
     - conda install conda-build anaconda-client
     - conda config --set anaconda_upload yes
-    - echo $CI_COMMIT_TAG
-    - conda skeleton pypi --noarch-python --version $CI_COMMIT_TAG --pypi-url https://test.pypi.io/pypi/ covnet
-    - conda-build --token $ANACONDA_PASSWORD covnet
+    - conda config --append channels conda-forge
+    - sed -i "s/covnet_version/$CI_COMMIT_TAG/g" conda-config/meta.yaml
+    - conda-build --token $ANACONDA_PASSWORD conda-config
   only:
     - tags
 

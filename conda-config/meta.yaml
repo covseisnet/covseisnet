@@ -1,0 +1,33 @@
+{% set name = "covnet" %}
+{% set version = "covnet_version" %}
+# {% set version = "x.x.x" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://test.pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+
+build:
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - pip
+    - python
+  run:
+    - numpy
+    - obspy
+    - python
+    - scipy
+
+about:
+  home: https://covnet.gricad-pages.univ-grenoble-alpes.fr/covnet/
+  license: LGPLv3
+  license_file: ../LICENSE
+  summary: "Covariance matrix analysis of network seismic data"
+  doc_url: https://covnet.gricad-pages.univ-grenoble-alpes.fr/covnet/
+  dev_url: https://gricad-gitlab.univ-grenoble-alpes.fr/covnet/covnet
