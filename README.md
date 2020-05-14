@@ -1,4 +1,4 @@
-# CovNet
+# CovSeisNet
 
 Analaysing seismic data with array processing tools.
 
