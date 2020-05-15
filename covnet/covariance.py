@@ -11,6 +11,7 @@ Todo
 """
 
 import numpy as np
+import obspy
 
 from scipy.linalg import eigvalsh, eigh
 
@@ -121,8 +122,8 @@ class CovarianceMatrix(np.ndarray):
             log_eigenvalues = np.log(eigenvalues + epsilon)
             return -np.sum(eigenvalues * log_eigenvalues, axis=-1)
         else:
-            print("Error: {} is not an available option for kind.")
-            pass
+            message = "{} is not an available option for kind."
+            raise ValueError(message.format(kind))
 
     def eigenvalues(self, norm=max):
         """Eigenvalue decomposition.
@@ -190,7 +191,8 @@ class CovarianceMatrix(np.ndarray):
         """
         # Initialization
         matrices = self._flat()
-        eigenvectors = np.zeros((matrices.shape[0], matrices.shape[-1]), dtype=complex)
+        eigenvectors = np.zeros(
+            (matrices.shape[0], matrices.shape[-1]), dtype=complex)
 
         # Calculation over submatrices
         for i, m in enumerate(matrices):
@@ -318,7 +320,7 @@ def calculate(stream, window_duration_sec, average, average_step=None, **kwargs)
     # Times
     t_end = times[-1]
     times = times[:-1]
-    times = times[: 1 - average : step]
+    times = times[: 1 - average: step]
     n_average = len(times)
     times = np.hstack((times, t_end))
 
@@ -403,7 +405,10 @@ def stft(
     step = npts // 2 if window_step_sec is None else int(window_step_sec * fs)
     times_kw.setdefault("type", "relative")
     times_kw.setdefault("reftime", None)
-    times = stream.times(**times_kw)[: 1 - npts : step]
+    if type(stream) is obspy.core.stream.Stream:
+        times = stream[0].times(**times_kw)[: 1 - npts: step]
+    else:
+        times = stream.times(**times_kw)[: 1 - npts: step]
     n_times = len(times)
 
     # Frequency vector

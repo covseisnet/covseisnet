@@ -8,4 +8,4 @@ __all__ = [
 ]
 
 from . import *
-from covariance import CovarianceMatrix
+from .covariance import CovarianceMatrix
