@@ -7,7 +7,7 @@ python-black:
   stage: static analysis
   script:
     - pip install black
-    - black .
+    - black --check .
 
 deploy_to_PyPI:
   image: python:3.7-slim
