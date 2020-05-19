@@ -16,7 +16,7 @@ with open(os.path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
 try:
-    version = os.environ['CI_COMMIT_TAG']
+    version = os.environ["CI_COMMIT_TAG"]
 except KeyError:
     version = None
 

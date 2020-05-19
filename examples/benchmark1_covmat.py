@@ -11,10 +11,11 @@ import numpy as np
 stream = obspy.read()
 
 # calculate covariance from stream
-window_duration_sec = 1.
+window_duration_sec = 1.0
 average = 5
 times, frequencies, covariances = cn.covariance.calculate(
-    stream, window_duration_sec, average)
+    stream, window_duration_sec, average
+)
 
 # show covariance at first time window and first frequency
 fig, ax = plt.subplots(1)
