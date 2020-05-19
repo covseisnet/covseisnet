@@ -1,5 +1,13 @@
 stages:
   - deploy
+  - static analysis
+
+python-black:
+  image: python:3.7-slim
+  stage: static analysis
+  script:
+    - pip install black
+    - black .
 
 deploy_to_PyPI:
   image: python:3.7-slim
@@ -42,4 +50,4 @@ pages:
     paths:
       - public
   only:
-    - develop
+    - master
