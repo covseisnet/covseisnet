@@ -4,9 +4,9 @@
 
 Todo
 ----
-- Pass the function :func:`covnet.covariance.calculate` as a top level
+- Pass the function :func:`covseisnet.covariance.calculate` as a top level
   function?
-- Should we consider `privatizing` the :func:`covnet.covariance.xcov`
+- Should we consider `privatizing` the :func:`covseisnet.covariance.xcov`
   routine?
 """
 
@@ -53,7 +53,7 @@ class CovarianceMatrix(np.ndarray):
     Any :class:`numpy.ndarray` can be turned into a
     :class:`~arrayprocessing.covariance.CovarianceMatrix` object with
 
-    >>> import covnet as cn
+    >>> import covseisnet as cn
     >>> import numpy as np
     >>> c = np.zeros((4, 4)).view(cn.CovarianceMatrix)
     >>> c
@@ -231,7 +231,7 @@ class CovarianceMatrix(np.ndarray):
         Example
         -------
 
-        >>> import covnet as cn
+        >>> import covseisnet as cn
         >>> import numpy as np
         >>> c = np.arange(8).reshape((2, 2, 2)).view(cn.CovarianceMatrix)
         >>> c
@@ -272,7 +272,7 @@ def calculate(stream, window_duration_sec, average, average_step=None, **kwargs)
 
     **kwargs: dict, optional
         Additional keyword arguments passed to the
-        :func:`~covnet.covariance.stft` function.
+        :func:`~covseisnet.covariance.stft` function.
 
     Returns
     -------
@@ -282,7 +282,7 @@ def calculate(stream, window_duration_sec, average, average_step=None, **kwargs)
     :class:`numpy.ndarray`
         The frequency vector.
 
-    :class:`covnet.covariance.CovarianceMatrix`
+    :class:`covseisnet.covariance.CovarianceMatrix`
         The complex covariance matrix in a maximal shape
         ``(n_time, n_freq, n_sta, n_sta)``.
 
@@ -292,7 +292,7 @@ def calculate(stream, window_duration_sec, average, average_step=None, **kwargs)
     Calculate the covariance matrix of the example stream with 1 second windows
     averaged over 5 windows:
 
-    >>> import covnet as cn
+    >>> import covseisnet as cn
     >>> stream = cn.data.read()
     >>> t, f, c = cn.covariance.calculate(stream, 1., 5)
     >>> print(c.shape)  # (n_times, n_freq, n_cha, n_cha)
@@ -371,7 +371,7 @@ def stft(
 
     times_kw: string, optional
         The keyword arguments passed to the
-        :class:`covnet.data.ArrayStream.times` or
+        :class:`covseisnet.data.ArrayStream.times` or
         :meth:`obspy.core.trace.Trace.times` method depending on the input
         stream class.
 

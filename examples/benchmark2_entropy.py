@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """Covariance matrix in spectral domain."""
 
-import covnet as cn
+import covseisnet as cn
 import obspy
 import matplotlib.pyplot as plt
 

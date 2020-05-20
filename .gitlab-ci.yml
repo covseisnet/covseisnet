@@ -1,6 +1,8 @@
 stages:
-  - deploy
   - static analysis
+  - deploy to PyPI
+  - deploy to Conda
+  - deploy
 
 python-black:
   image: python:3.7-slim
@@ -11,7 +13,7 @@ python-black:
 
 deploy_to_PyPI:
   image: python:3.7-slim
-  stage: deploy
+  stage: deploy to PyPI
   variables:
     TWINE_USERNAME: $PYPI_USERNAME
     TWINE_PASSWORD: $PYPI_PASSWORD
@@ -24,15 +26,15 @@ deploy_to_PyPI:
 
 deploy_to_Conda:
   image: continuumio/miniconda3:4.8.2
-  stage: deploy
+  stage: deploy to Conda
   variables:
     TWINE_USERNAME: $PYPI_USERNAME
     TWINE_PASSWORD: $PYPI_PASSWORD
   script:
+    - sed -i "s/covseisnet_version/$CI_COMMIT_TAG/g" conda-config/meta.yaml
     - conda install conda-build anaconda-client
     - conda config --set anaconda_upload yes
     - conda config --append channels conda-forge
-    - sed -i "s/covnet_version/$CI_COMMIT_TAG/g" conda-config/meta.yaml
     - conda-build --token $ANACONDA_PASSWORD conda-config
   only:
     - tags

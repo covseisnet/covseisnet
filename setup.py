@@ -36,7 +36,7 @@ setup(
     # There are some restrictions on what makes a valid project name
     # specification here:
     # https://packaging.python.org/specifications/core-metadata/#name
-    name="covnet",  # Required
+    name="covseisnet",  # Required
     # Versions should comply with PEP 440:
     # https://www.python.org/dev/peps/pep-0440/
     #
@@ -75,10 +75,10 @@ setup(
     # url='https://github.com/',  # Optional
     # This should be your name or the name of the organization which owns the
     # project.
-    author="The covnet team",  # Optional
+    author="The covseisnet team",  # Optional
     # This should be a valid email address corresponding to the author listed
     # above.
-    author_email="covnet@gmail.com",  # Optional
+    author_email="covseisnet@gmail.com",  # Optional
     # Classifiers help users find your project by categorizing it.
     #
     # For a list of valid classifiers, see https://pypi.org/classifiers/
@@ -110,7 +110,7 @@ setup(
     keywords="seismic data covariance",  # Optional
     # When your source code is in a subdirectory under the project root, e.g.
     # `src/`, it is necessary to specify the `package_dir` argument.
-    # package_dir={'': 'covnet'},  # Optional
+    # package_dir={'': 'covseisnet'},  # Optional
     # You can just specify package directories manually here if your project is
     # simple. Or you can use find_packages().
     #
@@ -120,7 +120,7 @@ setup(
     #
     #   py_modules=["my_module"],
     #
-    packages=["covnet"],  # Required
+    packages=["covseisnet"],  # Required
     # Specify which Python versions you support. In contrast to the
     # 'Programming Language' classifiers above, 'pip install' will check this
     # and refuse to install the project if the version does not match. If you

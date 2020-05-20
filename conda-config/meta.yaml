@@ -1,5 +1,5 @@
-{% set name = "covnet" %}
-{% set version = "covnet_version" %}
+{% set name = "covseisnet" %}
+{% set version = "covseisnet_version" %}
 # {% set version = "x.x.x" %}
 
 package:
@@ -25,9 +25,9 @@ requirements:
     - scipy
 
 about:
-  home: https://covnet.gricad-pages.univ-grenoble-alpes.fr/covnet/
+  home: https://covseisnet.gricad-pages.univ-grenoble-alpes.fr/covseisnet/
   license: LGPLv3
   license_file: ../LICENSE
   summary: "Covariance matrix analysis of network seismic data"
-  doc_url: https://covnet.gricad-pages.univ-grenoble-alpes.fr/covnet/
-  dev_url: https://gricad-gitlab.univ-grenoble-alpes.fr/covnet/covnet
+  doc_url: https://covseisnet.gricad-pages.univ-grenoble-alpes.fr/covseisnet/
+  dev_url: https://gricad-gitlab.univ-grenoble-alpes.fr/covseisnet/covseisnet
