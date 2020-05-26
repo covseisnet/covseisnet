@@ -22,6 +22,8 @@ py37-test:
     - pip install obspy
     - python -m pytest --cov=./
     - codecov --token=45d540c0-9bbc-467c-88d8-df523062d634
+  except:
+    - tags
 
 py35-test:
   image: python:3.5-slim
@@ -32,6 +34,8 @@ py35-test:
     - pip install pytest-cov codecov numpy
     - pip install obspy
     - python -m pytest --cov=./
+  except:
+    - tags
     
 py36-test:
   image: python:3.6-slim
@@ -42,6 +46,8 @@ py36-test:
     - pip install pytest-cov codecov numpy
     - pip install obspy
     - python -m pytest --cov=./
+  except:
+    - tags
 
 py38-test:
   image: python:3.8-slim
@@ -52,6 +58,8 @@ py38-test:
     - pip install pytest-cov codecov numpy
     - pip install obspy
     - python -m pytest --cov=./
+  except:
+    - tags
 
 
 deploy_to_PyPI:
@@ -95,4 +103,4 @@ pages:
     paths:
       - public
   only:
-    - develop
+    - master
