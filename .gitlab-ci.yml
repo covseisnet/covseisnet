@@ -1,5 +1,6 @@
 stages:
   - static analysis
+  - test
   - deploy to PyPI
   - deploy to Conda
   - deploy
@@ -10,6 +11,48 @@ python-black:
   script:
     - pip install black
     - black --check .
+
+py37-test:
+  image: python:3.7-slim
+  stage: test
+  script:
+    - apt update
+    - apt install -y gcc
+    - pip install pytest-cov codecov numpy
+    - pip install obspy
+    - python -m pytest --cov=./
+    - codecov --token=45d540c0-9bbc-467c-88d8-df523062d634
+
+py35-test:
+  image: python:3.5-slim
+  stage: test
+  script:
+    - apt update
+    - apt install -y gcc
+    - pip install pytest-cov codecov numpy
+    - pip install obspy
+    - python -m pytest --cov=./
+    
+py36-test:
+  image: python:3.6-slim
+  stage: test
+  script:
+    - apt update
+    - apt install -y gcc
+    - pip install pytest-cov codecov numpy
+    - pip install obspy
+    - python -m pytest --cov=./
+
+py38-test:
+  image: python:3.8-slim
+  stage: test
+  script:
+    - apt update
+    - apt install -y gcc
+    - pip install pytest-cov codecov numpy
+    - pip install obspy
+    - python -m pytest --cov=./
+
 
 deploy_to_PyPI:
   image: python:3.7-slim
