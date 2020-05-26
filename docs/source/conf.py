@@ -23,14 +23,14 @@ sys.path.insert(0, os.path.abspath("../../"))
 # -------------------
 
 project = "covseisnet"
-copyright = "2019, The Covnet Team"
+copyright = "2020, The CovSeisNet Team"
 author = "L. Seydoux, J. Soubestre, C. Journeau, F. Tong & N. Shapiro"
 
 # The short X.Y version
-version = "0"
+version = "0.3"
 
 # The full version, including alpha/beta/rc tags
-release = "0.0.1"
+release = "0.3.2"
 
 
 # General configuration
@@ -202,7 +202,7 @@ texinfo_documents = [
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {
-    "python": ("https://docs.python.org/3.4", None),
+    "python": ("https://docs.python.org/3.7", None),
     "numpy": ("http://docs.scipy.org/doc/numpy/", None),
     "scipy": ("http://docs.scipy.org/doc/scipy/reference/", None),
     "obspy": ("http://docs.obspy.org", None),

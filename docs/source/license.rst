@@ -5,7 +5,7 @@ License
 
 Version 3, 29 June 2007
 
-Copyright © 2020 The CovNet Team.
+Copyright © 2020 The CovSeisNet Team.
 
 Everyone is permitted to copy and distribute verbatim copies
 of this license document, but changing it is not allowed.
@@ -657,7 +657,7 @@ state the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.
 
 This package is an open-source project dedicated to the analysis of array seismic data. The project includes several classical tools such as beamforming, cross-correlation and spectral analysis.
-Copyright © 2020 The CovNet Team.
+Copyright © 2020 The CovSeisNet Team.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -677,7 +677,7 @@ Also add information on how to contact you by electronic and paper mail.
 If the program does terminal interaction, make it output a short
 notice like this when it starts in an interactive mode:
 
-CovNet Copyright © 2020 The CovNet Team.
+CovSeisNet Copyright © 2020 The CovSeisNet Team.
 This program comes with ABSOLUTELY NO WARRANTY; for details type `show w`.
 This is free software, and you are welcome to redistribute it
 under certain conditions; type `show c` for details.

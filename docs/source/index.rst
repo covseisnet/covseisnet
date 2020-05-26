@@ -20,19 +20,17 @@ Contents
 Manual installation
 -------------------
 
-At the moment, the only way to get this package is to clone it from GitHub. In a terminal, you can create a directory of your choice (for instance a directory where you can store all packages manually installed), and execute the following lines:
+The package is available from the PyPI repository. To install using pip, execute the following line:
 
 .. code-block:: bash
 
-    git clone https://github.com/leonard-seydoux/covseisnet.git .
-    cd covseisnet
-    pip install .
+    pip install covseisnet
 
 Once you installed the package, you can verify your install with executing the following command in a python shell (outside the package repository).
 
 .. code-block:: python
 
-    import covseisnet as cn
+    import covseisnet as csn
 
 References
 ----------
