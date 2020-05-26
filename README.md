@@ -2,6 +2,15 @@
 
 Analaysing seismic data with array processing tools.
 
+[![PyPI Version](https://img.shields.io/pypi/v/covseisnet.svg)](https://test.pypi.org/project/covseisnet)
+[![Conda Version](https://img.shields.io/conda/v/francistong/covseisnet)](https://anaconda.org/francistong/covseisnet)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![License](https://img.shields.io/conda/l/francistong/covseisnet)](https://www.gnu.org/licenses/lgpl.html)
+[![Python Version](https://img.shields.io/pypi/pyversions/covseisnet)](https://test.pypi.org/project/covseisnet)
+[![Platform](https://img.shields.io/conda/pn/francistong/covseisnet)](https://anaconda.org/francistong/covseisnet)
+[![Pipeline Build](https://gricad-gitlab.univ-grenoble-alpes.fr/covseisnet/covseisnet/badges/develop/pipeline.svg)]()
+[![Coverage](https://img.shields.io/codecov/c/gh/covseisnet/covseisnet?token=17eccecf8a2846e497a9c35f10e396de)]()
+
 ## Get and pre-process seismic data
 
 ### Read
