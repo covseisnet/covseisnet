@@ -3,9 +3,9 @@
 # flake8: noqa
 
 __all__ = [
-    "covariance",
-    "data",
+    "covariancematrix",
+    "arraystream",
 ]
 
 from . import *
-from .covariance import CovarianceMatrix
+from .covariancematrix import CovarianceMatrix

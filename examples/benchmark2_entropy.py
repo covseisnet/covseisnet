@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """Covariance matrix in spectral domain."""
 
-import covseisnet as cn
+import covseisnet as csn
 import obspy
 import matplotlib.pyplot as plt
 
@@ -14,7 +14,7 @@ stream = obspy.read()
 # calculate covariance from stream
 window_duration_sec = 1.0
 average = 5
-times, frequencies, covariances = cn.covariance.calculate(
+times, frequencies, covariances = csn.covariancematrix.calculate(
     stream, window_duration_sec, average
 )
 

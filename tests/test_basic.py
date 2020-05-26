@@ -9,7 +9,7 @@ def test_covariance_spec_width():
     stream = obspy.read()
     window_duration_sec = 1.0
     average = 5
-    times, frequencies, covariances = csn.covariance.calculate(
+    times, frequencies, covariances = csn.covariancematrix.calculate(
         stream, window_duration_sec, average
     )
 
