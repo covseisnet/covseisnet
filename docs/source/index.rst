@@ -1,4 +1,4 @@
-.. covnet documentation master file, created by
+.. covseisnet documentation master file, created by
    sphinx-quickstart on Mon Mar 26 10:49:33 2018.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
@@ -20,19 +20,17 @@ Contents
 Manual installation
 -------------------
 
-At the moment, the only way to get this package is to clone it from GitHub. In a terminal, you can create a directory of your choice (for instance a directory where you can store all packages manually installed), and execute the following lines:
+The package is available from the PyPI repository. To install using pip, execute the following line:
 
 .. code-block:: bash
 
-    git clone https://github.com/leonard-seydoux/covnet.git .
-    cd covnet
-    pip install .
+    pip install covseisnet
 
 Once you installed the package, you can verify your install with executing the following command in a python shell (outside the package repository).
 
 .. code-block:: python
 
-    import covnet as cn
+    import covseisnet as csn
 
 References
 ----------

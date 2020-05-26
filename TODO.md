@@ -24,9 +24,9 @@ __Roadmap__
 
 ## Data management
 
-- Remove methods for strange formats (`h5read`, `matread`). We want the users to whether feed covariance with an `obspy.Stream` object stream or an `covnet.ArrayStream` object.
+- Remove methods for strange formats (`h5read`, `matread`). We want the users to whether feed covariance with an `obspy.Stream` object stream or an `covseisnet.ArrayStream` object.
 
-- for calculating the covariance, if we get a `obspy.Stream` object, we have to turn it into a `covnet.ArrayStream`, involing a `synchronize` routine (method of the `data.py` module).
+- for calculating the covariance, if we get a `obspy.Stream` object, we have to turn it into a `covseisnet.ArrayStream`, involing a `synchronize` routine (method of the `data.py` module).
 
 - the `time` propertry returns only 1 time vector from 1 of the traces, knowing that they should be exactly on the same sampling and length. If not, this property should trigger an error/warning.
 
@@ -91,7 +91,7 @@ ttimes[station2]
 
 
 # Define grid
-likelihood = covnet.GridSearch(model, net, ttimes='/path/to/ttimes.npz', build=False)
+likelihood = covseisnet.GridSearch(model, net, ttimes='/path/to/ttimes.npz', build=False)
 likelihood.calculate(corr)
 ```
 

@@ -22,15 +22,15 @@ sys.path.insert(0, os.path.abspath("../../"))
 # Project information
 # -------------------
 
-project = "covnet"
-copyright = "2019, The Covnet Team"
+project = "covseisnet"
+copyright = "2020, The CovSeisNet Team"
 author = "L. Seydoux, J. Soubestre, C. Journeau, F. Tong & N. Shapiro"
 
 # The short X.Y version
-version = "0"
+version = "0.3"
 
 # The full version, including alpha/beta/rc tags
-release = "0.0.1"
+release = "0.3.2"
 
 
 # General configuration
@@ -132,7 +132,7 @@ html_sidebars = {"**": ["localtoc.html", "searchbox.html"]}
 # ---------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "covnetdoc"
+htmlhelp_basename = "covseisnetdoc"
 
 
 # Options for LaTeX output
@@ -159,8 +159,8 @@ latex_elements = {
 latex_documents = [
     (
         master_doc,
-        "covnet.tex",
-        "covnet Documentation",
+        "covseisnet.tex",
+        "covseisnet Documentation",
         "Leonard Seydoux and Jean Soubestre",
         "manual",
     ),
@@ -172,7 +172,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, "covnet", "covnet Documentation", [author], 1)]
+man_pages = [(master_doc, "covseisnet", "covseisnet Documentation", [author], 1)]
 
 
 # Options for Texinfo output
@@ -184,10 +184,10 @@ man_pages = [(master_doc, "covnet", "covnet Documentation", [author], 1)]
 texinfo_documents = [
     (
         master_doc,
-        "covnet",
-        "covnet Documentation",
+        "covseisnet",
+        "covseisnet Documentation",
         author,
-        "covnet",
+        "covseisnet",
         "Array seismic data processing.",
         "Miscellaneous",
     ),
@@ -202,7 +202,7 @@ texinfo_documents = [
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {
-    "python": ("https://docs.python.org/3.4", None),
+    "python": ("https://docs.python.org/3.7", None),
     "numpy": ("http://docs.scipy.org/doc/numpy/", None),
     "scipy": ("http://docs.scipy.org/doc/scipy/reference/", None),
     "obspy": ("http://docs.obspy.org", None),

@@ -1,17 +1,17 @@
 Package structure
 =================
 
-:mod:`covnet.covariance`
+:mod:`covseisnet.covariancematrix`
 -------------------------------------------------------------------------------
 
-.. automodule:: covnet.covariance
+.. automodule:: covseisnet.covariancematrix
     :members:
     :show-inheritance:
 
-:mod:`covnet.data`
+:mod:`covseisnet.arraystream`
 -------------------------------------------------------------------------------
 
-.. automodule:: covnet.data
+.. automodule:: covseisnet.arraystream
     :members:
     :show-inheritance:
 
