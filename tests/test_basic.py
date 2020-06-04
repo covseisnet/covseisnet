@@ -1,9 +1,9 @@
 import covseisnet as csn
+import pytest
+import obspy
 
 
-def test_covariance_spec_width():
-
-    import obspy
+def test_covariance():
 
     # read ObsPy's example stream
     stream = obspy.read()
@@ -15,6 +15,37 @@ def test_covariance_spec_width():
 
     assert covariances.all() != None
 
+    # test spectral width
     spectral_width = covariances.coherence(kind="spectral_width")
-
     assert spectral_width.all() != None
+
+    # test coherence
+    coherence = covariances.coherence(kind="coherence")
+    assert coherence.all() != None
+
+    with pytest.raises(ValueError):
+        covariances.coherence(kind="none")
+
+    # test eigenvectors
+    eigenvectors = covariances.eigenvectors()
+    assert eigenvectors.all() != None
+
+    # test upper triangular
+    triu = covariances.triu()
+    assert triu.all() != None
+
+
+def test_arraystream():
+
+    stream = csn.arraystream.read()
+
+    # test cut
+    stream.cut(
+        starttime=stream[0].stats.starttime + 1, endtime=stream[0].stats.endtime - 1
+    )
+
+    # test normalize
+    stream.normalize(method="onebit")
+
+    # test times
+    times = stream.times()
