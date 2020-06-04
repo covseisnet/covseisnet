@@ -6,36 +6,41 @@
 Home
 ====
 
-This package is an open-source project dedicated to the analysis of array seismic data. The project includes several classical tools such as beamforming, cross-correlation and spectral analysis. Seismic data reading and processing is mostly based on the ObsPy library (https://github.com/obspy/obspy/wiki).
+This package provides tools for array signal processing, with a focus on seismic data. In addition to the classical array processing tools (e.g. beaforming, inter-station cross-correlation) we provide various tools for source detection and location with blind source separation algorithms. The project also includes diverse spectral analysis tools. `covseisnet` mostly inherits from `obpsy` (seismic-data analysis) and `numpy`.
+
 
 Contents
 --------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
+   installation
+   guide
+   auto_examples/index
    api
    license
 
-Manual installation
--------------------
 
-The package is available from the PyPI repository. To install using pip, execute the following line:
+How-to cite this package
+------------------------
 
-.. code-block:: bash
+This package is released under the GNU General Public License v3.0 (see :ref:`license`). Please include the following statement in the ackowledgements section of your publication, and please include a reference to one the paper listed in the :ref:`references` section below.
 
-    pip install covseisnet
 
-Once you installed the package, you can verify your install with executing the following command in a python shell (outside the package repository).
 
-.. code-block:: python
-
-    import covseisnet as csn
+.. _references:
 
 References
 ----------
 
 The following publications have made use of this package, or of a development version of it. Please refer to the description provided therein in order to get in-depth descriptions of the tools defined in the package as well as an overview of possible applications.
+
+- Journeau, Cyril, Nikolai M. Shapiro, Leonard Seydoux, Jean Soubestre, Valérie Ferrazzini, and Aline Peltier. "Detection, classification, and location of seismovolcanic tremors with multi-component seismic data, example from the Piton de la Fournaise volcano (La Réunion, France)." (preprint, 2020)
+
+- Lott, Martin, Philippe Roux, Léonard Seydoux, Benoit Tallon, Adrien Pelat, Sergey Skipetrov, and Andrea Colombi. "Localized modes on a metasurface through multi-wave interactions." arXiv preprint arXiv:1912.11530 (2019).
+
+- Soubestre, J., L. Seydoux, N. M. Shapiro, J. de Rosny, D. V. Droznin, S. Ya Droznina, S. L. Senyukov, and E. I. Gordeev. "Depth Migration of Seismovolcanic Tremor Sources Below the Klyuchevskoy Volcanic Group (Kamchatka) Determined From a Network‐Based Analysis." *Geophysical Research Letters* 46, no. 14 (2019): 8018-8030.
 
 - Soubestre, Jean, et al. Network‐Based Detection and Classification of Seismovolcanic Tremors: Example From the Klyuchevskoy Volcanic Group in Kamchatka. *Journal of Geophysical Research: Solid Earth* 123.1 (2018): 564-582.
 
@@ -46,24 +51,4 @@ The following publications have made use of this package, or of a development ve
 - Seydoux, Léonard, et al. "Detecting seismic activity with a covariance matrix analysis of data recorded on seismic arrays." Geophysical Journal International 204.3 (2016): 1430-1442.
 
 
-Indices and tables
-------------------
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
-Licence
--------
-
-This package is released under the GNU General Public License v3.0 (see :ref:`license`)
-
-Todo
-----
-
-- Add the installation process from ``conda``.
-- Add recent papers and doi links.
-- Add a "How to cite this package" section.
-- Discuss the copyright and licence formatting.
-- Review the ``conf.py`` file meta data.
 
