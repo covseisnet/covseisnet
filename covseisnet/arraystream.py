@@ -93,11 +93,7 @@ class ArrayStream(obspy.core.stream.Stream):
         self.trim(starttime, endtime, **kwargs)
 
     def normalize(
-        self,
-        method="onebit",
-        smooth_length=None,
-        smooth_order=None,
-        epsilon=1e-10
+        self, method="onebit", smooth_length=None, smooth_order=None, epsilon=1e-10
     ):
         r"""Normalize the seismic traces in temporal domain.
 
@@ -199,10 +195,7 @@ class ArrayStream(obspy.core.stream.Stream):
         start = obspy.UTCDateTime(start)
         self.interpolate(sampling_rate, method, start, npts)
 
-    def times(
-            self,
-            station_index=0,
-            **kwargs):
+    def times(self, station_index=0, **kwargs):
         r"""Common time vector of the ArrayStream.
 
         Because the :class:`~covseisnet.data.ArrayStream` is supposed to handle

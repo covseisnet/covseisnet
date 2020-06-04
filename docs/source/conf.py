@@ -56,7 +56,7 @@ extensions = [
     "sphinx.ext.githubpages",
     "sphinx.ext.napoleon",
     "recommonmark",
-    'sphinx_gallery.gen_gallery'
+    "sphinx_gallery.gen_gallery",
 ]
 
 
@@ -69,12 +69,13 @@ class MatplotlibSVG(object):
 
     def __call__(self, *args, **kwargs):
         """Return image with SVG format."""
-        return matplotlib_scraper(*args, format='svg', **kwargs)
+        return matplotlib_scraper(*args, format="svg", **kwargs)
+
 
 sphinx_gallery_conf = {
-    'examples_dirs': '../../examples',
-    'gallery_dirs': 'auto_examples',
-    'image_scrapers': (MatplotlibSVG(),),
+    "examples_dirs": "../../examples",
+    "gallery_dirs": "auto_examples",
+    "image_scrapers": (MatplotlibSVG(),),
 }
 
 # Add any paths that contain templates here, relative to this directory.
@@ -193,8 +194,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, "covseisnet",
-              "covseisnet Documentation", [author], 1)]
+man_pages = [(master_doc, "covseisnet", "covseisnet Documentation", [author], 1)]
 
 
 # Options for Texinfo output
