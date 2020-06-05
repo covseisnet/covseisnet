@@ -1,0 +1,309 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="english" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="english" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>User&#39;s Guide &mdash; covseisnet 0.3.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery-dataframe.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Gallery" href="auto_examples/index.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> covseisnet
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#manual-installation">Manual installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User's Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#roadmap">Roadmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dealing-with-array-seismic-data">Dealing with array seismic data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#network-covariance-matrix-analysis">Network covariance matrix analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Gallery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_example_2.html">Single-station covariance matrix spectral width</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_example_1.html">Single-station covariance matrix</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Package structure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-covseisnet.covariancematrix"><code class="xref py py-mod docutils literal notranslate"><span class="pre">covseisnet.covariancematrix</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-covseisnet.arraystream"><code class="xref py py-mod docutils literal notranslate"><span class="pre">covseisnet.arraystream</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="license.html#preamble">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#how-to-apply-these-terms-to-your-new-programs">How to Apply These Terms to Your New Programs</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">covseisnet</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>User's Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/guide.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="user-s-guide">
+<span id="guide"></span><h1>User's Guide<a class="headerlink" href="#user-s-guide" title="Permalink to this headline">¶</a></h1>
+<p>This package provides tools for array signal processing, with a focus on seismic data. In addition to the classical array processing tools (e.g. beaforming, inter-station cross-correlation) we provide various tools for source detection and location with blind source separation algorithms. The project also includes diverse spectral analysis tools. <cite>covseisnet</cite> mostly inherits from the <cite>obspy</cite> seismic-oriented python package and <cite>numpy</cite>.</p>
+<div class="section" id="roadmap">
+<h2>Roadmap<a class="headerlink" href="#roadmap" title="Permalink to this headline">¶</a></h2>
+<p>Different versions of the package are planned to be released:</p>
+<ul>
+<li><p><strong>version 1</strong>: detection from array covariance matrix, where two main objects are defined:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="api.html#covseisnet.arraystream.ArrayStream" title="covseisnet.arraystream.ArrayStream"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayStream</span></code></a> – a synchronous obspy stream collected from an array of seismic stations (see the <a class="reference internal" href="#user-guide-arraystream"><span class="std std-ref">Dealing with array seismic data</span></a> section below, or see the object documentation).</p></li>
+<li><p><a class="reference internal" href="api.html#covseisnet.covariancematrix.CovarianceMatrix" title="covseisnet.covariancematrix.CovarianceMatrix"><code class="xref py py-class docutils literal notranslate"><span class="pre">CovarianceMatrix</span></code></a> – a numpy array with covariance-analysis methods (see the <a class="reference internal" href="#user-guide-covariancematrix"><span class="std std-ref">Network covariance matrix analysis</span></a> section below, or see the object documentation).</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>version 2</strong>: source separation and location from the covariance matrix eigenvectors, temporal cross-correlation and backpropagation.</p></li>
+<li><p><strong>version 3</strong>: equalization method for coherent source removal and wavefield equipartionning enhancement.</p></li>
+</ul>
+</div>
+<div class="section" id="dealing-with-array-seismic-data">
+<span id="user-guide-arraystream"></span><h2>Dealing with array seismic data<a class="headerlink" href="#dealing-with-array-seismic-data" title="Permalink to this headline">¶</a></h2>
+<p>Because we do array seismic data analysis, we need synchronized seismic traces. The whole package is based on obspy's <a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.stream.Stream.html#obspy.core.stream.Stream" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a> object in order to use the seismic and signal-processing tools therein defined. Nevertheless, obspy's <a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.stream.Stream.html#obspy.core.stream.Stream" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a> allow to gather different traces from different seismic stations with different sampling properties (sampling rate, start time, duration...). Yet, in order to do array signal processing, we need to have synchronous seismic traces, and to make sure that any pre-processing is applied to the whole array seismic data in a similar fashion.</p>
+<p>We therefore provide an <a class="reference internal" href="api.html#covseisnet.arraystream.ArrayStream" title="covseisnet.arraystream.ArrayStream"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayStream</span></code></a> class, which primary goal is to synchronize and pre-process a collection of seismic traces collected at different seismic stations. This class directly inherits from the obspy's <a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.stream.Stream.html#obspy.core.stream.Stream" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a> class, with four additional methods.</p>
+<div class="section" id="traces-synchronization-with-synchronize">
+<h3>1. Traces synchronization with <a class="reference internal" href="api.html#covseisnet.arraystream.ArrayStream.synchronize" title="covseisnet.arraystream.ArrayStream.synchronize"><code class="xref py py-meth docutils literal notranslate"><span class="pre">synchronize()</span></code></a><a class="headerlink" href="#traces-synchronization-with-synchronize" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="api.html#covseisnet.arraystream.ArrayStream.synchronize" title="covseisnet.arraystream.ArrayStream.synchronize"><code class="xref py py-meth docutils literal notranslate"><span class="pre">covseisnet.arraystream.ArrayStream.synchronize()</span></code></a> method allows to trim the seismic traces on similar starting and ending dates (and thus, duration) and similar sampling rate. In addition, the method can perform sub-sampling interpolation if the traces are time-shifted below the sampling rate.</p>
+</div>
+<div class="section" id="traces-preprocessing-with-preprocess">
+<h3>2. Traces preprocessing with <code class="xref py py-meth docutils literal notranslate"><span class="pre">preprocess()</span></code><a class="headerlink" href="#traces-preprocessing-with-preprocess" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="xref py py-meth docutils literal notranslate"><span class="pre">covseisnet.arraystream.ArrayStream.preprocess()</span></code> method provides a great diveristy of pre-processing in the spectral and temporal domains.</p>
+</div>
+<div class="section" id="traces-trimming-with-cut">
+<h3>3. Traces trimming with <a class="reference internal" href="api.html#covseisnet.arraystream.ArrayStream.cut" title="covseisnet.arraystream.ArrayStream.cut"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cut()</span></code></a><a class="headerlink" href="#traces-trimming-with-cut" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="api.html#covseisnet.arraystream.ArrayStream.cut" title="covseisnet.arraystream.ArrayStream.cut"><code class="xref py py-meth docutils literal notranslate"><span class="pre">covseisnet.arraystream.ArrayStream.cut()</span></code></a> method is a wrapper for the <a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.stream.Stream.trim.html#obspy.core.stream.Stream.trim" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">trim()</span></code></a> method; the only difference is that it can work with date strings instead of <a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.utcdatetime.UTCDateTime.html#obspy.core.utcdatetime.UTCDateTime" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UTCDateTime</span></code></a> objects.</p>
+</div>
+<div class="section" id="array-seismic-data-time-vector-with-times">
+<h3>4. Array seismic data time vector with <a class="reference internal" href="api.html#covseisnet.arraystream.ArrayStream.times" title="covseisnet.arraystream.ArrayStream.times"><code class="xref py py-meth docutils literal notranslate"><span class="pre">times()</span></code></a><a class="headerlink" href="#array-seismic-data-time-vector-with-times" title="Permalink to this headline">¶</a></h3>
+<p>In a <a class="reference internal" href="api.html#covseisnet.arraystream.ArrayStream" title="covseisnet.arraystream.ArrayStream"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayStream</span></code></a> instance, the time vectors of each individual traces is supposed to be the same after the synchronization. Note that all the array operations performed by other classes and methods of the package consider that the traces are synchronous. Therefore, there is only a single time vector that should be considered for all traces. The
+<a class="reference internal" href="api.html#covseisnet.arraystream.ArrayStream.times" title="covseisnet.arraystream.ArrayStream.times"><code class="xref py py-meth docutils literal notranslate"><span class="pre">covseisnet.arraystream.ArrayStream.times()</span></code></a> method is a wrapper for the <a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.trace.Trace.times.html#obspy.core.trace.Trace.times" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">obspy.core.trace.Trace.times()</span></code></a> method, where only the first seismic station (by default) time vector is considered. This method can return the times in different formats, please check the documentation for more details.</p>
+</div>
+</div>
+<div class="section" id="network-covariance-matrix-analysis">
+<span id="user-guide-covariancematrix"></span><h2>Network covariance matrix analysis<a class="headerlink" href="#network-covariance-matrix-analysis" title="Permalink to this headline">¶</a></h2>
+<p>One of the goal of the package is to provide detection strategies based on the properties of the spectral covariance matrix of the array seismic data. The spectral network covariance matrix is the Fourier transform of the time-domain (local) inter-station cross-correlation matrix. The <a class="reference internal" href="api.html#covseisnet.covariancematrix.CovarianceMatrix" title="covseisnet.covariancematrix.CovarianceMatrix"><code class="xref py py-class docutils literal notranslate"><span class="pre">CovarianceMatrix</span></code></a> object is based on a <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.18)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> with additional covariance-based analysis tools. One should never instanciate a <a class="reference internal" href="api.html#covseisnet.covariancematrix.CovarianceMatrix" title="covseisnet.covariancematrix.CovarianceMatrix"><code class="xref py py-class docutils literal notranslate"><span class="pre">CovarianceMatrix</span></code></a> object directly, but calculate it from an <a class="reference internal" href="api.html#covseisnet.arraystream.ArrayStream" title="covseisnet.arraystream.ArrayStream"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayStream</span></code></a> object (or an obspy's <a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.stream.Stream.html#obspy.core.stream.Stream" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a> directly if the user ensure that the traces are already synchronous and pre-processed) with the <a class="reference internal" href="api.html#covseisnet.covariancematrix.calculate" title="covseisnet.covariancematrix.calculate"><code class="xref py py-class docutils literal notranslate"><span class="pre">covseisnet.covariancematrix.calculate</span></code></a> function.</p>
+<p>The shape of a <a class="reference internal" href="api.html#covseisnet.covariancematrix.CovarianceMatrix" title="covseisnet.covariancematrix.CovarianceMatrix"><code class="xref py py-class docutils literal notranslate"><span class="pre">CovarianceMatrix</span></code></a> object calculated from <span class="math notranslate nohighlight">\(N\)</span> traces is at least <span class="math notranslate nohighlight">\(N \times N\)</span>. Depending on the averaging size and frequency content, the covariance matrix can be of shape</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">(n_sta,</span> <span class="pre">n_sta)</span></code> if a single frequency and time sample is obtained.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(n_freq,</span> <span class="pre">n_sta,</span> <span class="pre">n_sta)</span></code> for a single time sample and <code class="docutils literal notranslate"><span class="pre">n_freq</span></code> frequency points</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(n_times,</span> <span class="pre">n_freq,</span> <span class="pre">n_sta,</span> <span class="pre">n_sta)</span></code> for <code class="docutils literal notranslate"><span class="pre">n_times</span></code> and <code class="docutils literal notranslate"><span class="pre">n_freq</span></code> dimensions.</p></li>
+</ul>
+<p>All the methods defined in the the <code class="xref py py-class docutils literal notranslate"><span class="pre">CovarianceMatrix</span></code> class are performed on the flattened array with the private method <code class="xref py py-class docutils literal notranslate"><span class="pre">arrayprocessing.covariance.CovarianceMatrix._flat</span></code>, which allows to obtain as many <span class="math notranslate nohighlight">\(N \times N\)</span> covariance matrices as time and frequency samples.</p>
+<div class="section" id="covariance-matrix-estimation-from-an-arraystream-object-with-covseisnet-covariancematrix-calculate">
+<h3>1. Covariance matrix estimation from an <a class="reference internal" href="api.html#covseisnet.arraystream.ArrayStream" title="covseisnet.arraystream.ArrayStream"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayStream</span></code></a> object with <a class="reference internal" href="api.html#covseisnet.covariancematrix.calculate" title="covseisnet.covariancematrix.calculate"><code class="xref py py-func docutils literal notranslate"><span class="pre">covseisnet.covariancematrix.calculate()</span></code></a><a class="headerlink" href="#covariance-matrix-estimation-from-an-arraystream-object-with-covseisnet-covariancematrix-calculate" title="Permalink to this headline">¶</a></h3>
+<p>The function <a class="reference internal" href="api.html#covseisnet.covariancematrix.calculate" title="covseisnet.covariancematrix.calculate"><code class="xref py py-func docutils literal notranslate"><span class="pre">covseisnet.covariancematrix.calculate()</span></code></a> allows to compute the spectral network covariance matrix from a synchronous stream object (a manually synchronized obspy's <a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.stream.Stream.html#obspy.core.stream.Stream" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a> object, or an <a class="reference internal" href="api.html#covseisnet.arraystream.ArrayStream" title="covseisnet.arraystream.ArrayStream"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayStream</span></code></a> from this package). This function makes use of the <a class="reference internal" href="api.html#covseisnet.covariancematrix.stft" title="covseisnet.covariancematrix.stft"><code class="xref py py-func docutils literal notranslate"><span class="pre">covseisnet.covariancematrix.stft()</span></code></a> function to calculate the Fourier spectra, and of <a class="reference internal" href="api.html#covseisnet.covariancematrix.xcov" title="covseisnet.covariancematrix.xcov"><code class="xref py py-func docutils literal notranslate"><span class="pre">covseisnet.covariancematrix.xcov()</span></code></a> to build the covariance matrix.</p>
+<p>In order to estimate the covariance matrix, two main parameters are of importance: (1) the <cite>window_duration_sec</cite> which defines the duration of Fourier spectral segments; and (2) <cite>average</cite> which is the number of consecutive Fourier segments to average in order to estimate the covariance. By default, the Fourier spectral segments and the final averaged window are both overlaped by 50%.</p>
+</div>
+<div class="section" id="wavefield-coherence-with-coherence">
+<h3>2. Wavefield coherence with <a class="reference internal" href="api.html#covseisnet.covariancematrix.CovarianceMatrix.coherence" title="covseisnet.covariancematrix.CovarianceMatrix.coherence"><code class="xref py py-meth docutils literal notranslate"><span class="pre">coherence()</span></code></a><a class="headerlink" href="#wavefield-coherence-with-coherence" title="Permalink to this headline">¶</a></h3>
+<p>The spatial coherence is a well-defined concept for continuous wavefields. Indeed, it related to the number of coefficients required to decompose the observed wavefield onto a basis. When the wavefield is recorded at discrete spatial locations (seismic stations), the concept of wavefield coherence can still be assessed from the covariance matrix eigenstructure. In particular, we provide two measurements for assessing the spatial coherence: the covariance matrix spectral width and the Shannon entropy.</p>
+<p>The <strong>covariance matrix spectral width</strong> is a real positive scalar number which measures the width of the network covariance matrix eigenvalues distribution. This measurement can be represented in a time and frequency diagram.</p>
+<p>The <strong>Shannon entropy</strong> provides a measurement of the degree of information present in a given dataset. Extended to the case of discrete operators by Van Neumann, it can also be calculated from the eigenvalue distribution.</p>
+<p>Both these coherence measurements are delivered by the <a class="reference internal" href="api.html#covseisnet.covariancematrix.CovarianceMatrix.coherence" title="covseisnet.covariancematrix.CovarianceMatrix.coherence"><code class="xref py py-meth docutils literal notranslate"><span class="pre">coherence()</span></code></a> method (see the documentation of the method for more details). Please visit the <a class="reference internal" href="auto_examples/index.html#examples"><span class="std std-ref">Gallery</span></a> page for examples.</p>
+</div>
+<div class="section" id="direct-eigenvalue-assessment-with-eigenvalues">
+<h3>3. direct eigenvalue assessment with <a class="reference internal" href="api.html#covseisnet.covariancematrix.CovarianceMatrix.eigenvalues" title="covseisnet.covariancematrix.CovarianceMatrix.eigenvalues"><code class="xref py py-meth docutils literal notranslate"><span class="pre">eigenvalues()</span></code></a><a class="headerlink" href="#direct-eigenvalue-assessment-with-eigenvalues" title="Permalink to this headline">¶</a></h3>
+<p>Other measurments of the wavefield coherence can be also implemented manually by the user from the eigenvalue distribution (for instance polarization analysis in the case of 3-component single-station data). The method <a class="reference internal" href="api.html#covseisnet.covariancematrix.CovarianceMatrix.eigenvalues" title="covseisnet.covariancematrix.CovarianceMatrix.eigenvalues"><code class="xref py py-meth docutils literal notranslate"><span class="pre">covseisnet.covariancematrix.CovarianceMatrix.eigenvalues()</span></code></a> allows to directly extract the eigenvalues of the covariance matrices collected at different times and frequencies.</p>
+</div>
+<div class="section" id="direct-eigenvector-assessment-with-eigenvectors">
+<h3>4. direct eigenvector assessment with <a class="reference internal" href="api.html#covseisnet.covariancematrix.CovarianceMatrix.eigenvectors" title="covseisnet.covariancematrix.CovarianceMatrix.eigenvectors"><code class="xref py py-meth docutils literal notranslate"><span class="pre">eigenvectors()</span></code></a><a class="headerlink" href="#direct-eigenvector-assessment-with-eigenvectors" title="Permalink to this headline">¶</a></h3>
+<p>Many source-separation algorithms are based on the eigenvectors of the network covariance matrix. We therefore provide a method <a class="reference internal" href="api.html#covseisnet.covariancematrix.CovarianceMatrix.eigenvectors" title="covseisnet.covariancematrix.CovarianceMatrix.eigenvectors"><code class="xref py py-meth docutils literal notranslate"><span class="pre">covseisnet.covariancematrix.CovarianceMatrix.eigenvectors()</span></code></a> to access it from the covariance matrix.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="auto_examples/index.html" class="btn btn-neutral float-right" title="Gallery" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, The CovSeisNet Team
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
