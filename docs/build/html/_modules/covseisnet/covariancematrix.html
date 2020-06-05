@@ -1,0 +1,699 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="english" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="english" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>covseisnet.covariancematrix &mdash; covseisnet 0.3.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> covseisnet
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#manual-installation">Manual installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../guide.html">User's Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../guide.html#roadmap">Roadmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guide.html#dealing-with-array-seismic-data">Dealing with array seismic data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guide.html#network-covariance-matrix-analysis">Network covariance matrix analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../auto_examples/index.html">Gallery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_example_2.html">Single-station covariance matrix spectral width</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_example_1.html">Single-station covariance matrix</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">Package structure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#module-covseisnet.covariancematrix"><code class="xref py py-mod docutils literal notranslate"><span class="pre">covseisnet.covariancematrix</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#module-covseisnet.arraystream"><code class="xref py py-mod docutils literal notranslate"><span class="pre">covseisnet.arraystream</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../license.html#preamble">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../license.html#how-to-apply-these-terms-to-your-new-programs">How to Apply These Terms to Your New Programs</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">covseisnet</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>covseisnet.covariancematrix</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for covseisnet.covariancematrix</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Covariance matrix in spectral domain.</span>
+
+<span class="sd">Todo</span>
+<span class="sd">----</span>
+<span class="sd">- Pass the function :func:`covseisnet.covariance.calculate` as a top level</span>
+<span class="sd">  function?</span>
+<span class="sd">- Should we consider `privatizing` the :func:`covseisnet.covariance.xcov`</span>
+<span class="sd">  routine?</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">obspy</span>
+
+<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">eigvalsh</span><span class="p">,</span> <span class="n">eigh</span>
+
+
+<div class="viewcode-block" id="CovarianceMatrix"><a class="viewcode-back" href="../../api.html#covseisnet.covariancematrix.CovarianceMatrix">[docs]</a><span class="k">class</span> <span class="nc">CovarianceMatrix</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Covariance matrix.</span>
+
+<span class="sd">    This class is a subclass of :class:`numpy.ndarray`, meaning that</span>
+<span class="sd">    all the methods available with regular numpy arrays are also available</span>
+<span class="sd">    here, plus additional arrayprocessing-oriented methods. Note that</span>
+<span class="sd">    any numpy method or function applied to a</span>
+<span class="sd">    :class:`~arrayprocessing.covariance.CovarianceMatrix` instance returns a</span>
+<span class="sd">    :class:`~arrayprocessing.covariance.CovarianceMatrix` instance.</span>
+
+<span class="sd">    The shape of a covariance matrix calculate from :math:`N` traces is at</span>
+<span class="sd">    least :math:`N \times N`. Depending on the averaging size and frequency</span>
+<span class="sd">    content, the covariance matrix can be of shape</span>
+
+<span class="sd">    - ``(n_sta, n_sta)`` if a single frequency and time sample is obtained.</span>
+
+<span class="sd">    - ``(n_freq, n_sta, n_sta)`` for a single time sample and ``n_freq``</span>
+<span class="sd">      frequency points</span>
+
+<span class="sd">    - ``(n_times, n_freq, n_sta, n_sta)`` for ``n_times`` and ``n_freq``</span>
+<span class="sd">      dimensions.</span>
+
+<span class="sd">    All the methods defined in the the</span>
+<span class="sd">    :class:`~arrayprocessing.covariance.CovarianceMatrix` class are performed</span>
+<span class="sd">    on the flattened array with the private method</span>
+<span class="sd">    :class:`~arrayprocessing.covariance.CovarianceMatrix._flat`, which allow</span>
+<span class="sd">    to obtain as many :math:`N \times N` covariance matrices as time and</span>
+<span class="sd">    frequency samples. Given a method that outputs a shape ``shape_out``</span>
+<span class="sd">    given a covariance matrix of shape ``(n_sta, n_sta)``, the output of this</span>
+<span class="sd">    method on a covariance matrix of shape ``(n_times, n_freq, n_sta, n_sta)``</span>
+<span class="sd">    will be of shape ``(n_times, n_freq, *shape_out)``.</span>
+
+<span class="sd">    Tip</span>
+<span class="sd">    ---</span>
+<span class="sd">    Any :class:`numpy.ndarray` can be turned into a</span>
+<span class="sd">    :class:`~arrayprocessing.covariance.CovarianceMatrix` object with</span>
+
+<span class="sd">    &gt;&gt;&gt; import covseisnet as cn</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; c = np.zeros((4, 4)).view(cn.CovarianceMatrix)</span>
+<span class="sd">    &gt;&gt;&gt; c</span>
+<span class="sd">    CovarianceMatrix([[ 0.,  0.,  0.,  0.],</span>
+<span class="sd">                      [ 0.,  0.,  0.,  0.],</span>
+<span class="sd">                      [ 0.,  0.,  0.,  0.],</span>
+<span class="sd">                      [ 0.,  0.,  0.,  0.]])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">input_array</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Subclassing.&quot;&quot;&quot;</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">input_array</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">obj</span>
+
+<div class="viewcode-block" id="CovarianceMatrix.coherence"><a class="viewcode-back" href="../../api.html#covseisnet.covariancematrix.CovarianceMatrix.coherence">[docs]</a>    <span class="k">def</span> <span class="nf">coherence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;spectral_width&quot;</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Covariance-based coherence estimation.</span>
+
+<span class="sd">        The measured is performed onto all the covariance matrices from</span>
+<span class="sd">        the eigenvalues obtained with the method</span>
+<span class="sd">        :meth:`~arrayprocessing.covariance.CovarianceMatrix.eigenvalues`.</span>
+<span class="sd">        For a given matrix :math:`N \times N` matrix :math:`M` with</span>
+<span class="sd">        eigenvalues :math:`\mathbf{\lambda} = \lambda_i` where</span>
+<span class="sd">        :math:`i=1\ldots n`. The coherence is obtained as :math:`F(\lambda)`,</span>
+<span class="sd">        with :math:`F` being defined by the `kind` parameter.</span>
+
+<span class="sd">        - The spectral width is obtained with setting ``kind=&#39;spectral_width&#39;``</span>
+<span class="sd">          , and returns the width :math:`\sigma` of the</span>
+<span class="sd">          eigenvalue distribution such as</span>
+
+<span class="sd">          .. math::</span>
+
+<span class="sd">              \sigma = \frac{\sum_{i=0}^n i \lambda_i}{\sum_{i=0}^n \lambda_i}</span>
+
+
+<span class="sd">        - The entropy is obtained with setting ``kind=&#39;entropy&#39;``, and returns</span>
+<span class="sd">          the entropy :math:`h` of the eigenvalue distribution such as</span>
+
+<span class="sd">          .. math::</span>
+
+<span class="sd">              h = - \sum_{i=0}^n i \lambda_i \log(\lambda_i + \epsilon)</span>
+
+
+<span class="sd">        Keyword arguments</span>
+<span class="sd">        -----------------</span>
+<span class="sd">        kind: str, optional</span>
+<span class="sd">            The type of coherence, may be &quot;spectral_width&quot; (default) or</span>
+<span class="sd">            &quot;entropy&quot;.</span>
+
+<span class="sd">        epsilon: float, optional</span>
+<span class="sd">            The regularization parameter for log-entropy calculation. Default</span>
+<span class="sd">            to ``1e-10``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        :class:`np.ndarray`</span>
+<span class="sd">            The spectral width of maximal shape ``(n_times, n_frequencies)``.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;spectral_width&quot;</span><span class="p">:</span>
+            <span class="n">eigenvalues</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">(</span><span class="n">norm</span><span class="o">=</span><span class="nb">sum</span><span class="p">)</span>
+            <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;coherence&quot;</span><span class="p">:</span>
+            <span class="n">eigenvalues</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">(</span><span class="n">norm</span><span class="o">=</span><span class="nb">sum</span><span class="p">)</span>
+            <span class="n">log_eigenvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">eigenvalues</span> <span class="o">+</span> <span class="n">epsilon</span><span class="p">)</span>
+            <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">eigenvalues</span> <span class="o">*</span> <span class="n">log_eigenvalues</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> is not an available option for kind.&quot;</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">kind</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="CovarianceMatrix.eigenvalues"><a class="viewcode-back" href="../../api.html#covseisnet.covariancematrix.CovarianceMatrix.eigenvalues">[docs]</a>    <span class="k">def</span> <span class="nf">eigenvalues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="nb">max</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Eigenvalue decomposition.</span>
+
+<span class="sd">        The eigenvalue decomposition is performed onto the two last dimensions</span>
+<span class="sd">        of the :class:`~arrayprocessing.covariance.CovarianceMatrix` object.</span>
+<span class="sd">        The function used for eigenvalue decomposition is</span>
+<span class="sd">        :func:`scipy.linalg.eigvalsh`. It assumes that the input matrix is 2D</span>
+<span class="sd">        and hermitian. The decomposition is performed onto the lower triangular</span>
+<span class="sd">        part in order to save time.</span>
+
+<span class="sd">        Keyword arguments</span>
+<span class="sd">        -----------------</span>
+<span class="sd">        norm : function, optional</span>
+<span class="sd">            The function used to normalize the eigenvalues. Can be :func:`max`,</span>
+<span class="sd">            (default), any other functions.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`np.ndarray`</span>
+<span class="sd">            The eigenvalues of maximal shape ``(n_times, n_freq, n_sta)``.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">matrices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flat</span><span class="p">()</span>
+        <span class="n">eigenvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">matrices</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">matrices</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">matrix</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">matrices</span><span class="p">):</span>
+            <span class="n">eigenvalues</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">eigvalsh</span><span class="p">(</span><span class="n">matrix</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">eigenvalues</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/=</span> <span class="n">norm</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">eigenvalues</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="CovarianceMatrix.eigenvectors"><a class="viewcode-back" href="../../api.html#covseisnet.covariancematrix.CovarianceMatrix.eigenvectors">[docs]</a>    <span class="k">def</span> <span class="nf">eigenvectors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">covariance</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Extract eigenvectors of given rank.</span>
+
+<span class="sd">        The function used for extracting eigenvectors is</span>
+<span class="sd">        :func:`scipy.linalg.eigh`. It assumes that the input matrix is 2D</span>
+<span class="sd">        and hermitian. The decomposition is performed onto the lower triangular</span>
+<span class="sd">        part.</span>
+
+<span class="sd">        Keyword arguments</span>
+<span class="sd">        -----------------</span>
+<span class="sd">        rank : int, optional</span>
+<span class="sd">            Eigenvector rank, 0 by default (first eigenvector).</span>
+
+<span class="sd">        covariance: int, optional</span>
+<span class="sd">            Outer-product of eigenvectors of rank ``rank``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`np.ndarray`</span>
+<span class="sd">            The complex-valued eigenvector array of shape</span>
+<span class="sd">            ``(n_times, n_freq, n_sta)`` if the parameter ``covariance`` is</span>
+<span class="sd">            ``False``, else ``(n_times, n_freq, n_sta, n_sta)``.</span>
+
+
+<span class="sd">        Todo</span>
+<span class="sd">        ----</span>
+<span class="sd">        Implement a new option on the ``rank`` in order to accept a list, so</span>
+<span class="sd">        the filtered covariance can be obtained from multiple eigenvector</span>
+<span class="sd">        ranks. This should be defined together with a ``normalize`` boolean</span>
+<span class="sd">        keyword argument in order to take into account the eigenvalues or not,</span>
+<span class="sd">        and therefore the isotropization of the covariance matrix would be</span>
+<span class="sd">        here defined fully (so far, the user has to define a loop in the</span>
+<span class="sd">        main script).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Initialization</span>
+        <span class="n">matrices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flat</span><span class="p">()</span>
+        <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">matrices</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">matrices</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+
+        <span class="c1"># Calculation over submatrices</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">matrices</span><span class="p">):</span>
+            <span class="n">eigenvectors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">eigh</span><span class="p">(</span><span class="n">m</span><span class="p">)[</span><span class="mi">1</span><span class="p">][:,</span> <span class="o">-</span><span class="mi">1</span> <span class="o">-</span> <span class="n">rank</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">covariance</span><span class="p">:</span>
+            <span class="n">ec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+            <span class="n">ec</span> <span class="o">=</span> <span class="n">ec</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">CovarianceMatrix</span><span class="p">)</span>
+            <span class="n">ec</span> <span class="o">=</span> <span class="n">ec</span><span class="o">.</span><span class="n">_flat</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">eigenvectors</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="n">ec</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">eigenvectors</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">eigenvectors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">ec</span> <span class="o">=</span> <span class="n">ec</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">ec</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">CovarianceMatrix</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">eigenvectors</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span></div>
+
+    <span class="k">def</span> <span class="nf">_flat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Covariance matrices with flatten first dimensions.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        :class:`np.ndarray`</span>
+<span class="sd">            The covariance matrices in a shape ``(a * b, n, n)``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:])</span>
+
+<div class="viewcode-block" id="CovarianceMatrix.triu"><a class="viewcode-back" href="../../api.html#covseisnet.covariancematrix.CovarianceMatrix.triu">[docs]</a>    <span class="k">def</span> <span class="nf">triu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Extract upper triangular on flatten array.</span>
+
+<span class="sd">        Keyword arguments</span>
+<span class="sd">        -----------------</span>
+<span class="sd">        **kwargs: dict, optional</span>
+<span class="sd">            The keyword arguments passed to the :func:`numpy.triu` function.</span>
+
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        &gt;&gt;&gt; import covseisnet as cn</span>
+<span class="sd">        &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">        &gt;&gt;&gt; c = np.arange(8).reshape((2, 2, 2)).view(cn.CovarianceMatrix)</span>
+<span class="sd">        &gt;&gt;&gt; c</span>
+<span class="sd">            CovarianceMatrix([[[0, 1],</span>
+<span class="sd">                              [2, 3]],</span>
+<span class="sd">                             [[4, 5],</span>
+<span class="sd">                              [6, 7]]])</span>
+<span class="sd">        &gt;&gt;&gt; c.triu()</span>
+<span class="sd">            CovarianceMatrix([[0, 1, 3],</span>
+<span class="sd">                              [4, 5, 7]])</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">trii</span><span class="p">,</span> <span class="n">trij</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu_indices</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">trii</span><span class="p">,</span> <span class="n">trij</span><span class="p">]</span></div></div>
+
+
+<div class="viewcode-block" id="calculate"><a class="viewcode-back" href="../../api.html#covseisnet.covariancematrix.calculate">[docs]</a><span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">window_duration_sec</span><span class="p">,</span> <span class="n">average</span><span class="p">,</span> <span class="n">average_step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate covariance matrix from the streams.</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+<span class="sd">    stream: :class:`ArrayStream` or :class:`obspy.core.stream.Stream`</span>
+<span class="sd">        The input data stream. If an :class:`obspy.core.stream.Stream` given,</span>
+<span class="sd">        the calculation assumes a synchronized stream, and raises and error</span>
+<span class="sd">        if not.</span>
+
+<span class="sd">    window_duration_sec: float</span>
+<span class="sd">        The Fourier calculation window in seconds.</span>
+
+<span class="sd">    average: int</span>
+<span class="sd">        The number of window used to estimate the sample covariance.</span>
+
+<span class="sd">    Keyword arguments</span>
+<span class="sd">    -----------------</span>
+<span class="sd">    average_step: int, optional</span>
+<span class="sd">        The sliding window step for covariance matrix calculation (in number</span>
+<span class="sd">        of windows).</span>
+
+<span class="sd">    **kwargs: dict, optional</span>
+<span class="sd">        Additional keyword arguments passed to the</span>
+<span class="sd">        :func:`~covseisnet.covariance.stft` function.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :class:`numpy.ndarray`</span>
+<span class="sd">        The time vector of the beginning of each covariance window.</span>
+
+<span class="sd">    :class:`numpy.ndarray`</span>
+<span class="sd">        The frequency vector.</span>
+
+<span class="sd">    :class:`covseisnet.covariance.CovarianceMatrix`</span>
+<span class="sd">        The complex covariance matrix in a maximal shape</span>
+<span class="sd">        ``(n_time, n_freq, n_sta, n_sta)``.</span>
+
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    Calculate the covariance matrix of the example stream with 1 second windows</span>
+<span class="sd">    averaged over 5 windows:</span>
+
+<span class="sd">    &gt;&gt;&gt; import covseisnet as cn</span>
+<span class="sd">    &gt;&gt;&gt; stream = cn.data.read()</span>
+<span class="sd">    &gt;&gt;&gt; t, f, c = cn.covariance.calculate(stream, 1., 5)</span>
+<span class="sd">    &gt;&gt;&gt; print(c.shape)  # (n_times, n_freq, n_cha, n_cha)</span>
+<span class="sd">        (28, 199, 3, 3)</span>
+<span class="sd">    &gt;&gt;&gt;&gt; print(c[0, 1])  # first window, second frequency</span>
+<span class="sd">    CovarianceMatrix([[  4.84823507e+08       +0.j        ,</span>
+<span class="sd">                         8.36715570e+07+55825525.33551149j,</span>
+<span class="sd">                        -2.47008776e+08-60728089.46938748j],</span>
+<span class="sd">                      [  8.36715570e+07-55825525.33551149j,</span>
+<span class="sd">                         1.67037017e+08       +0.j        ,</span>
+<span class="sd">                        -1.82827585e+08+27408763.38879033j],</span>
+<span class="sd">                      [ -2.47008776e+08+60728089.46938748j,</span>
+<span class="sd">                        -1.82827585e+08-27408763.38879033j,</span>
+<span class="sd">                         2.66448583e+08       +0.j        ]])</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">times</span><span class="p">,</span> <span class="n">frequencies</span><span class="p">,</span> <span class="n">spectra</span> <span class="o">=</span> <span class="n">stft</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">window_duration_sec</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="c1"># Parametrization</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="n">average</span> <span class="o">//</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">average_step</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">average</span> <span class="o">*</span> <span class="n">average_step</span>
+    <span class="n">n_traces</span><span class="p">,</span> <span class="n">n_windows</span><span class="p">,</span> <span class="n">n_frequencies</span> <span class="o">=</span> <span class="n">spectra</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="c1"># Times</span>
+    <span class="n">t_end</span> <span class="o">=</span> <span class="n">times</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="n">times</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="n">times</span><span class="p">[:</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">average</span> <span class="p">:</span> <span class="n">step</span><span class="p">]</span>
+    <span class="n">n_average</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">)</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">times</span><span class="p">,</span> <span class="n">t_end</span><span class="p">))</span>
+
+    <span class="c1"># Initialization</span>
+    <span class="n">cov_shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">n_average</span><span class="p">,</span> <span class="n">n_traces</span><span class="p">,</span> <span class="n">n_traces</span><span class="p">,</span> <span class="n">n_frequencies</span><span class="p">)</span>
+    <span class="n">covariance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">cov_shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+
+    <span class="c1"># Compute</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_average</span><span class="p">):</span>
+        <span class="n">covariance</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">xcov</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">spectra</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">average</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">times</span><span class="p">,</span>
+        <span class="n">frequencies</span><span class="p">,</span>
+        <span class="n">covariance</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">CovarianceMatrix</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="stft"><a class="viewcode-back" href="../../api.html#covseisnet.covariancematrix.stft">[docs]</a><span class="k">def</span> <span class="nf">stft</span><span class="p">(</span>
+    <span class="n">stream</span><span class="p">,</span>
+    <span class="n">window_duration_sec</span><span class="p">,</span>
+    <span class="n">bandwidth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">window_step_sec</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">window</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">hanning</span><span class="p">,</span>
+    <span class="n">times_kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(),</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Short-time fourier transform.</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+<span class="sd">    stream: :class:`ArrayStream` or :class:`obspy.core.stream.Stream`</span>
+<span class="sd">        The input data stream. If an :class:`obspy.core.stream.Stream` given,</span>
+<span class="sd">        the calculation assumes a synchronized stream, and raises and error</span>
+<span class="sd">        if not.</span>
+
+<span class="sd">    window_duration_sec: float</span>
+<span class="sd">        The Fourier calculation window in seconds.</span>
+
+<span class="sd">    Keyword arguments</span>
+<span class="sd">    -----------------</span>
+<span class="sd">    window_step_sec: float, optional</span>
+<span class="sd">        The step between two consecutive Fourier windows in seconds. Default</span>
+<span class="sd">        (None) considers half the ``window_duration_sec``.</span>
+
+<span class="sd">    bandwidth: list, optional</span>
+<span class="sd">        The restricted frequencies onto which the Fourier transform is</span>
+<span class="sd">        calculated. This improve performances when Fourier windows are large.</span>
+
+<span class="sd">    times_kw: string, optional</span>
+<span class="sd">        The keyword arguments passed to the</span>
+<span class="sd">        :class:`covseisnet.data.ArrayStream.times` or</span>
+<span class="sd">        :meth:`obspy.core.trace.Trace.times` method depending on the input</span>
+<span class="sd">        stream class.</span>
+
+<span class="sd">    window: function, optional</span>
+<span class="sd">        The window function, by default :func:`numpy.hanning`. A list of</span>
+<span class="sd">        available window functions is available at</span>
+<span class="sd">        https://numpy.org/doc/stable/reference/routines.window.html. Any</span>
+<span class="sd">        function taking as argument a integer is accepted.</span>
+
+<span class="sd">    **kwargs: dict, optional</span>
+<span class="sd">        Additional keyword arguments passed to the :func:`numpy.fft.fft`</span>
+<span class="sd">        function. By default, ``kwargs[&#39;n&#39;]`` is defined as</span>
+<span class="sd">        ``2 * npts - 1`` in order to calculate the cross-correlation.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :class:`numpy.ndarray`</span>
+<span class="sd">        The time vector of the beginning of each Fourier window.</span>
+
+<span class="sd">    :class:`numpy.ndarray`</span>
+<span class="sd">        The frequency vector.</span>
+
+<span class="sd">    :class:`numpy.ndarray`</span>
+<span class="sd">        The complex spectrograms of each timeseries in a</span>
+<span class="sd">        ``(n_sta, n_time, n_freq)`` array.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Time vector</span>
+    <span class="n">fs</span> <span class="o">=</span> <span class="n">stream</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">sampling_rate</span>
+    <span class="n">npts</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">window_duration_sec</span> <span class="o">*</span> <span class="n">fs</span><span class="p">)</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="n">npts</span> <span class="o">//</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">window_step_sec</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">int</span><span class="p">(</span><span class="n">window_step_sec</span> <span class="o">*</span> <span class="n">fs</span><span class="p">)</span>
+    <span class="n">times_kw</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;relative&quot;</span><span class="p">)</span>
+    <span class="n">times_kw</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;reftime&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span> <span class="ow">is</span> <span class="n">obspy</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">:</span>
+        <span class="n">times</span> <span class="o">=</span> <span class="n">stream</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="o">**</span><span class="n">times_kw</span><span class="p">)[:</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">npts</span> <span class="p">:</span> <span class="n">step</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">times</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="o">**</span><span class="n">times_kw</span><span class="p">)[:</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">npts</span> <span class="p">:</span> <span class="n">step</span><span class="p">]</span>
+    <span class="n">n_times</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">)</span>
+
+    <span class="c1"># Frequency vector</span>
+    <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;n&quot;</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">npts</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">frequencies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;n&quot;</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">bandwidth</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fin</span> <span class="o">=</span> <span class="p">(</span><span class="n">frequencies</span> <span class="o">&gt;=</span> <span class="n">bandwidth</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">frequencies</span> <span class="o">&lt;=</span> <span class="n">bandwidth</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">fin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">frequencies</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">frequencies</span> <span class="o">=</span> <span class="n">frequencies</span><span class="p">[</span><span class="n">fin</span><span class="p">]</span>
+
+    <span class="c1"># Calculate spectra</span>
+    <span class="n">spectra_shape</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">stream</span><span class="p">),</span> <span class="n">n_times</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
+    <span class="n">spectra</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">spectra_shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">trace_id</span><span class="p">,</span> <span class="n">trace</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">stream</span><span class="p">):</span>
+        <span class="n">tr</span> <span class="o">=</span> <span class="n">trace</span><span class="o">.</span><span class="n">data</span>
+        <span class="k">for</span> <span class="n">time_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_times</span><span class="p">):</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">time_id</span> <span class="o">*</span> <span class="n">step</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">npts</span>
+            <span class="n">segment</span> <span class="o">=</span> <span class="n">tr</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span> <span class="o">*</span> <span class="n">window</span><span class="p">(</span><span class="n">npts</span><span class="p">)</span>
+            <span class="n">spectra</span><span class="p">[</span><span class="n">trace_id</span><span class="p">,</span> <span class="n">time_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)[</span><span class="n">fin</span><span class="p">]</span>
+
+    <span class="c1"># Times are extended with last time of traces</span>
+    <span class="n">t_end</span> <span class="o">=</span> <span class="n">stream</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="o">**</span><span class="n">times_kw</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">times</span><span class="p">,</span> <span class="n">t_end</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">times</span><span class="p">,</span> <span class="n">frequencies</span><span class="p">,</span> <span class="n">spectra</span></div>
+
+
+<div class="viewcode-block" id="xcov"><a class="viewcode-back" href="../../api.html#covseisnet.covariancematrix.xcov">[docs]</a><span class="k">def</span> <span class="nf">xcov</span><span class="p">(</span><span class="n">wid</span><span class="p">,</span> <span class="n">spectra_full</span><span class="p">,</span> <span class="n">overlap</span><span class="p">,</span> <span class="n">average</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculation of the array covariance matrix from the array data vectors.</span>
+
+<span class="sd">    Warning</span>
+<span class="sd">    -------</span>
+<span class="sd">    This function is not fully documented yet, as may be reformulated.</span>
+
+<span class="sd">    To do</span>
+<span class="sd">    -----</span>
+<span class="sd">    Allow to possibly reformulate this part with Einstein convention for</span>
+<span class="sd">    faster computation, clarity and TensorFlow GPU transparency.</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+<span class="sd">    spectra_full: :class:`numpy.ndarray`</span>
+<span class="sd">        The stream&#39;s spectra.</span>
+
+<span class="sd">    overlap: int</span>
+<span class="sd">        The average step.</span>
+
+<span class="sd">    average: int</span>
+<span class="sd">        The number of averaging windows.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :class:`numpy.ndarray`</span>
+<span class="sd">        The covariance matrix.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n_traces</span><span class="p">,</span> <span class="n">n_windows</span><span class="p">,</span> <span class="n">n_frequencies</span> <span class="o">=</span> <span class="n">spectra_full</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">beg</span> <span class="o">=</span> <span class="n">overlap</span> <span class="o">*</span> <span class="n">wid</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">beg</span> <span class="o">+</span> <span class="n">average</span>
+    <span class="n">spectra</span> <span class="o">=</span> <span class="n">spectra_full</span><span class="p">[:,</span> <span class="n">beg</span><span class="p">:</span><span class="n">end</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">spectra</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">spectra</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+    <span class="k">for</span> <span class="n">swid</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">average</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">+=</span> <span class="n">spectra</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">swid</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">spectra</span><span class="p">[:,</span> <span class="n">swid</span><span class="p">,</span> <span class="p">:])</span>
+    <span class="k">return</span> <span class="n">x</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, The CovSeisNet Team
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
