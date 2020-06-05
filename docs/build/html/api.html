@@ -1,0 +1,824 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="english" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="english" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Package structure &mdash; covseisnet 0.3.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery-dataframe.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="License" href="license.html" />
+    <link rel="prev" title="Single-station covariance matrix" href="auto_examples/plot_example_1.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> covseisnet
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#manual-installation">Manual installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guide.html">User's Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#roadmap">Roadmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#dealing-with-array-seismic-data">Dealing with array seismic data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#network-covariance-matrix-analysis">Network covariance matrix analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Gallery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_example_2.html">Single-station covariance matrix spectral width</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_example_1.html">Single-station covariance matrix</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Package structure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-covseisnet.covariancematrix"><code class="xref py py-mod docutils literal notranslate"><span class="pre">covseisnet.covariancematrix</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-covseisnet.arraystream"><code class="xref py py-mod docutils literal notranslate"><span class="pre">covseisnet.arraystream</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="license.html#preamble">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#how-to-apply-these-terms-to-your-new-programs">How to Apply These Terms to Your New Programs</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">covseisnet</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Package structure</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="package-structure">
+<span id="guide"></span><h1>Package structure<a class="headerlink" href="#package-structure" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-covseisnet.covariancematrix">
+<span id="covseisnet-covariancematrix"></span><h2><a class="reference internal" href="#module-covseisnet.covariancematrix" title="covseisnet.covariancematrix"><code class="xref py py-mod docutils literal notranslate"><span class="pre">covseisnet.covariancematrix</span></code></a><a class="headerlink" href="#module-covseisnet.covariancematrix" title="Permalink to this headline">¶</a></h2>
+<p>Covariance matrix in spectral domain.</p>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<ul class="simple">
+<li><p>Pass the function <code class="xref py py-func docutils literal notranslate"><span class="pre">covseisnet.covariance.calculate()</span></code> as a top level
+function?</p></li>
+<li><p>Should we consider <cite>privatizing</cite> the <code class="xref py py-func docutils literal notranslate"><span class="pre">covseisnet.covariance.xcov()</span></code>
+routine?</p></li>
+</ul>
+</div>
+<dl class="py class">
+<dt id="covseisnet.covariancematrix.CovarianceMatrix">
+<em class="property">class </em><code class="sig-prename descclassname">covseisnet.covariancematrix.</code><code class="sig-name descname">CovarianceMatrix</code><a class="reference internal" href="_modules/covseisnet/covariancematrix.html#CovarianceMatrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covseisnet.covariancematrix.CovarianceMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.18)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></p>
+<p>Covariance matrix.</p>
+<p>This class is a subclass of <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.18)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>, meaning that
+all the methods available with regular numpy arrays are also available
+here, plus additional arrayprocessing-oriented methods. Note that
+any numpy method or function applied to a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">CovarianceMatrix</span></code> instance returns a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">CovarianceMatrix</span></code> instance.</p>
+<p>The shape of a covariance matrix calculate from <span class="math notranslate nohighlight">\(N\)</span> traces is at
+least <span class="math notranslate nohighlight">\(N \times N\)</span>. Depending on the averaging size and frequency
+content, the covariance matrix can be of shape</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">(n_sta,</span> <span class="pre">n_sta)</span></code> if a single frequency and time sample is obtained.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(n_freq,</span> <span class="pre">n_sta,</span> <span class="pre">n_sta)</span></code> for a single time sample and <code class="docutils literal notranslate"><span class="pre">n_freq</span></code>
+frequency points</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(n_times,</span> <span class="pre">n_freq,</span> <span class="pre">n_sta,</span> <span class="pre">n_sta)</span></code> for <code class="docutils literal notranslate"><span class="pre">n_times</span></code> and <code class="docutils literal notranslate"><span class="pre">n_freq</span></code>
+dimensions.</p></li>
+</ul>
+<p>All the methods defined in the the
+<code class="xref py py-class docutils literal notranslate"><span class="pre">CovarianceMatrix</span></code> class are performed
+on the flattened array with the private method
+<code class="xref py py-class docutils literal notranslate"><span class="pre">_flat</span></code>, which allow
+to obtain as many <span class="math notranslate nohighlight">\(N \times N\)</span> covariance matrices as time and
+frequency samples. Given a method that outputs a shape <code class="docutils literal notranslate"><span class="pre">shape_out</span></code>
+given a covariance matrix of shape <code class="docutils literal notranslate"><span class="pre">(n_sta,</span> <span class="pre">n_sta)</span></code>, the output of this
+method on a covariance matrix of shape <code class="docutils literal notranslate"><span class="pre">(n_times,</span> <span class="pre">n_freq,</span> <span class="pre">n_sta,</span> <span class="pre">n_sta)</span></code>
+will be of shape <code class="docutils literal notranslate"><span class="pre">(n_times,</span> <span class="pre">n_freq,</span> <span class="pre">*shape_out)</span></code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Any <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.18)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> can be turned into a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">CovarianceMatrix</span></code> object with</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">covseisnet</span> <span class="k">as</span> <span class="nn">cn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">cn</span><span class="o">.</span><span class="n">CovarianceMatrix</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">CovarianceMatrix([[ 0.,  0.,  0.,  0.],</span>
+<span class="go">                  [ 0.,  0.,  0.,  0.],</span>
+<span class="go">                  [ 0.,  0.,  0.,  0.],</span>
+<span class="go">                  [ 0.,  0.,  0.,  0.]])</span>
+</pre></div>
+</div>
+</div>
+<dl class="py method">
+<dt id="covseisnet.covariancematrix.CovarianceMatrix.coherence">
+<code class="sig-name descname">coherence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">kind</span><span class="o">=</span><span class="default_value">'spectral_width'</span></em>, <em class="sig-param"><span class="n">epsilon</span><span class="o">=</span><span class="default_value">1e-10</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/covseisnet/covariancematrix.html#CovarianceMatrix.coherence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covseisnet.covariancematrix.CovarianceMatrix.coherence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Covariance-based coherence estimation.</p>
+<p>The measured is performed onto all the covariance matrices from
+the eigenvalues obtained with the method
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">eigenvalues()</span></code>.
+For a given matrix <span class="math notranslate nohighlight">\(N \times N\)</span> matrix <span class="math notranslate nohighlight">\(M\)</span> with
+eigenvalues <span class="math notranslate nohighlight">\(\mathbf{\lambda} = \lambda_i\)</span> where
+<span class="math notranslate nohighlight">\(i=1\ldots n\)</span>. The coherence is obtained as <span class="math notranslate nohighlight">\(F(\lambda)\)</span>,
+with <span class="math notranslate nohighlight">\(F\)</span> being defined by the <cite>kind</cite> parameter.</p>
+<ul>
+<li><p>The spectral width is obtained with setting <code class="docutils literal notranslate"><span class="pre">kind='spectral_width'</span></code>
+, and returns the width <span class="math notranslate nohighlight">\(\sigma\)</span> of the
+eigenvalue distribution such as</p>
+<div class="math notranslate nohighlight">
+\[\sigma = \frac{\sum_{i=0}^n i \lambda_i}{\sum_{i=0}^n \lambda_i}\]</div>
+</li>
+<li><p>The entropy is obtained with setting <code class="docutils literal notranslate"><span class="pre">kind='entropy'</span></code>, and returns
+the entropy <span class="math notranslate nohighlight">\(h\)</span> of the eigenvalue distribution such as</p>
+<div class="math notranslate nohighlight">
+\[h = - \sum_{i=0}^n i \lambda_i \log(\lambda_i + \epsilon)\]</div>
+</li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kind</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) -- The type of coherence, may be &quot;spectral_width&quot; (default) or
+&quot;entropy&quot;.</p></li>
+<li><p><strong>epsilon</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) -- The regularization parameter for log-entropy calculation. Default
+to <code class="docutils literal notranslate"><span class="pre">1e-10</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The spectral width of maximal shape <code class="docutils literal notranslate"><span class="pre">(n_times,</span> <span class="pre">n_frequencies)</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">np.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="covseisnet.covariancematrix.CovarianceMatrix.eigenvalues">
+<code class="sig-name descname">eigenvalues</code><span class="sig-paren">(</span><em class="sig-param">norm=&lt;built-in function max&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/covseisnet/covariancematrix.html#CovarianceMatrix.eigenvalues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covseisnet.covariancematrix.CovarianceMatrix.eigenvalues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Eigenvalue decomposition.</p>
+<p>The eigenvalue decomposition is performed onto the two last dimensions
+of the <code class="xref py py-class docutils literal notranslate"><span class="pre">CovarianceMatrix</span></code> object.
+The function used for eigenvalue decomposition is
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.eigvalsh.html#scipy.linalg.eigvalsh" title="(in SciPy v1.4.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.eigvalsh()</span></code></a>. It assumes that the input matrix is 2D
+and hermitian. The decomposition is performed onto the lower triangular
+part in order to save time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><p><strong>norm</strong> (<em>function</em><em>, </em><em>optional</em>) -- The function used to normalize the eigenvalues. Can be <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#max" title="(in Python v3.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">max()</span></code></a>,
+(default), any other functions.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The eigenvalues of maximal shape <code class="docutils literal notranslate"><span class="pre">(n_times,</span> <span class="pre">n_freq,</span> <span class="pre">n_sta)</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">np.ndarray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="covseisnet.covariancematrix.CovarianceMatrix.eigenvectors">
+<code class="sig-name descname">eigenvectors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rank</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">covariance</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/covseisnet/covariancematrix.html#CovarianceMatrix.eigenvectors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covseisnet.covariancematrix.CovarianceMatrix.eigenvectors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract eigenvectors of given rank.</p>
+<p>The function used for extracting eigenvectors is
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.eigh.html#scipy.linalg.eigh" title="(in SciPy v1.4.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.eigh()</span></code></a>. It assumes that the input matrix is 2D
+and hermitian. The decomposition is performed onto the lower triangular
+part.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rank</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) -- Eigenvector rank, 0 by default (first eigenvector).</p></li>
+<li><p><strong>covariance</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) -- Outer-product of eigenvectors of rank <code class="docutils literal notranslate"><span class="pre">rank</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The complex-valued eigenvector array of shape
+<code class="docutils literal notranslate"><span class="pre">(n_times,</span> <span class="pre">n_freq,</span> <span class="pre">n_sta)</span></code> if the parameter <code class="docutils literal notranslate"><span class="pre">covariance</span></code> is
+<code class="docutils literal notranslate"><span class="pre">False</span></code>, else <code class="docutils literal notranslate"><span class="pre">(n_times,</span> <span class="pre">n_freq,</span> <span class="pre">n_sta,</span> <span class="pre">n_sta)</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">np.ndarray</span></code></p>
+</dd>
+</dl>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>Implement a new option on the <code class="docutils literal notranslate"><span class="pre">rank</span></code> in order to accept a list, so
+the filtered covariance can be obtained from multiple eigenvector
+ranks. This should be defined together with a <code class="docutils literal notranslate"><span class="pre">normalize</span></code> boolean
+keyword argument in order to take into account the eigenvalues or not,
+and therefore the isotropization of the covariance matrix would be
+here defined fully (so far, the user has to define a loop in the
+main script).</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="covseisnet.covariancematrix.CovarianceMatrix.triu">
+<code class="sig-name descname">triu</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/covseisnet/covariancematrix.html#CovarianceMatrix.triu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covseisnet.covariancematrix.CovarianceMatrix.triu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract upper triangular on flatten array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em>, </em><em>optional</em>) -- The keyword arguments passed to the <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.triu.html#numpy.triu" title="(in NumPy v1.18)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.triu()</span></code></a> function.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">covseisnet</span> <span class="k">as</span> <span class="nn">cn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">cn</span><span class="o">.</span><span class="n">CovarianceMatrix</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">    CovarianceMatrix([[[0, 1],</span>
+<span class="go">                      [2, 3]],</span>
+<span class="go">                     [[4, 5],</span>
+<span class="go">                      [6, 7]]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">triu</span><span class="p">()</span>
+<span class="go">    CovarianceMatrix([[0, 1, 3],</span>
+<span class="go">                      [4, 5, 7]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="covseisnet.covariancematrix.calculate">
+<code class="sig-prename descclassname">covseisnet.covariancematrix.</code><code class="sig-name descname">calculate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">stream</span></em>, <em class="sig-param"><span class="n">window_duration_sec</span></em>, <em class="sig-param"><span class="n">average</span></em>, <em class="sig-param"><span class="n">average_step</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/covseisnet/covariancematrix.html#calculate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covseisnet.covariancematrix.calculate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate covariance matrix from the streams.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stream</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayStream</span></code> or <a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.stream.Stream.html#obspy.core.stream.Stream" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">obspy.core.stream.Stream</span></code></a>) -- The input data stream. If an <a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.stream.Stream.html#obspy.core.stream.Stream" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">obspy.core.stream.Stream</span></code></a> given,
+the calculation assumes a synchronized stream, and raises and error
+if not.</p></li>
+<li><p><strong>window_duration_sec</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) -- The Fourier calculation window in seconds.</p></li>
+<li><p><strong>average</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) -- The number of window used to estimate the sample covariance.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>average_step</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) -- The sliding window step for covariance matrix calculation (in number
+of windows).</p></li>
+<li><p><strong>**kwargs</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em>, </em><em>optional</em>) -- Additional keyword arguments passed to the
+<code class="xref py py-func docutils literal notranslate"><span class="pre">stft()</span></code> function.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.18)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> -- The time vector of the beginning of each covariance window.</p></li>
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.18)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> -- The frequency vector.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">covseisnet.covariance.CovarianceMatrix</span></code> -- The complex covariance matrix in a maximal shape
+<code class="docutils literal notranslate"><span class="pre">(n_time,</span> <span class="pre">n_freq,</span> <span class="pre">n_sta,</span> <span class="pre">n_sta)</span></code>.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Calculate the covariance matrix of the example stream with 1 second windows
+averaged over 5 windows:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">covseisnet</span> <span class="k">as</span> <span class="nn">cn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stream</span> <span class="o">=</span> <span class="n">cn</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">cn</span><span class="o">.</span><span class="n">covariance</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># (n_times, n_freq, n_cha, n_cha)</span>
+<span class="go">    (28, 199, 3, 3)</span>
+<span class="go">&gt;&gt;&gt;&gt; print(c[0, 1])  # first window, second frequency</span>
+<span class="go">CovarianceMatrix([[  4.84823507e+08       +0.j        ,</span>
+<span class="go">                     8.36715570e+07+55825525.33551149j,</span>
+<span class="go">                    -2.47008776e+08-60728089.46938748j],</span>
+<span class="go">                  [  8.36715570e+07-55825525.33551149j,</span>
+<span class="go">                     1.67037017e+08       +0.j        ,</span>
+<span class="go">                    -1.82827585e+08+27408763.38879033j],</span>
+<span class="go">                  [ -2.47008776e+08+60728089.46938748j,</span>
+<span class="go">                    -1.82827585e+08-27408763.38879033j,</span>
+<span class="go">                     2.66448583e+08       +0.j        ]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="covseisnet.covariancematrix.stft">
+<code class="sig-prename descclassname">covseisnet.covariancematrix.</code><code class="sig-name descname">stft</code><span class="sig-paren">(</span><em class="sig-param">stream</em>, <em class="sig-param">window_duration_sec</em>, <em class="sig-param">bandwidth=None</em>, <em class="sig-param">window_step_sec=None</em>, <em class="sig-param">window=&lt;function hanning&gt;</em>, <em class="sig-param">times_kw={'reftime': None</em>, <em class="sig-param">'type': 'relative'}</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/covseisnet/covariancematrix.html#stft"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covseisnet.covariancematrix.stft" title="Permalink to this definition">¶</a></dt>
+<dd><p>Short-time fourier transform.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stream</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayStream</span></code> or <a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.stream.Stream.html#obspy.core.stream.Stream" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">obspy.core.stream.Stream</span></code></a>) -- The input data stream. If an <a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.stream.Stream.html#obspy.core.stream.Stream" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">obspy.core.stream.Stream</span></code></a> given,
+the calculation assumes a synchronized stream, and raises and error
+if not.</p></li>
+<li><p><strong>window_duration_sec</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) -- The Fourier calculation window in seconds.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>window_step_sec</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) -- The step between two consecutive Fourier windows in seconds. Default
+(None) considers half the <code class="docutils literal notranslate"><span class="pre">window_duration_sec</span></code>.</p></li>
+<li><p><strong>bandwidth</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>, </em><em>optional</em>) -- The restricted frequencies onto which the Fourier transform is
+calculated. This improve performances when Fourier windows are large.</p></li>
+<li><p><strong>times_kw</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/string.html#module-string" title="(in Python v3.7)"><em>string</em></a><em>, </em><em>optional</em>) -- The keyword arguments passed to the
+<code class="xref py py-class docutils literal notranslate"><span class="pre">covseisnet.data.ArrayStream.times</span></code> or
+<a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.trace.Trace.times.html#obspy.core.trace.Trace.times" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">obspy.core.trace.Trace.times()</span></code></a> method depending on the input
+stream class.</p></li>
+<li><p><strong>window</strong> (<em>function</em><em>, </em><em>optional</em>) -- The window function, by default <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.hanning.html#numpy.hanning" title="(in NumPy v1.18)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.hanning()</span></code></a>. A list of
+available window functions is available at
+<a class="reference external" href="https://numpy.org/doc/stable/reference/routines.window.html">https://numpy.org/doc/stable/reference/routines.window.html</a>. Any
+function taking as argument a integer is accepted.</p></li>
+<li><p><strong>**kwargs</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em>, </em><em>optional</em>) -- Additional keyword arguments passed to the <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.fft.fft.html#numpy.fft.fft" title="(in NumPy v1.18)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.fft.fft()</span></code></a>
+function. By default, <code class="docutils literal notranslate"><span class="pre">kwargs['n']</span></code> is defined as
+<code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">npts</span> <span class="pre">-</span> <span class="pre">1</span></code> in order to calculate the cross-correlation.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.18)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> -- The time vector of the beginning of each Fourier window.</p></li>
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.18)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> -- The frequency vector.</p></li>
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.18)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> -- The complex spectrograms of each timeseries in a
+<code class="docutils literal notranslate"><span class="pre">(n_sta,</span> <span class="pre">n_time,</span> <span class="pre">n_freq)</span></code> array.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="covseisnet.covariancematrix.xcov">
+<code class="sig-prename descclassname">covseisnet.covariancematrix.</code><code class="sig-name descname">xcov</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">wid</span></em>, <em class="sig-param"><span class="n">spectra_full</span></em>, <em class="sig-param"><span class="n">overlap</span></em>, <em class="sig-param"><span class="n">average</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/covseisnet/covariancematrix.html#xcov"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covseisnet.covariancematrix.xcov" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculation of the array covariance matrix from the array data vectors.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This function is not fully documented yet, as may be reformulated.</p>
+<p>Allow to possibly reformulate this part with Einstein convention for
+faster computation, clarity and TensorFlow GPU transparency.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spectra_full</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.18)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>) -- The stream's spectra.</p></li>
+<li><p><strong>overlap</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) -- The average step.</p></li>
+<li><p><strong>average</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) -- The number of averaging windows.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The covariance matrix.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.18)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-covseisnet.arraystream">
+<span id="covseisnet-arraystream"></span><h2><a class="reference internal" href="#module-covseisnet.arraystream" title="covseisnet.arraystream"><code class="xref py py-mod docutils literal notranslate"><span class="pre">covseisnet.arraystream</span></code></a><a class="headerlink" href="#module-covseisnet.arraystream" title="Permalink to this headline">¶</a></h2>
+<p>Read and pre-process seismic data.</p>
+<div class="admonition-todo admonition" id="id3">
+<p class="admonition-title">Todo</p>
+<ul class="simple">
+<li><p>Implement the new <code class="xref py py-meth docutils literal notranslate"><span class="pre">synchronize()</span></code> method.</p></li>
+<li><p>Implement a <code class="xref py py-meth docutils literal notranslate"><span class="pre">covseisnet.data.ArrayStream.check_synchronicity()</span></code> method.</p></li>
+</ul>
+</div>
+<dl class="py class">
+<dt id="covseisnet.arraystream.ArrayStream">
+<em class="property">class </em><code class="sig-prename descclassname">covseisnet.arraystream.</code><code class="sig-name descname">ArrayStream</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/covseisnet/arraystream.html#ArrayStream"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covseisnet.arraystream.ArrayStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.stream.Stream.html#obspy.core.stream.Stream" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">obspy.core.stream.Stream</span></code></a></p>
+<p>List-like object of multiple ObsPy trace objects (synchroneous).</p>
+<p>This class is a subclass of the <a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.stream.Stream.html#obspy.core.stream.Stream" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">obspy.core.stream.Stream</span></code></a> class,
+with additional methods pre-processing methods. The main idea is to
+gather traces with an exact same amount of samples per traces in order
+to perform array-procesing methods onto it. The synchronization of the
+different traces objects is not automatic. There are two options for
+synchronizing the stream:</p>
+<ol class="arabic">
+<li><p>use the <code class="xref py py-meth docutils literal notranslate"><span class="pre">synchronize()</span></code></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">covseisnet</span> <span class="k">as</span> <span class="nn">cn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stream</span> <span class="o">=</span> <span class="n">cn</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stream</span><span class="o">.</span><span class="n">synchronize</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+<li><p>perform a manual synchronization before turning the stream
+into an <code class="xref py py-class docutils literal notranslate"><span class="pre">covseisnet.ArrayStream</span></code> object with</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">covseisnet</span> <span class="k">as</span> <span class="nn">cn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stream</span> <span class="o">=</span> <span class="n">obspy</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># manually synchronize</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stream</span> <span class="o">=</span> <span class="n">cn</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">ArrayStream</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All the original methods of <a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.stream.Stream.html#obspy.core.stream.Stream" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">obspy.core.stream.Stream</span></code></a> objects
+remain available in <code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayStream</span></code> objects. For more
+information, please visit the ObsPy documentation at
+<a class="reference external" href="https://examples.obspy.org">https://examples.obspy.org</a>.</p>
+</div>
+<dl class="py method">
+<dt id="covseisnet.arraystream.ArrayStream.cut">
+<code class="sig-name descname">cut</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">starttime</span></em>, <em class="sig-param"><span class="n">endtime</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/covseisnet/arraystream.html#ArrayStream.cut"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covseisnet.arraystream.ArrayStream.cut" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cut (trim) seismic traces between given start and end times.</p>
+<p>This function is a wrapper to the <a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.stream.Stream.trim.html#obspy.core.stream.Stream.trim" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">obspy.core.stream.Stream.trim()</span></code></a>
+method, but works directly with datetimes in <a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> format.
+The function uses the native ObsPy
+<a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.utcdatetime.UTCDateTime.html#obspy.core.utcdatetime.UTCDateTime" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UTCDateTime</span></code></a> class in order
+to convert the datetimes from <a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> into
+<a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.utcdatetime.UTCDateTime.html#obspy.core.utcdatetime.UTCDateTime" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">obspy.core.utcdatetime.UTCDateTime</span></code></a> format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>starttime</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) -- The starting date time. Can be in any format that the
+<a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.utcdatetime.UTCDateTime.html#obspy.core.utcdatetime.UTCDateTime" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UTCDateTime</span></code></a> can parse.
+For instance <code class="docutils literal notranslate"><span class="pre">starttime=&quot;2010-01-01</span> <span class="pre">10:34&quot;</span></code>.</p></li>
+<li><p><strong>endtime</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) -- The ending date time, with the same constrain that the
+<code class="docutils literal notranslate"><span class="pre">starttime</span></code> parameter.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><p><strong>**kwargs</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em>, </em><em>optional</em>) -- Additional keyword arguments are passed to the
+<a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.stream.Stream.trim.html#obspy.core.stream.Stream.trim" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">obspy.core.stream.Stream.trim()</span></code></a> method.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stream</span> <span class="o">=</span> <span class="n">cn</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stream</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="s1">&#39;2009-08-24 00:20:05&#39;</span><span class="p">,</span> <span class="s1">&#39;2009-08-24 00:20:12&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+<span class="go">3 Trace(s) in Stream:</span>
+<span class="go">BW.RJOB..EHZ | 2009-08-24T00:20:05.000000Z... | 100.0 Hz, 701 samples</span>
+<span class="go">BW.RJOB..EHN | 2009-08-24T00:20:05.000000Z... | 100.0 Hz, 701 samples</span>
+<span class="go">BW.RJOB..EHE | 2009-08-24T00:20:05.000000Z... | 100.0 Hz, 701 samples</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="covseisnet.arraystream.ArrayStream.normalize">
+<code class="sig-name descname">normalize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'onebit'</span></em>, <em class="sig-param"><span class="n">smooth_length</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">smooth_order</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">epsilon</span><span class="o">=</span><span class="default_value">1e-10</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/covseisnet/arraystream.html#ArrayStream.normalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covseisnet.arraystream.ArrayStream.normalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize the seismic traces in temporal domain.</p>
+<p>Considering <span class="math notranslate nohighlight">\(x_i(t)\)</span> being the seismic trace <span class="math notranslate nohighlight">\(x_i(t)\)</span>, the
+normalized trace <span class="math notranslate nohighlight">\(\tilde{x}_i(t)\)</span> is obtained with</p>
+<div class="math notranslate nohighlight">
+\[\tilde{x}_i(t) = \frac{x_i(t)}{Fx_i(t) + \epsilon}\]</div>
+<p>where <span class="math notranslate nohighlight">\(Fx\)</span> is a characteristic of the trace <span class="math notranslate nohighlight">\(x\)</span> that
+depends on the <code class="docutils literal notranslate"><span class="pre">method</span></code> argument, and <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> is a
+regularization value to avoid division by 0, set by the <code class="docutils literal notranslate"><span class="pre">epsilon</span></code>
+keyword argument.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) -- <p>Must be one of &quot;onebit&quot; (default), &quot;mad&quot;, or &quot;smooth&quot;.</p>
+<ul>
+<li><p>&quot;onebit&quot; compress the seismic trace into a series of 0 and 1.
+In this case, <span class="math notranslate nohighlight">\(F\)</span> is defined as <span class="math notranslate nohighlight">\(Fx(t) = |x(t)|\)</span>.</p></li>
+<li><p>&quot;mad&quot; normalize each trace by its median absolute deviation.
+In this case, <span class="math notranslate nohighlight">\(F\)</span> delivers a scalar value defined as
+<span class="math notranslate nohighlight">\(Fx(t) = \text{MAD}x(t) =
+\text{median}(|x(t) - \langle x(t)\rangle|)\)</span>, where
+<span class="math notranslate nohighlight">\(\langle x(t)\rangle)\)</span> is the signal's average.</p></li>
+<li><p>&quot;smooth&quot; normalize each trace by a smooth version of its
+envelope. In this case, <span class="math notranslate nohighlight">\(F\)</span> is obtained from the
+signal's Hilbert envelope.</p></li>
+</ul>
+</p></li>
+<li><p><strong>smooth_length</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) -- If the <code class="docutils literal notranslate"><span class="pre">method</span></code> keyword argument is set to &quot;smooth&quot;, the
+normalization is performed with the smoothed trace envelopes,
+calculated over a sliding window of <cite>smooth_length</cite> samples.
+Note that this parameter is not consider if <code class="docutils literal notranslate"><span class="pre">method</span></code> is not
+set to &quot;smooth&quot;. (<cite>None</cite> by default)</p></li>
+<li><p><strong>smooth_order</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) -- If the <code class="docutils literal notranslate"><span class="pre">method</span></code> keyword argument is set to &quot;smooth&quot;, the
+normalization is performed with the smoothed trace envelopes.
+The smoothing order is set by the <code class="docutils literal notranslate"><span class="pre">smooth_order</span></code> parameter.
+Note that this parameter is not consider if <code class="docutils literal notranslate"><span class="pre">method</span></code> is not
+set to &quot;smooth&quot;. (<cite>None</cite> by default)</p></li>
+<li><p><strong>epsilon</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) -- Regularization parameter in division, set to <code class="docutils literal notranslate"><span class="pre">1e-10</span></code> by default.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="covseisnet.arraystream.ArrayStream.synchronize">
+<code class="sig-name descname">synchronize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sampling_rate</span><span class="o">=</span><span class="default_value">20.0</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'linear'</span></em>, <em class="sig-param"><span class="n">start</span><span class="o">=</span><span class="default_value">'2010-01-01'</span></em>, <em class="sig-param"><span class="n">npts</span><span class="o">=</span><span class="default_value">1728000</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/covseisnet/arraystream.html#ArrayStream.synchronize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covseisnet.arraystream.ArrayStream.synchronize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Synchronize seismic traces into the same times.</p>
+<p>So far, this function uses the
+<a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.trace.Trace.interpolate.html#obspy.core.trace.Trace.interpolate" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">obspy.core.trace.Trace.interpolate()</span></code></a> method in order to
+synchronize the traces. This is not yet optimal (see to-do list).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sampling_rate</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) -- The desired final sampling rate in Hz. Default to 20 Hz.</p></li>
+<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) -- Interpolation method. Default to &quot;linear&quot;.</p></li>
+<li><p><strong>start</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>, </em><em>optional</em>) -- Start date of the interpolation. Default to &quot;2010-01-01&quot;.</p></li>
+<li><p><strong>npts</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>default</em>) -- Number of samples per traces. Default to 1,728,000 samples, the
+total number of samples on a single day at 20 Hz.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This function is deprecated, and wil be replaced in near future.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="covseisnet.arraystream.ArrayStream.times">
+<code class="sig-name descname">times</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">station_index</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/covseisnet/arraystream.html#ArrayStream.times"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covseisnet.arraystream.ArrayStream.times" title="Permalink to this definition">¶</a></dt>
+<dd><p>Common time vector of the ArrayStream.</p>
+<p>Because the <code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayStream</span></code> is supposed to handle
+traces with exact same number of samples (and sampling frequency), the
+time vector of each traces is supposed to be the same. This function
+only returns the times of one of the traces, accessible from the
+<a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.trace.Trace.times.html#obspy.core.trace.Trace.times" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">obspy.core.trace.Trace.times()</span></code></a> method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>station_index</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) -- The trace index to extract the time vector from. This has no
+influence on the returned time vector is the traces have indeed
+the same sampling, otherwise, you should consider synchronizing
+the traces first. By default, the first trace is considered.</p></li>
+<li><p><strong>**kwargs</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em>, </em><em>optional</em>) -- Additional keyword arguments are directly passed to the
+<a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.trace.Trace.times.html#obspy.core.trace.Trace.times" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">obspy.core.trace.Trace.times()</span></code></a> (for instance,
+<code class="docutils literal notranslate"><span class="pre">type=&quot;matplotlib&quot;</span></code> allows to recover matplotlib timestamps
+provided by the <a class="reference external" href="https://matplotlib.org/api/dates_api.html#matplotlib.dates.date2num" title="(in Matplotlib v3.2.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">matplotlib.dates.date2num()</span></code></a> function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of timestamps in a <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.18)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> or in a
+<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.18)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> or <a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the times are not synchroneous, the time vector will only correspond
+to the times of the trace indexed with <code class="docutils literal notranslate"><span class="pre">station_index</span></code>. The user
+should ensure that the traces are synchroneous first.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In order to extract times in matplotlib format, you can set the
+<code class="docutils literal notranslate"><span class="pre">type</span></code> parameter of the
+<a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.trace.Trace.times.html#obspy.core.trace.Trace.times" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">times()</span></code></a> method such as</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">covseisnet</span> <span class="k">as</span> <span class="nn">cn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span> <span class="o">=</span> <span class="n">cn</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;matplotlib&#39;</span><span class="p">)</span>
+<span class="go">array([ 733643.01392361,  733643.01392373,  733643.01392384, ...,</span>
+<span class="go">733643.01427049,  733643.0142706 ,  733643.01427072])</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="covseisnet.arraystream.ArrayStream.whiten">
+<code class="sig-name descname">whiten</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">segment_duration_sec</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'pure'</span></em>, <em class="sig-param"><span class="n">smooth</span><span class="o">=</span><span class="default_value">11</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/covseisnet/arraystream.html#ArrayStream.whiten"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covseisnet.arraystream.ArrayStream.whiten" title="Permalink to this definition">¶</a></dt>
+<dd><p>Spectral normalization of the traces.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>segment_duration_sec</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) -- Duration of the segments for Fourier transformation.</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) -- <code class="docutils literal notranslate"><span class="pre">&quot;pure&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;smooth&quot;</span></code>. Wheter to consider the division with
+direct Fourier transform modulus, or a smooth version.</p></li>
+<li><p><strong>smooth</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) -- Smoothing window length in points.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="covseisnet.arraystream.read">
+<code class="sig-prename descclassname">covseisnet.arraystream.</code><code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pathname_or_url</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/covseisnet/arraystream.html#read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covseisnet.arraystream.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read seismic waveforms files into an ArrayStream object.</p>
+<p>This function uses the <a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.stream.read.html#obspy.core.stream.read" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">obspy.core.stream.read()</span></code></a> function to read
+the streams. A detailed list of arguments and options are available at
+<a class="reference external" href="https://docs.obspy.org">https://docs.obspy.org</a>. This function opens either one or multiple
+waveform files given via file name or URL using the <code class="docutils literal notranslate"><span class="pre">pathname_or_url</span></code>
+attribute. The format of the waveform file will be automatically detected
+if not given. See the <cite>Supported Formats</cite> section in
+the <a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.stream.read.html#obspy.core.stream.read" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">obspy.core.stream.read()</span></code></a> function.</p>
+<p>This function returns an <code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayStream</span></code> object, an
+object directly inherited from the <a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.stream.Stream.html#obspy.core.stream.Stream" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">obspy.core.stream.Stream</span></code></a>
+object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><p><strong>pathname_or_url</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/io.html#io.BytesIO" title="(in Python v3.7)"><em>io.BytesIO</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) -- String containing a file name or a URL or a open file-like object.
+Wildcards are allowed for a file name. If this attribute is omitted,
+an example <code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayStream</span></code> object will be returned.</p>
+</dd>
+<dt class="field-even">Other Parameters</dt>
+<dd class="field-even"><p><strong>**kwargs</strong> (<em>dict</em>) -- Other parameters are passed to the <a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.stream.read.html#obspy.core.stream.read" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">obspy.core.stream.read()</span></code></a>
+directly.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>An <code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayStream</span></code> object.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayStream</span></code></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>In most cases a filename is specified as the only argument to
+<a class="reference external" href="http://docs.obspy.org/packages/autogen/obspy.core.stream.read.html#obspy.core.stream.read" title="(in ObsPy Documentation (1.2.0) v1.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">obspy.core.stream.read()</span></code></a>. For a quick start you may omit all
+arguments and ObsPy will create and return a basic example seismogram.
+Further usages of this function can be seen in the ObsPy documentation.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">covseisnet</span> <span class="k">as</span> <span class="nn">cn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stream</span> <span class="o">=</span> <span class="n">cn</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+<span class="go">3 Trace(s) in Stream:</span>
+<span class="go">BW.RJOB..EHZ | 2009-08-24T00:20:03.000000Z - ... | 100.0 Hz, 3000 samples</span>
+<span class="go">BW.RJOB..EHN | 2009-08-24T00:20:03.000000Z - ... | 100.0 Hz, 3000 samples</span>
+<span class="go">BW.RJOB..EHE | 2009-08-24T00:20:03.000000Z - ... | 100.0 Hz, 3000 samples</span>
+</pre></div>
+</div>
+<p class="rubric"><span class="target" id="further-examples">Further Examples</span></p>
+<p>Example waveform files may be retrieved via <a class="reference external" href="https://examples.obspy.org">https://examples.obspy.org</a>.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="license.html" class="btn btn-neutral float-right" title="License" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="auto_examples/plot_example_1.html" class="btn btn-neutral float-left" title="Single-station covariance matrix" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, The CovSeisNet Team
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

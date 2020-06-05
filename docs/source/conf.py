@@ -16,6 +16,8 @@ http://www.sphinx-doc.org/en/stable/config
 import os
 import sys
 
+from sphinx_gallery.scrapers import matplotlib_scraper
+
 sys.path.insert(0, os.path.abspath("../../"))
 
 
@@ -54,7 +56,27 @@ extensions = [
     "sphinx.ext.githubpages",
     "sphinx.ext.napoleon",
     "recommonmark",
+    "sphinx_gallery.gen_gallery",
 ]
+
+
+class MatplotlibSVG(object):
+    """Render images with SVG format."""
+
+    def __repr__(self):
+        """Let matplotlib know the classname."""
+        return self.__class__.__name__
+
+    def __call__(self, *args, **kwargs):
+        """Return image with SVG format."""
+        return matplotlib_scraper(*args, format="svg", **kwargs)
+
+
+sphinx_gallery_conf = {
+    "examples_dirs": "../../examples",
+    "gallery_dirs": "auto_examples",
+    "image_scrapers": (MatplotlibSVG(),),
+}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -101,7 +123,7 @@ html_theme_options = {
     "style_external_links": False,
     "collapse_navigation": False,
     "sticky_navigation": True,
-    "navigation_depth": 4,
+    "navigation_depth": 2,
     "includehidden": True,
 }
 
