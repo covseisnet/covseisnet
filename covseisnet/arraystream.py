@@ -92,6 +92,84 @@ class ArrayStream(obspy.core.stream.Stream):
         endtime = obspy.UTCDateTime(endtime)
         self.trim(starttime, endtime, **kwargs)
 
+    def preprocess(
+        self,
+        domain="frequency",
+        method="onebit",
+        window_duration_sec=1.,
+        smooth_length=None,
+        smooth_order=None,
+        epsilon=1e-10
+    ):
+        r"""Preprocess seismic traces all at once.
+
+        This method provides tools for preprocessing the input data in the time
+        or frequency domain. The preprocessing domain is managed by the
+        keyword argument `domain`, and the following rules apply:
+
+        **Frequency-domain pre-processing**
+
+        Considering :math:`x_i(t)` being the input seismic trace at station
+        :math:`i`, the normalized trace :math:`x^N_i(t)` is obtained
+        from the inverse short-time Fourier transform of the modified
+        spectrogram :math:`\tilde{x}_i(f)`:
+
+        .. math::
+            x^N_i(t) = \text{STFT}^{-1}\tilde{x}_i(f) / F(\tilde{x}_i(f))
+
+        where :math:`F(\tilde{x}_i(f))` is a characteristic of the spectrogram.
+
+        **Temporal-domain pre-processing**
+
+        Considering :math:`x_i(t)` being the seismic trace :math:`x_i(t)`, the
+        normalized trace :math:`\tilde{x}_i(t)` is obtained with
+
+        .. math::
+            \tilde{x}_i(t) = \frac{x_i(t)}{Fx_i(t) + \epsilon}
+
+        where :math:`Fx` is a characteristic of the trace :math:`x` that
+        depends on the ``method`` argument, and :math:`\epsilon > 0` is a
+        regularization value to avoid division by 0, set by the ``epsilon``
+        keyword argument.
+
+        Keyword arguments
+        -----------------
+        method : str, optional
+            Must be one of "onebit" (default), "mad", or "smooth".
+
+            - "onebit" compress the seismic trace into a series of 0 and 1.
+              In this case, :math:`F` is defined as :math:`Fx(t) = |x(t)|`.
+
+            - "mad" normalize each trace by its median absolute deviation.
+              In this case, :math:`F` delivers a scalar value defined as
+              :math:`Fx(t) = \text{MAD}x(t) =
+              \text{median}(|x(t) - \langle x(t)\rangle|)`, where
+              :math:`\langle x(t)\rangle)` is the signal's average.
+
+            - "smooth" normalize each trace by a smooth version of its
+              envelope. In this case, :math:`F` is obtained from the
+              signal's Hilbert envelope.
+
+        smooth_length: int, optional
+            If the ``method`` keyword argument is set to "smooth", the
+            normalization is performed with the smoothed trace envelopes,
+            calculated over a sliding window of `smooth_length` samples.
+            Note that this parameter is not consider if ``method`` is not
+            set to "smooth". (`None` by default)
+
+        smooth_order: int, optional
+            If the ``method`` keyword argument is set to "smooth", the
+            normalization is performed with the smoothed trace envelopes.
+            The smoothing order is set by the ``smooth_order`` parameter.
+            Note that this parameter is not consider if ``method`` is not
+            set to "smooth". (`None` by default)
+
+        epsilon: float, optional
+            Regularization parameter in division, set to ``1e-10`` by default.
+
+        """
+        pass
+
     def normalize(
         self,
         method="onebit",
@@ -129,6 +207,18 @@ class ArrayStream(obspy.core.stream.Stream):
             - "smooth" normalize each trace by a smooth version of its
               envelope. In this case, :math:`F` is obtained from the
               signal's Hilbert envelope.
+
+        segment_duration_sec : float
+            Duration of the segments for Fourier transformation.
+
+        Keyword arguments
+        -----------------
+        method : str
+            ``"pure"`` or ``"smooth"``. Wheter to consider the division with
+            direct Fourier transform modulus, or a smooth version.
+
+        smooth : int
+            Smoothing window length in points.
 
         smooth_length: int, optional
             If the ``method`` keyword argument is set to "smooth", the

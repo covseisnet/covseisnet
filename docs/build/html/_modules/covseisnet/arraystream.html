@@ -274,8 +274,90 @@
         <span class="n">endtime</span> <span class="o">=</span> <span class="n">obspy</span><span class="o">.</span><span class="n">UTCDateTime</span><span class="p">(</span><span class="n">endtime</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">trim</span><span class="p">(</span><span class="n">starttime</span><span class="p">,</span> <span class="n">endtime</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="ArrayStream.preprocess"><a class="viewcode-back" href="../../api.html#covseisnet.arraystream.ArrayStream.preprocess">[docs]</a>    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">domain</span><span class="o">=</span><span class="s2">&quot;frequency&quot;</span><span class="p">,</span>
+        <span class="n">method</span><span class="o">=</span><span class="s2">&quot;onebit&quot;</span><span class="p">,</span>
+        <span class="n">window_duration_sec</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
+        <span class="n">smooth_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">smooth_order</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-10</span>
+    <span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Preprocess seismic traces all at once.</span>
+
+<span class="sd">        This method provides tools for preprocessing the input data in the time</span>
+<span class="sd">        or frequency domain. The preprocessing domain is managed by the</span>
+<span class="sd">        keyword argument `domain`, and the following rules apply:</span>
+
+<span class="sd">        **Frequency-domain pre-processing**</span>
+
+<span class="sd">        Considering :math:`x_i(t)` being the input seismic trace at station</span>
+<span class="sd">        :math:`i`, the normalized trace :math:`x^N_i(t)` is obtained</span>
+<span class="sd">        from the inverse short-time Fourier transform of the modified</span>
+<span class="sd">        spectrogram :math:`\tilde{x}_i(f)`:</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">            x^N_i(t) = \text{STFT}^{-1}\tilde{x}_i(f) / F(\tilde{x}_i(f))</span>
+
+<span class="sd">        where :math:`F(\tilde{x}_i(f))` is a characteristic of the spectrogram.</span>
+
+<span class="sd">        **Temporal-domain pre-processing**</span>
+
+<span class="sd">        Considering :math:`x_i(t)` being the seismic trace :math:`x_i(t)`, the</span>
+<span class="sd">        normalized trace :math:`\tilde{x}_i(t)` is obtained with</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">            \tilde{x}_i(t) = \frac{x_i(t)}{Fx_i(t) + \epsilon}</span>
+
+<span class="sd">        where :math:`Fx` is a characteristic of the trace :math:`x` that</span>
+<span class="sd">        depends on the ``method`` argument, and :math:`\epsilon &gt; 0` is a</span>
+<span class="sd">        regularization value to avoid division by 0, set by the ``epsilon``</span>
+<span class="sd">        keyword argument.</span>
+
+<span class="sd">        Keyword arguments</span>
+<span class="sd">        -----------------</span>
+<span class="sd">        method : str, optional</span>
+<span class="sd">            Must be one of &quot;onebit&quot; (default), &quot;mad&quot;, or &quot;smooth&quot;.</span>
+
+<span class="sd">            - &quot;onebit&quot; compress the seismic trace into a series of 0 and 1.</span>
+<span class="sd">              In this case, :math:`F` is defined as :math:`Fx(t) = |x(t)|`.</span>
+
+<span class="sd">            - &quot;mad&quot; normalize each trace by its median absolute deviation.</span>
+<span class="sd">              In this case, :math:`F` delivers a scalar value defined as</span>
+<span class="sd">              :math:`Fx(t) = \text{MAD}x(t) =</span>
+<span class="sd">              \text{median}(|x(t) - \langle x(t)\rangle|)`, where</span>
+<span class="sd">              :math:`\langle x(t)\rangle)` is the signal&#39;s average.</span>
+
+<span class="sd">            - &quot;smooth&quot; normalize each trace by a smooth version of its</span>
+<span class="sd">              envelope. In this case, :math:`F` is obtained from the</span>
+<span class="sd">              signal&#39;s Hilbert envelope.</span>
+
+<span class="sd">        smooth_length: int, optional</span>
+<span class="sd">            If the ``method`` keyword argument is set to &quot;smooth&quot;, the</span>
+<span class="sd">            normalization is performed with the smoothed trace envelopes,</span>
+<span class="sd">            calculated over a sliding window of `smooth_length` samples.</span>
+<span class="sd">            Note that this parameter is not consider if ``method`` is not</span>
+<span class="sd">            set to &quot;smooth&quot;. (`None` by default)</span>
+
+<span class="sd">        smooth_order: int, optional</span>
+<span class="sd">            If the ``method`` keyword argument is set to &quot;smooth&quot;, the</span>
+<span class="sd">            normalization is performed with the smoothed trace envelopes.</span>
+<span class="sd">            The smoothing order is set by the ``smooth_order`` parameter.</span>
+<span class="sd">            Note that this parameter is not consider if ``method`` is not</span>
+<span class="sd">            set to &quot;smooth&quot;. (`None` by default)</span>
+
+<span class="sd">        epsilon: float, optional</span>
+<span class="sd">            Regularization parameter in division, set to ``1e-10`` by default.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
 <div class="viewcode-block" id="ArrayStream.normalize"><a class="viewcode-back" href="../../api.html#covseisnet.arraystream.ArrayStream.normalize">[docs]</a>    <span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;onebit&quot;</span><span class="p">,</span> <span class="n">smooth_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">smooth_order</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-10</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">method</span><span class="o">=</span><span class="s2">&quot;onebit&quot;</span><span class="p">,</span>
+        <span class="n">smooth_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">smooth_order</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-10</span>
     <span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Normalize the seismic traces in temporal domain.</span>
 
@@ -307,6 +389,18 @@
 <span class="sd">            - &quot;smooth&quot; normalize each trace by a smooth version of its</span>
 <span class="sd">              envelope. In this case, :math:`F` is obtained from the</span>
 <span class="sd">              signal&#39;s Hilbert envelope.</span>
+
+<span class="sd">        segment_duration_sec : float</span>
+<span class="sd">            Duration of the segments for Fourier transformation.</span>
+
+<span class="sd">        Keyword arguments</span>
+<span class="sd">        -----------------</span>
+<span class="sd">        method : str</span>
+<span class="sd">            ``&quot;pure&quot;`` or ``&quot;smooth&quot;``. Wheter to consider the division with</span>
+<span class="sd">            direct Fourier transform modulus, or a smooth version.</span>
+
+<span class="sd">        smooth : int</span>
+<span class="sd">            Smoothing window length in points.</span>
 
 <span class="sd">        smooth_length: int, optional</span>
 <span class="sd">            If the ``method`` keyword argument is set to &quot;smooth&quot;, the</span>
@@ -377,7 +471,10 @@
         <span class="n">start</span> <span class="o">=</span> <span class="n">obspy</span><span class="o">.</span><span class="n">UTCDateTime</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">sampling_rate</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">npts</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ArrayStream.times"><a class="viewcode-back" href="../../api.html#covseisnet.arraystream.ArrayStream.times">[docs]</a>    <span class="k">def</span> <span class="nf">times</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">station_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="ArrayStream.times"><a class="viewcode-back" href="../../api.html#covseisnet.arraystream.ArrayStream.times">[docs]</a>    <span class="k">def</span> <span class="nf">times</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">station_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Common time vector of the ArrayStream.</span>
 
 <span class="sd">        Because the :class:`~covseisnet.data.ArrayStream` is supposed to handle</span>

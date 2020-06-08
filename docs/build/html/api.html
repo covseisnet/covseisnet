@@ -427,7 +427,7 @@ averaged over 5 windows:</p>
 
 <dl class="py function">
 <dt id="covseisnet.covariancematrix.stft">
-<code class="sig-prename descclassname">covseisnet.covariancematrix.</code><code class="sig-name descname">stft</code><span class="sig-paren">(</span><em class="sig-param">stream</em>, <em class="sig-param">window_duration_sec</em>, <em class="sig-param">bandwidth=None</em>, <em class="sig-param">window_step_sec=None</em>, <em class="sig-param">window=&lt;function hanning&gt;</em>, <em class="sig-param">times_kw={'reftime': None</em>, <em class="sig-param">'type': 'relative'}</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/covseisnet/covariancematrix.html#stft"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covseisnet.covariancematrix.stft" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">covseisnet.covariancematrix.</code><code class="sig-name descname">stft</code><span class="sig-paren">(</span><em class="sig-param">stream</em>, <em class="sig-param">window_duration_sec</em>, <em class="sig-param">bandwidth=None</em>, <em class="sig-param">window_step_sec=None</em>, <em class="sig-param">window=&lt;function hanning&gt;</em>, <em class="sig-param">times_kw={}</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/covseisnet/covariancematrix.html#stft"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covseisnet.covariancematrix.stft" title="Permalink to this definition">¶</a></dt>
 <dd><p>Short-time fourier transform.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -584,6 +584,67 @@ For instance <code class="docutils literal notranslate"><span class="pre">startt
 <dt id="covseisnet.arraystream.ArrayStream.normalize">
 <code class="sig-name descname">normalize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'onebit'</span></em>, <em class="sig-param"><span class="n">smooth_length</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">smooth_order</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">epsilon</span><span class="o">=</span><span class="default_value">1e-10</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/covseisnet/arraystream.html#ArrayStream.normalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covseisnet.arraystream.ArrayStream.normalize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Normalize the seismic traces in temporal domain.</p>
+<p>Considering <span class="math notranslate nohighlight">\(x_i(t)\)</span> being the seismic trace <span class="math notranslate nohighlight">\(x_i(t)\)</span>, the
+normalized trace <span class="math notranslate nohighlight">\(\tilde{x}_i(t)\)</span> is obtained with</p>
+<div class="math notranslate nohighlight">
+\[\tilde{x}_i(t) = \frac{x_i(t)}{Fx_i(t) + \epsilon}\]</div>
+<p>where <span class="math notranslate nohighlight">\(Fx\)</span> is a characteristic of the trace <span class="math notranslate nohighlight">\(x\)</span> that
+depends on the <code class="docutils literal notranslate"><span class="pre">method</span></code> argument, and <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> is a
+regularization value to avoid division by 0, set by the <code class="docutils literal notranslate"><span class="pre">epsilon</span></code>
+keyword argument.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) -- <p>Must be one of &quot;onebit&quot; (default), &quot;mad&quot;, or &quot;smooth&quot;.</p>
+<ul>
+<li><p>&quot;onebit&quot; compress the seismic trace into a series of 0 and 1.
+In this case, <span class="math notranslate nohighlight">\(F\)</span> is defined as <span class="math notranslate nohighlight">\(Fx(t) = |x(t)|\)</span>.</p></li>
+<li><p>&quot;mad&quot; normalize each trace by its median absolute deviation.
+In this case, <span class="math notranslate nohighlight">\(F\)</span> delivers a scalar value defined as
+<span class="math notranslate nohighlight">\(Fx(t) = \text{MAD}x(t) =
+\text{median}(|x(t) - \langle x(t)\rangle|)\)</span>, where
+<span class="math notranslate nohighlight">\(\langle x(t)\rangle)\)</span> is the signal's average.</p></li>
+<li><p>&quot;smooth&quot; normalize each trace by a smooth version of its
+envelope. In this case, <span class="math notranslate nohighlight">\(F\)</span> is obtained from the
+signal's Hilbert envelope.</p></li>
+</ul>
+</p></li>
+<li><p><strong>segment_duration_sec</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) -- Duration of the segments for Fourier transformation.</p></li>
+<li><p><strong>method</strong> -- <code class="docutils literal notranslate"><span class="pre">&quot;pure&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;smooth&quot;</span></code>. Wheter to consider the division with
+direct Fourier transform modulus, or a smooth version.</p></li>
+<li><p><strong>smooth</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) -- Smoothing window length in points.</p></li>
+<li><p><strong>smooth_length</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) -- If the <code class="docutils literal notranslate"><span class="pre">method</span></code> keyword argument is set to &quot;smooth&quot;, the
+normalization is performed with the smoothed trace envelopes,
+calculated over a sliding window of <cite>smooth_length</cite> samples.
+Note that this parameter is not consider if <code class="docutils literal notranslate"><span class="pre">method</span></code> is not
+set to &quot;smooth&quot;. (<cite>None</cite> by default)</p></li>
+<li><p><strong>smooth_order</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><em>optional</em>) -- If the <code class="docutils literal notranslate"><span class="pre">method</span></code> keyword argument is set to &quot;smooth&quot;, the
+normalization is performed with the smoothed trace envelopes.
+The smoothing order is set by the <code class="docutils literal notranslate"><span class="pre">smooth_order</span></code> parameter.
+Note that this parameter is not consider if <code class="docutils literal notranslate"><span class="pre">method</span></code> is not
+set to &quot;smooth&quot;. (<cite>None</cite> by default)</p></li>
+<li><p><strong>epsilon</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>, </em><em>optional</em>) -- Regularization parameter in division, set to <code class="docutils literal notranslate"><span class="pre">1e-10</span></code> by default.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="covseisnet.arraystream.ArrayStream.preprocess">
+<code class="sig-name descname">preprocess</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">domain</span><span class="o">=</span><span class="default_value">'frequency'</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'onebit'</span></em>, <em class="sig-param"><span class="n">window_duration_sec</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">smooth_length</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">smooth_order</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">epsilon</span><span class="o">=</span><span class="default_value">1e-10</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/covseisnet/arraystream.html#ArrayStream.preprocess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covseisnet.arraystream.ArrayStream.preprocess" title="Permalink to this definition">¶</a></dt>
+<dd><p>Preprocess seismic traces all at once.</p>
+<p>This method provides tools for preprocessing the input data in the time
+or frequency domain. The preprocessing domain is managed by the
+keyword argument <cite>domain</cite>, and the following rules apply:</p>
+<p><strong>Frequency-domain pre-processing</strong></p>
+<p>Considering <span class="math notranslate nohighlight">\(x_i(t)\)</span> being the input seismic trace at station
+<span class="math notranslate nohighlight">\(i\)</span>, the normalized trace <span class="math notranslate nohighlight">\(x^N_i(t)\)</span> is obtained
+from the inverse short-time Fourier transform of the modified
+spectrogram <span class="math notranslate nohighlight">\(\tilde{x}_i(f)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[x^N_i(t) = \text{STFT}^{-1}\tilde{x}_i(f) / F(\tilde{x}_i(f))\]</div>
+<p>where <span class="math notranslate nohighlight">\(F(\tilde{x}_i(f))\)</span> is a characteristic of the spectrogram.</p>
+<p><strong>Temporal-domain pre-processing</strong></p>
 <p>Considering <span class="math notranslate nohighlight">\(x_i(t)\)</span> being the seismic trace <span class="math notranslate nohighlight">\(x_i(t)\)</span>, the
 normalized trace <span class="math notranslate nohighlight">\(\tilde{x}_i(t)\)</span> is obtained with</p>
 <div class="math notranslate nohighlight">
