@@ -2,15 +2,15 @@
 # -*- coding: utf-8 -*-
 # flake8: noqa
 """
-Single-station covariance matrix spectral width
-===============================================
+Network covariance matrix spectral width: natural case
+=========================================================
 
 
-This example shows how to calculate the spectral width of the interchannel spectral covariance matrix. It makes use of the obspy example trace available when installing obspy. This basic example does not apply any synchronization or pre-processing.
+This example shows how to calculate the spectral width of the network covariance matrix. It makes use of real seismic data acquired the 2010.10.14 by the Piton de la Fournaise seismic network. This day of data contains seismovolcanic signals linked to the pre-eruptive seismic swarm and to the beginning of the co-eruptive tremor starting at 15:20 (GMT). This basic example does not apply any synchronization or pre-processing.
 
-Considering a single seismic station with three channels (NS, EW, and Z), the covariance is of dimensions 3 times 3. The following example use a Fourier estimation window of 1 second and is estimated over 5 consecutive windows. The overlapping between the Fourier windows is 50%, and the step between two consecutive averaging window is 50%.
+Considering a seismic network with 21 stations (using only the vertical component), the covariance is of dimensions 21 times 21. The following example use a Fourier estimation window of 50 seconds and is estimated over 40 consecutive windows. The overlapping between the Fourier windows is 50%, and the step between two consecutive averaging window is 50%.
 
-The lower the covariance matrix spectral width (dark blue), the more polarized the seismic wavefield (into a given direction). Note that the sampling rate of the seismic station is 100 Hz, the dark band at 50 Hz therefore corresponds to the Nyquist frequency (and should be disregarded).
+The lower the covariance matrix spectral width (dark blue), the more coherent the seismic wavefield. Note that the sampling rate of the seismic station is 20 Hz, the dark band at 10 Hz therefore corresponds to the Nyquist frequency (and should be disregarded).
 """
 
 import covseisnet as csn
@@ -19,11 +19,12 @@ import matplotlib.pyplot as plt
 
 
 # read ObsPy's example stream
-stream = obspy.read()
+file_seismograms = '/path/to/data'
+stream = obspy.read(file_seismograms)
 
 # calculate covariance from stream
-window_duration_sec = 1.0
-average = 5
+window_duration_sec = 50
+average = 40
 times, frequencies, covariances = csn.covariancematrix.calculate(
     stream, window_duration_sec, average
 )
@@ -31,7 +32,7 @@ times, frequencies, covariances = csn.covariancematrix.calculate(
 # calculate spectral width
 spectral_width = covariances.coherence(kind="spectral_width")
 
-# show covariance at first time window and first frequency
+# show network covariance matrix spectral width
 fig, ax = plt.subplots(1, constrained_layout=True)
 img = ax.pcolormesh(times, frequencies, spectral_width.T, rasterized=True)
 ax.set_ylim([0, stream[0].stats.sampling_rate / 2])
