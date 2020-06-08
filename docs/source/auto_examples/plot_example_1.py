@@ -26,16 +26,16 @@ channels = [s.stats.channel for s in stream]
 window_duration_sec = 1.0
 average = 5
 times, frequencies, covariances = csn.covariancematrix.calculate(
-        stream, window_duration_sec, average
-    )
+    stream, window_duration_sec, average
+)
 
 # show covariance from first window and first frequency
 covariance_show = np.abs(covariances[0, 0])
 fig, ax = plt.subplots(1, constrained_layout=True)
-img = ax.imshow(covariance_show, origin='lower', cmap='cividis')
+img = ax.imshow(covariance_show, origin="lower", cmap="cividis")
 ax.set_xticks(range(len(channels)))
 ax.set_xticklabels(channels)
 ax.set_yticks(range(len(channels)))
 ax.set_yticklabels(channels)
-ax.set_title('Single-station multiple channels covariance')
-plt.colorbar(img, shrink=.6).set_label('Covariance modulus')
+ax.set_title("Single-station multiple channels covariance")
+plt.colorbar(img, shrink=0.6).set_label("Covariance modulus")
