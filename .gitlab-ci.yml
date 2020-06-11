@@ -11,6 +11,10 @@ python-black:
   script:
     - pip install black
     - black --check .
+  only:
+    - develop
+  allow_failure: true
+
 
 py37-test:
   image: python:3.7-slim
