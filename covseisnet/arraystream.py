@@ -160,40 +160,51 @@ class ArrayStream(obspy.core.stream.Stream):
                 trace.data /= signal.mad(trace.data) + epsilon
 
     def synchronize(
-        self,
-        sampling_rate=20.0,
-        method="linear",
-        start="2010-01-01",
-        npts=24 * 3600 * 20,
+        self, start="2010-01-01T00:00:00.00", duration_sec=24 * 3600, method="linear",
     ):
         r"""Synchronize seismic traces into the same times.
-
-        So far, this function uses the
-        :meth:`obspy.core.trace.Trace.interpolate` method in order to
-        synchronize the traces. This is not yet optimal (see to-do list).
-
-        Keyword arguments
-        -----------------
-        sampling_rate : float, optional
-            The desired final sampling rate in Hz. Default to 20 Hz.
-
-        method: str, optional
-            Interpolation method. Default to "linear".
-
-        start: str, optional
-            Start date of the interpolation. Default to "2010-01-01".
-
-        npts: int, default
-            Number of samples per traces. Default to 1,728,000 samples, the
-            total number of samples on a single day at 20 Hz.
-
-
-        Warning
-        -------
-        This function is deprecated, and wil be replaced in near future.
-        """
+    
+            This function uses the
+            :meth:`obspy.core.stream.Stream.trim` method in order to cut all 
+            traces of the Stream object to given start and end time with
+            padding if necessary, and the
+            :meth:`obspy.core.trace.Trace.interpolate` method in order to
+            synchronize the traces. Then data are linearly interpolated.
+    
+            Keyword arguments
+            -----------------
+            start: str, default
+                Start date of the interpolation. 
+                Default to "2010-01-01T00:00:00.00".
+                
+            duration_sec: int, default
+                Duration of the data traces in second. Default to 86,400 seconds,
+                the total number of seconds on a single day.
+    
+            method: str, default
+                Interpolation method. Default to "linear".
+                
+    
+    
+            """
+        # Duplicate stream
+        stream_i = self.copy()
         start = obspy.UTCDateTime(start)
-        self.interpolate(sampling_rate, method, start, npts)
+        end = start + duration_sec
+        sampling = self[0].stats.sampling_rate
+        npts = int(sampling * duration_sec)
+        stream_i.trim(start, end, pad=True, fill_value=0, nearest_sample=False)
+
+        for tr, tr_i in zip(self, stream_i):
+            t = tr.times() / duration_sec + tr.stats.starttime.matplotlib_date
+            shift = tr_i.stats.starttime - start
+            tr_i.interpolate(
+                sampling, method, start=start, npts=npts, time_shift=-shift
+            )
+            ti = tr_i.times() / duration_sec + tr_i.stats.starttime.matplotlib_date
+            tr_i.data = np.interp(ti, t, tr.data)
+
+        return stream_i
 
     def times(self, station_index=0, **kwargs):
         r"""Common time vector of the ArrayStream.
