@@ -44,8 +44,11 @@ def test_arraystream():
         starttime=stream[0].stats.starttime + 1, endtime=stream[0].stats.endtime - 1
     )
 
+    # test synchronize
+    stream.synchronize()
+
     # test normalize
     stream.normalize(method="onebit")
 
     # test times
-    times = stream.times()
+    stream.times()
