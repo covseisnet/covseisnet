@@ -19,11 +19,13 @@ import matplotlib.pyplot as plt
 from obspy import UTCDateTime
 from obspy.clients.fdsn import Client
 
-# Download data from the YA Undervolc seismic network with RESIF Seismic data portal
+# download data from the YA Undervolc seismic network with RESIF Seismic data portal
 client = Client("RESIF")
 signal_duration_sec = 6*3600
 t = UTCDateTime("2010-10-14T10:00:00.00")
 stream = client.get_waveforms("YA", "UV*", "00", "HHZ", t, t + signal_duration_sec)
+
+# downsample data to 25 Hz
 stream.decimate(4)
 
 # calculate covariance from stream
