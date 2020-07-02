@@ -16,11 +16,15 @@ The lower the covariance matrix spectral width (dark blue), the more coherent th
 import covseisnet as csn
 import obspy
 import matplotlib.pyplot as plt
+from obspy import UTCDateTime
+from obspy.clients.fdsn import Client
 
-
-# read ObsPy's example stream
-file_seismograms = '/path/to/data'
-stream = obspy.read(file_seismograms)
+# Download data from the YA Undervolc seismic network with RESIF Seismic data portal
+client = Client("RESIF")
+signal_duration_sec = 6*3600
+t = UTCDateTime("2010-10-14T10:00:00.00")
+stream = client.get_waveforms("YA", "UV*", "00", "HHZ", t, t + signal_duration_sec)
+stream.decimate(4)
 
 # calculate covariance from stream
 window_duration_sec = 20
