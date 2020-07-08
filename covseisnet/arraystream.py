@@ -12,7 +12,7 @@ import obspy
 import numpy as np
 
 from functools import partial
-from scipy import signal
+from scipy import signal, stats
 
 
 class ArrayStream(obspy.core.stream.Stream):
@@ -93,101 +93,16 @@ class ArrayStream(obspy.core.stream.Stream):
         endtime = obspy.UTCDateTime(endtime)
         self.trim(starttime, endtime, **kwargs)
 
-    def normalize(
-        self, method="onebit", smooth_length=None, smooth_order=None, epsilon=1e-10
-    ):
-        r"""Normalize the seismic traces in temporal domain.
-
-        Considering :math:`x_i(t)` being the seismic trace :math:`x_i(t)`, the
-        normalized trace :math:`\tilde{x}_i(t)` is obtained with
-
-        .. math::
-            \tilde{x}_i(t) = \frac{x_i(t)}{Fx_i(t) + \epsilon}
-
-        where :math:`Fx` is a characteristic of the trace :math:`x` that
-        depends on the ``method`` argument, and :math:`\epsilon > 0` is a
-        regularization value to avoid division by 0, set by the ``epsilon``
-        keyword argument.
-
-        Keyword arguments
-        -----------------
-        method : str, optional
-            Must be one of "onebit" (default), "mad", or "smooth".
-
-            - "onebit" compress the seismic trace into a series of 0 and 1.
-              In this case, :math:`F` is defined as :math:`Fx(t) = |x(t)|`.
-
-            - "mad" normalize each trace by its median absolute deviation.
-              In this case, :math:`F` delivers a scalar value defined as
-              :math:`Fx(t) = \text{MAD}x(t) =
-              \text{median}(|x(t) - \langle x(t)\rangle|)`, where
-              :math:`\langle x(t)\rangle)` is the signal's average.
-
-            - "smooth" normalize each trace by a smooth version of its
-              envelope. In this case, :math:`F` is obtained from the
-              signal's Hilbert envelope.
-
-        smooth_length: int, optional
-            If the ``method`` keyword argument is set to "smooth", the
-            normalization is performed with the smoothed trace envelopes,
-            calculated over a sliding window of `smooth_length` samples.
-            Note that this parameter is not consider if ``method`` is not
-            set to "smooth". (`None` by default)
-
-        smooth_order: int, optional
-            If the ``method`` keyword argument is set to "smooth", the
-            normalization is performed with the smoothed trace envelopes.
-            The smoothing order is set by the ``smooth_order`` parameter.
-            Note that this parameter is not consider if ``method`` is not
-            set to "smooth". (`None` by default)
-
-        epsilon: float, optional
-            Regularization parameter in division, set to ``1e-10`` by default.
-
-        """
-        if method == "onebit":
-            for trace in self:
-                trace.data = trace.data / (np.abs(trace.data) + epsilon)
-
-        if method == "smooth":
-            for trace in self:
-                trace_env_smooth = signal.savgol_filter(
-                    np.abs(trace.data), smooth_length, smooth_order
-                )
-                trace.data = trace.data / (trace_env_smooth + epsilon)
-
-        if method == "demad":
-            for trace in self:
-                trace.data /= signal.mad(trace.data) + epsilon
-
     def preprocess(
-        self, domain='spectral', method='onebit', **kwargs
+        self, domain='spectral', **kwargs
     ):
         r"""Pre-process each trace in temporal or spectral domain."""
         kwargs.setdefault('epsilon', 1e-10)
         if domain == 'spectral':
-            if method == 'onebit':
-                kwargs['smooth_length', None]
-                kwargs['smooth_order', None]
-                whiten(self, **kwargs)
-            elif method == 'smooth':
-                kwargs.setdefault('smooth_length', 10)
-                kwargs.setdefault('smooth_order', 2)
-                whiten(self, **kwargs)
-            else:
-                raise ValueError('Unknown method {}'.format(method))
+            whiten(self, **kwargs)
 
         elif domain == 'temporal':
-            if method == 'onebit':
-                normalize(self, **kwargs)
-            elif method == 'smooth':
-                kwargs.setdefault('smooth_length', 10)
-                kwargs.setdefault('smooth_order', 2)
-                normalize(self, **kwargs)
-            elif method == 'demad':
-                demad(self)
-            else:
-                raise ValueError('Unknown method {}'.format(method))
+            normalize(self, **kwargs)
         pass
 
     def synchronize(
@@ -230,7 +145,8 @@ class ArrayStream(obspy.core.stream.Stream):
             tr_i.interpolate(
                 sampling, method, start=start, npts=npts, time_shift=-shift
             )
-            ti = tr_i.times() / duration_sec + tr_i.stats.starttime.matplotlib_date
+            ti = tr_i.times() / duration_sec +\
+                tr_i.stats.starttime.matplotlib_date
             tr_i.data = np.interp(ti, t, tr.data)
 
         return stream_i
@@ -306,7 +222,8 @@ def read(pathname_or_url=None, **kwargs):
     pathname_or_url: str or io.BytesIO or None
         String containing a file name or a URL or a open file-like object.
         Wildcards are allowed for a file name. If this attribute is omitted,
-        an example :class:`~covseisnet.data.ArrayStream` object will be returned.
+        an example :class:`~covseisnet.data.ArrayStream` object will be
+        returned.
 
     Other parameters
     ----------------
@@ -346,19 +263,24 @@ def read(pathname_or_url=None, **kwargs):
 
 def whiten(
         stream,
+        method='onebit',
         window_duration_sec=2,
-        smooth_length=None,
-        smooth_order=None,
+        smooth_length=11,
+        smooth_order=1,
         epsilon=1e-10
 ):
-    r"""Whiten traces in the spectral domain."""
-    fft_size = int(window_duration_sec * stream[0].stats.sampling_rate)
-    if smooth_length is None:
+    r"""Normalize in the spectral domain."""
+    print(method)
+    if method == 'onebit':
         whiten_method = phase
-    else:
+    elif method == 'smooth':
         whiten_method = partial(
             detrend_spectrum, smooth=smooth_length, order=smooth_order,
             epsilon=epsilon)
+    else:
+        raise ValueError('Unknown method {}'.format(method))
+    r"""Whiten traces in the spectral domain."""
+    fft_size = int(window_duration_sec * stream[0].stats.sampling_rate)
     for index, trace in enumerate(stream):
         data = trace.data
         _, _, data_fft = signal.stft(data, nperseg=fft_size)
@@ -366,26 +288,6 @@ def whiten(
         _, data = signal.istft(data_fft, nperseg=fft_size)
         trace.data = data
     pass
-
-
-def phase(x):
-    r"""Complex phase extraction.
-
-    Given a complex number (or complex-valued array)
-    :math:`x = r e^{\imath \phi}`, where :math:`r` is the complex modulus
-    and :math:`phi` the complex phase, the function returns the unitary-modulus
-    complex number such as
-
-    .. math::
-
-              \tilde{x} = e^{\imath \phi}
-
-    Arguments
-    ---------
-    x: :class:`np.ndarray`
-        The complex-valued data to extract the complex phase from.
-    """
-    return np.exp(1j * np.angle(x))
 
 
 def detrend_spectrum(x, smooth=None, order=None, epsilon=1e-10):
@@ -414,37 +316,94 @@ def detrend_spectrum(x, smooth=None, order=None, epsilon=1e-10):
     """
     n_frequencies, n_times = x.shape
     for t in range(n_times):
-        x_smooth = savitzky_golay(np.abs(x[:, t]), smooth, order)
+        x_smooth = signal.savgol_filter(np.abs(x[:, t]), smooth, order)
         x[:, t] /= (x_smooth + epsilon)
     return x
 
 
-def savitzky_golay(y, window_size, order, deriv=0, rate=1):
-    r"""Smooth with a Savitzky-Golay filter."""
-    try:
-        window_size = np.abs(np.int(window_size))
-        order = np.abs(np.int(order))
+def normalize(
+    stream, method, smooth_length=None, smooth_order=None, epsilon=1e-10
+):
+    r"""Normalize the seismic traces in temporal domain.
 
-    except ValueError:
-        raise ValueError("window_size and order have to be of type int")
+    Considering :math:`x_i(t)` being the seismic trace :math:`x_i(t)`, the
+    normalized trace :math:`\tilde{x}_i(t)` is obtained with
 
-    if window_size % 2 != 1 or window_size < 1:
-        raise TypeError("window_size size must be a positive odd number")
+    .. math::
+        \tilde{x}_i(t) = \frac{x_i(t)}{Fx_i(t) + \epsilon}
 
-    if window_size < order + 2:
-        raise TypeError("window_size is too small for the polynomials order")
+    where :math:`Fx` is a characteristic of the trace :math:`x` that
+    depends on the ``method`` argument, and :math:`\epsilon > 0` is a
+    regularization value to avoid division by 0, set by the ``epsilon``
+    keyword argument.
 
-    order_range = range(order + 1)
-    half_window = (window_size - 1) // 2
+    Keyword arguments
+    -----------------
+    method : str, optional
+        Must be one of "onebit" (default), "mad", or "smooth".
 
-    # Precompute coefficients
-    b = np.mat([[k**i for i in order_range]
-                for k in range(-half_window, half_window + 1)])
-    m = np.linalg.pinv(b).A[deriv] * rate**deriv * np.math.factorial(deriv)
+        - "onebit" compress the seismic trace into a series of 0 and 1.
+          In this case, :math:`F` is defined as :math:`Fx(t) = |x(t)|`.
 
-    # Pad the signal at the extremes with values taken from the signal itself
-    firstvals = y[0] - np.abs(y[1:half_window + 1][::-1] - y[0])
-    lastvals = y[-1] + np.abs(y[-half_window - 1:-1][::-1] - y[-1])
-    y = np.concatenate((firstvals, y, lastvals))
+        - "mad" normalize each trace by its median absolute deviation.
+          In this case, :math:`F` delivers a scalar value defined as
+          :math:`Fx(t) = \text{MAD}x(t) =
+          \text{median}(|x(t) - \langle x(t)\rangle|)`, where
+          :math:`\langle x(t)\rangle)` is the signal's average.
 
-    return np.convolve(m[::-1], y, mode='valid')
+        - "smooth" normalize each trace by a smooth version of its
+          envelope. In this case, :math:`F` is obtained from the
+          signal's Hilbert envelope.
+
+    smooth_length: int, optional
+        If the ``method`` keyword argument is set to "smooth", the
+        normalization is performed with the smoothed trace envelopes,
+        calculated over a sliding window of `smooth_length` samples.
+        Note that this parameter is not consider if ``method`` is not
+        set to "smooth". (`None` by default)
+
+    smooth_order: int, optional
+        If the ``method`` keyword argument is set to "smooth", the
+        normalization is performed with the smoothed trace envelopes.
+        The smoothing order is set by the ``smooth_order`` parameter.
+        Note that this parameter is not consider if ``method`` is not
+        set to "smooth". (`None` by default)
+
+    epsilon: float, optional
+        Regularization parameter in division, set to ``1e-10`` by default.
+
+    """
+    if method == "onebit":
+        for trace in stream:
+            trace.data = trace.data / (np.abs(trace.data) + epsilon)
+
+    if method == "smooth":
+        for trace in stream:
+            trace_env_smooth = signal.savgol_filter(
+                np.abs(trace.data), smooth_length, smooth_order
+            )
+            trace.data = trace.data / (trace_env_smooth + epsilon)
+
+    if method == "demad":
+        for trace in stream:
+            trace.data /= stats.median_absolute_deviation(trace.data) + epsilon
+
+
+def phase(x):
+    r"""Complex phase extraction.
+
+    Given a complex number (or complex-valued array)
+    :math:`x = r e^{\imath \phi}`, where :math:`r` is the complex modulus
+    and :math:`phi` the complex phase, the function returns the unitary-modulus
+    complex number such as
+
+    .. math::
+
+              \tilde{x} = e^{\imath \phi}
+
+    Arguments
+    ---------
+    x: :class:`np.ndarray`
+        The complex-valued data to extract the complex phase from.
+    """
+    return np.exp(1j * np.angle(x))
