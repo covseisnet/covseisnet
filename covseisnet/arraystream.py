@@ -11,6 +11,7 @@ Todo
 import obspy
 import numpy as np
 
+from functools import partial
 from scipy import signal
 
 
@@ -159,34 +160,62 @@ class ArrayStream(obspy.core.stream.Stream):
             for trace in self:
                 trace.data /= signal.mad(trace.data) + epsilon
 
+    def preprocess(
+        self, domain='spectral', method='onebit', **kwargs
+    ):
+        r"""Pre-process each trace in temporal or spectral domain."""
+        kwargs.setdefault('epsilon', 1e-10)
+        if domain == 'spectral':
+            if method == 'onebit':
+                kwargs['smooth_length', None]
+                kwargs['smooth_order', None]
+                whiten(self, **kwargs)
+            elif method == 'smooth':
+                kwargs.setdefault('smooth_length', 10)
+                kwargs.setdefault('smooth_order', 2)
+                whiten(self, **kwargs)
+            else:
+                raise ValueError('Unknown method {}'.format(method))
+
+        elif domain == 'temporal':
+            if method == 'onebit':
+                normalize(self, **kwargs)
+            elif method == 'smooth':
+                kwargs.setdefault('smooth_length', 10)
+                kwargs.setdefault('smooth_order', 2)
+                normalize(self, **kwargs)
+            elif method == 'demad':
+                demad(self)
+            else:
+                raise ValueError('Unknown method {}'.format(method))
+        pass
+
     def synchronize(
-        self, start="2010-01-01T00:00:00.00", duration_sec=24 * 3600, method="linear",
+        self, start="2010-01-01T00:00:00.00", duration_sec=24 * 3600,
+        method="linear"
     ):
         r"""Synchronize seismic traces into the same times.
-    
-            This function uses the
-            :meth:`obspy.core.stream.Stream.trim` method in order to cut all 
-            traces of the Stream object to given start and end time with
-            padding if necessary, and the
-            :meth:`obspy.core.trace.Trace.interpolate` method in order to
-            synchronize the traces. Then data are linearly interpolated.
-    
-            Keyword arguments
-            -----------------
-            start: str, default
-                Start date of the interpolation. 
-                Default to "2010-01-01T00:00:00.00".
-                
-            duration_sec: int, default
-                Duration of the data traces in second. Default to 86,400 seconds,
-                the total number of seconds on a single day.
-    
-            method: str, default
-                Interpolation method. Default to "linear".
-                
-    
-    
-            """
+
+        This function uses the
+        :meth:`obspy.core.stream.Stream.trim` method in order to cut all
+        traces of the Stream object to given start and end time with
+        padding if necessary, and the
+        :meth:`obspy.core.trace.Trace.interpolate` method in order to
+        synchronize the traces. Then data are linearly interpolated.
+
+        Keyword arguments
+        -----------------
+        start: str, default
+            Start date of the interpolation.
+            Default to "2010-01-01T00:00:00.00".
+
+        duration_sec: int, default
+            Duration of the data traces in second. Default to 86,400 seconds,
+            the total number of seconds on a single day.
+
+        method: str, default
+            Interpolation method. Default to "linear".
+        """
         # Duplicate stream
         stream_i = self.copy()
         start = obspy.UTCDateTime(start)
@@ -256,52 +285,6 @@ class ArrayStream(obspy.core.stream.Stream):
         """
         return self[0].times(**kwargs)
 
-    def whiten(self, segment_duration_sec, method="pure", smooth=11):
-        """Spectral normalization of the traces.
-
-        Parameters
-        ----------
-        segment_duration_sec : float
-            Duration of the segments for Fourier transformation.
-
-        Keyword arguments
-        -----------------
-        method : str
-            ``"pure"`` or ``"smooth"``. Wheter to consider the division with
-            direct Fourier transform modulus, or a smooth version.
-
-        smooth : int
-            Smoothing window length in points.
-
-        """
-        # Define method
-        if method == "pure":
-            whiten_method = signal.phase
-        elif method == "smooth":
-            whiten_method = signal.detrend_spectrum
-
-        # Initialize for waitbar
-        # waitbar = logtable.waitbar('Whiten', len(self))
-        fft_size = int(segment_duration_sec * self[0].stats.sampling_rate)
-        duration = self[0].times()[-1]
-
-        # Whiten
-        for index, trace in enumerate(self):
-            # waitbar.progress(index)
-            data = trace.data
-            _, _, data_fft = signal.stft(data, nperseg=fft_size)
-            data_fft = whiten_method(data_fft, smooth=smooth)
-            _, data = signal.istft(data_fft, nperseg=fft_size)
-            trace.data = data
-
-        # Trim
-        self.cut(
-            pad=True,
-            fill_value=0,
-            starttime=self[0].stats.starttime,
-            endtime=self[0].stats.starttime + duration,
-        )
-
 
 def read(pathname_or_url=None, **kwargs):
     """Read seismic waveforms files into an ArrayStream object.
@@ -359,3 +342,109 @@ def read(pathname_or_url=None, **kwargs):
     stream = obspy.read(pathname_or_url, **kwargs)
     stream = ArrayStream(stream)
     return stream
+
+
+def whiten(
+        stream,
+        window_duration_sec=2,
+        smooth_length=None,
+        smooth_order=None,
+        epsilon=1e-10
+):
+    r"""Whiten traces in the spectral domain."""
+    fft_size = int(window_duration_sec * stream[0].stats.sampling_rate)
+    if smooth_length is None:
+        whiten_method = phase
+    else:
+        whiten_method = partial(
+            detrend_spectrum, smooth=smooth_length, order=smooth_order,
+            epsilon=epsilon)
+    for index, trace in enumerate(stream):
+        data = trace.data
+        _, _, data_fft = signal.stft(data, nperseg=fft_size)
+        data_fft = whiten_method(data_fft)
+        _, data = signal.istft(data_fft, nperseg=fft_size)
+        trace.data = data
+    pass
+
+
+def phase(x):
+    r"""Complex phase extraction.
+
+    Given a complex number (or complex-valued array)
+    :math:`x = r e^{\imath \phi}`, where :math:`r` is the complex modulus
+    and :math:`phi` the complex phase, the function returns the unitary-modulus
+    complex number such as
+
+    .. math::
+
+              \tilde{x} = e^{\imath \phi}
+
+    Arguments
+    ---------
+    x: :class:`np.ndarray`
+        The complex-valued data to extract the complex phase from.
+    """
+    return np.exp(1j * np.angle(x))
+
+
+def detrend_spectrum(x, smooth=None, order=None, epsilon=1e-10):
+    r"""Smooth modulus spectrum.
+
+    Arugments
+    --------
+    x: :class:`np.ndarray`
+        The spectra to detrend. Must be of shape `(n_frequencies, n_times)`.
+
+    smooth: int
+        Smoothing window size in points.
+
+    order: int
+        Smoothing order. Please check the :func:`savitzky_golay` function
+        for more details.
+
+    Keyword arguments
+    -----------------
+    epsilon: float, optional
+        A regularizer for avoiding zero division.
+
+    Returns
+    -------
+    The spectrum divided by the smooth modulus spectrum.
+    """
+    n_frequencies, n_times = x.shape
+    for t in range(n_times):
+        x_smooth = savitzky_golay(np.abs(x[:, t]), smooth, order)
+        x[:, t] /= (x_smooth + epsilon)
+    return x
+
+
+def savitzky_golay(y, window_size, order, deriv=0, rate=1):
+    r"""Smooth with a Savitzky-Golay filter."""
+    try:
+        window_size = np.abs(np.int(window_size))
+        order = np.abs(np.int(order))
+
+    except ValueError:
+        raise ValueError("window_size and order have to be of type int")
+
+    if window_size % 2 != 1 or window_size < 1:
+        raise TypeError("window_size size must be a positive odd number")
+
+    if window_size < order + 2:
+        raise TypeError("window_size is too small for the polynomials order")
+
+    order_range = range(order + 1)
+    half_window = (window_size - 1) // 2
+
+    # Precompute coefficients
+    b = np.mat([[k**i for i in order_range]
+                for k in range(-half_window, half_window + 1)])
+    m = np.linalg.pinv(b).A[deriv] * rate**deriv * np.math.factorial(deriv)
+
+    # Pad the signal at the extremes with values taken from the signal itself
+    firstvals = y[0] - np.abs(y[1:half_window + 1][::-1] - y[0])
+    lastvals = y[-1] + np.abs(y[-half_window - 1:-1][::-1] - y[-1])
+    y = np.concatenate((firstvals, y, lastvals))
+
+    return np.convolve(m[::-1], y, mode='valid')
