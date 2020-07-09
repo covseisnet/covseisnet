@@ -99,7 +99,7 @@ pages:
   script:
     - apt update
     - apt install -y gcc
-    - pip install sphinx recommonmark sphinx_rtd_theme numpy scipy
+    - pip install sphinx sphinx_gallery recommonmark sphinx_rtd_theme numpy scipy
     - pip install obspy
     - sphinx-build -b html ./docs/source public
   artifacts:
