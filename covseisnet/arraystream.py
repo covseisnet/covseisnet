@@ -93,21 +93,18 @@ class ArrayStream(obspy.core.stream.Stream):
         endtime = obspy.UTCDateTime(endtime)
         self.trim(starttime, endtime, **kwargs)
 
-    def preprocess(
-        self, domain='spectral', **kwargs
-    ):
+    def preprocess(self, domain="spectral", **kwargs):
         r"""Pre-process each trace in temporal or spectral domain."""
-        kwargs.setdefault('epsilon', 1e-10)
-        if domain == 'spectral':
+        kwargs.setdefault("epsilon", 1e-10)
+        if domain == "spectral":
             whiten(self, **kwargs)
 
-        elif domain == 'temporal':
+        elif domain == "temporal":
             normalize(self, **kwargs)
         pass
 
     def synchronize(
-        self, start="2010-01-01T00:00:00.00", duration_sec=24 * 3600,
-        method="linear"
+        self, start="2010-01-01T00:00:00.00", duration_sec=24 * 3600, method="linear"
     ):
         r"""Synchronize seismic traces into the same times.
 
@@ -145,8 +142,7 @@ class ArrayStream(obspy.core.stream.Stream):
             tr_i.interpolate(
                 sampling, method, start=start, npts=npts, time_shift=-shift
             )
-            ti = tr_i.times() / duration_sec +\
-                tr_i.stats.starttime.matplotlib_date
+            ti = tr_i.times() / duration_sec + tr_i.stats.starttime.matplotlib_date
             tr_i.data = np.interp(ti, t, tr.data)
 
         return stream_i
@@ -262,23 +258,23 @@ def read(pathname_or_url=None, **kwargs):
 
 
 def whiten(
-        stream,
-        method='onebit',
-        window_duration_sec=2,
-        smooth_length=11,
-        smooth_order=1,
-        epsilon=1e-10
+    stream,
+    method="onebit",
+    window_duration_sec=2,
+    smooth_length=11,
+    smooth_order=1,
+    epsilon=1e-10,
 ):
     r"""Normalize in the spectral domain."""
     print(method)
-    if method == 'onebit':
+    if method == "onebit":
         whiten_method = phase
-    elif method == 'smooth':
+    elif method == "smooth":
         whiten_method = partial(
-            detrend_spectrum, smooth=smooth_length, order=smooth_order,
-            epsilon=epsilon)
+            detrend_spectrum, smooth=smooth_length, order=smooth_order, epsilon=epsilon
+        )
     else:
-        raise ValueError('Unknown method {}'.format(method))
+        raise ValueError("Unknown method {}".format(method))
     r"""Whiten traces in the spectral domain."""
     fft_size = int(window_duration_sec * stream[0].stats.sampling_rate)
     for index, trace in enumerate(stream):
@@ -317,13 +313,11 @@ def detrend_spectrum(x, smooth=None, order=None, epsilon=1e-10):
     n_frequencies, n_times = x.shape
     for t in range(n_times):
         x_smooth = signal.savgol_filter(np.abs(x[:, t]), smooth, order)
-        x[:, t] /= (x_smooth + epsilon)
+        x[:, t] /= x_smooth + epsilon
     return x
 
 
-def normalize(
-    stream, method, smooth_length=None, smooth_order=None, epsilon=1e-10
-):
+def normalize(stream, method, smooth_length=None, smooth_order=None, epsilon=1e-10):
     r"""Normalize the seismic traces in temporal domain.
 
     Considering :math:`x_i(t)` being the seismic trace :math:`x_i(t)`, the
