@@ -3,24 +3,21 @@
 User's Guide
 ============
 
-This package provides tools for array signal processing, with a focus on seismic data. In addition to the classical array processing tools (e.g. beaforming, inter-station cross-correlation) we provide various tools for source detection and location with blind source separation algorithms. The project also includes diverse spectral analysis tools. `covseisnet` mostly inherits from the `obspy` seismic-oriented python package and `numpy`.
+
+The `covseisnet` package provides tools for array signal processing, with a focus on data from seismic networks. The central analyzed mathematical construction is the array covariance matrix (sometimes called network covariance matrix). The core signal detection algorithms are based on the analysis of the eigenvalues of this matrix. Eigenvector decomposition provides a basis for a blind source separation. In addition, the covariance matrix can be used as input for classical array processing tools such as beaforming and inter-station cross-correlations. Covseisnet objects are mostly inherited from obspy (seismology-oriented python package) and `numpy`.
 
 Roadmap
 -------
 
 Different versions of the package are planned to be released:
 
-* **version 1**: detection from array covariance matrix, where two main objects are defined:
+* **version 1**: contains core detection algorithms from the array covariance matrix, where two main objects are defined:
 
     - :class:`~covseisnet.arraystream.ArrayStream` – a synchronous obspy stream collected from an array of seismic stations (see the :ref:`user-guide-arraystream` section below, or see the object documentation).
 
     - :class:`~covseisnet.covariancematrix.CovarianceMatrix` – a numpy array with covariance-analysis methods (see the :ref:`user-guide-covariancematrix` section below, or see the object documentation).
 
-
-* **version 2**: source separation and location from the covariance matrix eigenvectors, temporal cross-correlation and backpropagation.
-
-
-* **version 3**: equalization method for coherent source removal and wavefield equipartionning enhancement.
+Later versions well be complemented with source separation and location from the covariance matrix eigenvectors, temporal cross-correlation and backpropagation, equalization method for coherent source removal and wavefield equipartionning enhancement, and other developments of the array covariance analysis.
 
 .. _user-guide-arraystream:
 
