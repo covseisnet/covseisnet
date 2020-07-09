@@ -48,7 +48,7 @@ def test_arraystream():
     stream.synchronize()
 
     # test normalize
-    stream.normalize(method="onebit")
+    # stream.normalize(method="onebit")
 
     # test times
     stream.times()
