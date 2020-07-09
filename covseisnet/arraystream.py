@@ -11,7 +11,8 @@ Todo
 import obspy
 import numpy as np
 
-from scipy import signal
+from functools import partial
+from scipy import signal, stats
 
 
 class ArrayStream(obspy.core.stream.Stream):
@@ -92,101 +93,44 @@ class ArrayStream(obspy.core.stream.Stream):
         endtime = obspy.UTCDateTime(endtime)
         self.trim(starttime, endtime, **kwargs)
 
-    def normalize(
-        self, method="onebit", smooth_length=None, smooth_order=None, epsilon=1e-10
+    def preprocess(
+        self, domain='spectral', **kwargs
     ):
-        r"""Normalize the seismic traces in temporal domain.
+        r"""Pre-process each trace in temporal or spectral domain."""
+        kwargs.setdefault('epsilon', 1e-10)
+        if domain == 'spectral':
+            whiten(self, **kwargs)
 
-        Considering :math:`x_i(t)` being the seismic trace :math:`x_i(t)`, the
-        normalized trace :math:`\tilde{x}_i(t)` is obtained with
+        elif domain == 'temporal':
+            normalize(self, **kwargs)
+        pass
 
-        .. math::
-            \tilde{x}_i(t) = \frac{x_i(t)}{Fx_i(t) + \epsilon}
+    def synchronize(
+        self, start="2010-01-01T00:00:00.00", duration_sec=24 * 3600,
+        method="linear"
+    ):
+        r"""Synchronize seismic traces into the same times.
 
-        where :math:`Fx` is a characteristic of the trace :math:`x` that
-        depends on the ``method`` argument, and :math:`\epsilon > 0` is a
-        regularization value to avoid division by 0, set by the ``epsilon``
-        keyword argument.
+        This function uses the
+        :meth:`obspy.core.stream.Stream.trim` method in order to cut all
+        traces of the Stream object to given start and end time with
+        padding if necessary, and the
+        :meth:`obspy.core.trace.Trace.interpolate` method in order to
+        synchronize the traces. Then data are linearly interpolated.
 
         Keyword arguments
         -----------------
-        method : str, optional
-            Must be one of "onebit" (default), "mad", or "smooth".
+        start: str, default
+            Start date of the interpolation.
+            Default to "2010-01-01T00:00:00.00".
 
-            - "onebit" compress the seismic trace into a series of 0 and 1.
-              In this case, :math:`F` is defined as :math:`Fx(t) = |x(t)|`.
+        duration_sec: int, default
+            Duration of the data traces in second. Default to 86,400 seconds,
+            the total number of seconds on a single day.
 
-            - "mad" normalize each trace by its median absolute deviation.
-              In this case, :math:`F` delivers a scalar value defined as
-              :math:`Fx(t) = \text{MAD}x(t) =
-              \text{median}(|x(t) - \langle x(t)\rangle|)`, where
-              :math:`\langle x(t)\rangle)` is the signal's average.
-
-            - "smooth" normalize each trace by a smooth version of its
-              envelope. In this case, :math:`F` is obtained from the
-              signal's Hilbert envelope.
-
-        smooth_length: int, optional
-            If the ``method`` keyword argument is set to "smooth", the
-            normalization is performed with the smoothed trace envelopes,
-            calculated over a sliding window of `smooth_length` samples.
-            Note that this parameter is not consider if ``method`` is not
-            set to "smooth". (`None` by default)
-
-        smooth_order: int, optional
-            If the ``method`` keyword argument is set to "smooth", the
-            normalization is performed with the smoothed trace envelopes.
-            The smoothing order is set by the ``smooth_order`` parameter.
-            Note that this parameter is not consider if ``method`` is not
-            set to "smooth". (`None` by default)
-
-        epsilon: float, optional
-            Regularization parameter in division, set to ``1e-10`` by default.
-
+        method: str, default
+            Interpolation method. Default to "linear".
         """
-        if method == "onebit":
-            for trace in self:
-                trace.data = trace.data / (np.abs(trace.data) + epsilon)
-
-        if method == "smooth":
-            for trace in self:
-                trace_env_smooth = signal.savgol_filter(
-                    np.abs(trace.data), smooth_length, smooth_order
-                )
-                trace.data = trace.data / (trace_env_smooth + epsilon)
-
-        if method == "demad":
-            for trace in self:
-                trace.data /= signal.mad(trace.data) + epsilon
-
-    def synchronize(
-        self, start="2010-01-01T00:00:00.00", duration_sec=24 * 3600, method="linear",
-    ):
-        r"""Synchronize seismic traces into the same times.
-    
-            This function uses the
-            :meth:`obspy.core.stream.Stream.trim` method in order to cut all 
-            traces of the Stream object to given start and end time with
-            padding if necessary, and the
-            :meth:`obspy.core.trace.Trace.interpolate` method in order to
-            synchronize the traces. Then data are linearly interpolated.
-    
-            Keyword arguments
-            -----------------
-            start: str, default
-                Start date of the interpolation. 
-                Default to "2010-01-01T00:00:00.00".
-                
-            duration_sec: int, default
-                Duration of the data traces in second. Default to 86,400 seconds,
-                the total number of seconds on a single day.
-    
-            method: str, default
-                Interpolation method. Default to "linear".
-                
-    
-    
-            """
         # Duplicate stream
         stream_i = self.copy()
         start = obspy.UTCDateTime(start)
@@ -201,7 +145,8 @@ class ArrayStream(obspy.core.stream.Stream):
             tr_i.interpolate(
                 sampling, method, start=start, npts=npts, time_shift=-shift
             )
-            ti = tr_i.times() / duration_sec + tr_i.stats.starttime.matplotlib_date
+            ti = tr_i.times() / duration_sec +\
+                tr_i.stats.starttime.matplotlib_date
             tr_i.data = np.interp(ti, t, tr.data)
 
         return stream_i
@@ -256,52 +201,6 @@ class ArrayStream(obspy.core.stream.Stream):
         """
         return self[0].times(**kwargs)
 
-    def whiten(self, segment_duration_sec, method="pure", smooth=11):
-        """Spectral normalization of the traces.
-
-        Parameters
-        ----------
-        segment_duration_sec : float
-            Duration of the segments for Fourier transformation.
-
-        Keyword arguments
-        -----------------
-        method : str
-            ``"pure"`` or ``"smooth"``. Wheter to consider the division with
-            direct Fourier transform modulus, or a smooth version.
-
-        smooth : int
-            Smoothing window length in points.
-
-        """
-        # Define method
-        if method == "pure":
-            whiten_method = signal.phase
-        elif method == "smooth":
-            whiten_method = signal.detrend_spectrum
-
-        # Initialize for waitbar
-        # waitbar = logtable.waitbar('Whiten', len(self))
-        fft_size = int(segment_duration_sec * self[0].stats.sampling_rate)
-        duration = self[0].times()[-1]
-
-        # Whiten
-        for index, trace in enumerate(self):
-            # waitbar.progress(index)
-            data = trace.data
-            _, _, data_fft = signal.stft(data, nperseg=fft_size)
-            data_fft = whiten_method(data_fft, smooth=smooth)
-            _, data = signal.istft(data_fft, nperseg=fft_size)
-            trace.data = data
-
-        # Trim
-        self.cut(
-            pad=True,
-            fill_value=0,
-            starttime=self[0].stats.starttime,
-            endtime=self[0].stats.starttime + duration,
-        )
-
 
 def read(pathname_or_url=None, **kwargs):
     """Read seismic waveforms files into an ArrayStream object.
@@ -323,7 +222,8 @@ def read(pathname_or_url=None, **kwargs):
     pathname_or_url: str or io.BytesIO or None
         String containing a file name or a URL or a open file-like object.
         Wildcards are allowed for a file name. If this attribute is omitted,
-        an example :class:`~covseisnet.data.ArrayStream` object will be returned.
+        an example :class:`~covseisnet.data.ArrayStream` object will be
+        returned.
 
     Other parameters
     ----------------
@@ -359,3 +259,151 @@ def read(pathname_or_url=None, **kwargs):
     stream = obspy.read(pathname_or_url, **kwargs)
     stream = ArrayStream(stream)
     return stream
+
+
+def whiten(
+        stream,
+        method='onebit',
+        window_duration_sec=2,
+        smooth_length=11,
+        smooth_order=1,
+        epsilon=1e-10
+):
+    r"""Normalize in the spectral domain."""
+    print(method)
+    if method == 'onebit':
+        whiten_method = phase
+    elif method == 'smooth':
+        whiten_method = partial(
+            detrend_spectrum, smooth=smooth_length, order=smooth_order,
+            epsilon=epsilon)
+    else:
+        raise ValueError('Unknown method {}'.format(method))
+    r"""Whiten traces in the spectral domain."""
+    fft_size = int(window_duration_sec * stream[0].stats.sampling_rate)
+    for index, trace in enumerate(stream):
+        data = trace.data
+        _, _, data_fft = signal.stft(data, nperseg=fft_size)
+        data_fft = whiten_method(data_fft)
+        _, data = signal.istft(data_fft, nperseg=fft_size)
+        trace.data = data
+    pass
+
+
+def detrend_spectrum(x, smooth=None, order=None, epsilon=1e-10):
+    r"""Smooth modulus spectrum.
+
+    Arugments
+    --------
+    x: :class:`np.ndarray`
+        The spectra to detrend. Must be of shape `(n_frequencies, n_times)`.
+
+    smooth: int
+        Smoothing window size in points.
+
+    order: int
+        Smoothing order. Please check the :func:`savitzky_golay` function
+        for more details.
+
+    Keyword arguments
+    -----------------
+    epsilon: float, optional
+        A regularizer for avoiding zero division.
+
+    Returns
+    -------
+    The spectrum divided by the smooth modulus spectrum.
+    """
+    n_frequencies, n_times = x.shape
+    for t in range(n_times):
+        x_smooth = signal.savgol_filter(np.abs(x[:, t]), smooth, order)
+        x[:, t] /= (x_smooth + epsilon)
+    return x
+
+
+def normalize(
+    stream, method, smooth_length=None, smooth_order=None, epsilon=1e-10
+):
+    r"""Normalize the seismic traces in temporal domain.
+
+    Considering :math:`x_i(t)` being the seismic trace :math:`x_i(t)`, the
+    normalized trace :math:`\tilde{x}_i(t)` is obtained with
+
+    .. math::
+        \tilde{x}_i(t) = \frac{x_i(t)}{Fx_i(t) + \epsilon}
+
+    where :math:`Fx` is a characteristic of the trace :math:`x` that
+    depends on the ``method`` argument, and :math:`\epsilon > 0` is a
+    regularization value to avoid division by 0, set by the ``epsilon``
+    keyword argument.
+
+    Keyword arguments
+    -----------------
+    method : str, optional
+        Must be one of "onebit" (default), "mad", or "smooth".
+
+        - "onebit" compress the seismic trace into a series of 0 and 1.
+          In this case, :math:`F` is defined as :math:`Fx(t) = |x(t)|`.
+
+        - "mad" normalize each trace by its median absolute deviation.
+          In this case, :math:`F` delivers a scalar value defined as
+          :math:`Fx(t) = \text{MAD}x(t) =
+          \text{median}(|x(t) - \langle x(t)\rangle|)`, where
+          :math:`\langle x(t)\rangle)` is the signal's average.
+
+        - "smooth" normalize each trace by a smooth version of its
+          envelope. In this case, :math:`F` is obtained from the
+          signal's Hilbert envelope.
+
+    smooth_length: int, optional
+        If the ``method`` keyword argument is set to "smooth", the
+        normalization is performed with the smoothed trace envelopes,
+        calculated over a sliding window of `smooth_length` samples.
+        Note that this parameter is not consider if ``method`` is not
+        set to "smooth". (`None` by default)
+
+    smooth_order: int, optional
+        If the ``method`` keyword argument is set to "smooth", the
+        normalization is performed with the smoothed trace envelopes.
+        The smoothing order is set by the ``smooth_order`` parameter.
+        Note that this parameter is not consider if ``method`` is not
+        set to "smooth". (`None` by default)
+
+    epsilon: float, optional
+        Regularization parameter in division, set to ``1e-10`` by default.
+
+    """
+    if method == "onebit":
+        for trace in stream:
+            trace.data = trace.data / (np.abs(trace.data) + epsilon)
+
+    if method == "smooth":
+        for trace in stream:
+            trace_env_smooth = signal.savgol_filter(
+                np.abs(trace.data), smooth_length, smooth_order
+            )
+            trace.data = trace.data / (trace_env_smooth + epsilon)
+
+    if method == "demad":
+        for trace in stream:
+            trace.data /= stats.median_absolute_deviation(trace.data) + epsilon
+
+
+def phase(x):
+    r"""Complex phase extraction.
+
+    Given a complex number (or complex-valued array)
+    :math:`x = r e^{\imath \phi}`, where :math:`r` is the complex modulus
+    and :math:`phi` the complex phase, the function returns the unitary-modulus
+    complex number such as
+
+    .. math::
+
+              \tilde{x} = e^{\imath \phi}
+
+    Arguments
+    ---------
+    x: :class:`np.ndarray`
+        The complex-valued data to extract the complex phase from.
+    """
+    return np.exp(1j * np.angle(x))
