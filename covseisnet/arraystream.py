@@ -266,7 +266,6 @@ def whiten(
     epsilon=1e-10,
 ):
     r"""Normalize in the spectral domain."""
-    print(method)
     if method == "onebit":
         whiten_method = phase
     elif method == "smooth":
@@ -317,7 +316,7 @@ def detrend_spectrum(x, smooth=None, order=None, epsilon=1e-10):
     return x
 
 
-def normalize(stream, method, smooth_length=None, smooth_order=None, epsilon=1e-10):
+def normalize(stream, method="onebit", smooth_length=11, smooth_order=1, epsilon=1e-10):
     r"""Normalize the seismic traces in temporal domain.
 
     Considering :math:`x_i(t)` being the seismic trace :math:`x_i(t)`, the
@@ -353,15 +352,13 @@ def normalize(stream, method, smooth_length=None, smooth_order=None, epsilon=1e-
         If the ``method`` keyword argument is set to "smooth", the
         normalization is performed with the smoothed trace envelopes,
         calculated over a sliding window of `smooth_length` samples.
-        Note that this parameter is not consider if ``method`` is not
-        set to "smooth". (`None` by default)
+
 
     smooth_order: int, optional
         If the ``method`` keyword argument is set to "smooth", the
         normalization is performed with the smoothed trace envelopes.
         The smoothing order is set by the ``smooth_order`` parameter.
-        Note that this parameter is not consider if ``method`` is not
-        set to "smooth". (`None` by default)
+
 
     epsilon: float, optional
         Regularization parameter in division, set to ``1e-10`` by default.
@@ -378,9 +375,11 @@ def normalize(stream, method, smooth_length=None, smooth_order=None, epsilon=1e-
             )
             trace.data = trace.data / (trace_env_smooth + epsilon)
 
-    if method == "demad":
+    if method == "mad":
         for trace in stream:
-            trace.data /= stats.median_absolute_deviation(trace.data) + epsilon
+            trace.data = trace.data / (
+                stats.median_absolute_deviation(trace.data) + epsilon
+            )
 
 
 def phase(x):
