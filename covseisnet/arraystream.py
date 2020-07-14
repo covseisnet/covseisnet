@@ -98,9 +98,10 @@ class ArrayStream(obspy.core.stream.Stream):
         kwargs.setdefault("epsilon", 1e-10)
         if domain == "spectral":
             whiten(self, **kwargs)
-
         elif domain == "temporal":
             normalize(self, **kwargs)
+        else:
+            raise ValueError("Invalid preprocessing domain {} - please specify 'spectral' or 'temporal'".format(domain))
         pass
 
     def synchronize(
@@ -368,18 +369,19 @@ def normalize(stream, method="onebit", smooth_length=11, smooth_order=1, epsilon
         for trace in stream:
             trace.data = trace.data / (np.abs(trace.data) + epsilon)
 
-    if method == "smooth":
+    elif method == "smooth":
         for trace in stream:
             trace_env_smooth = signal.savgol_filter(
                 np.abs(trace.data), smooth_length, smooth_order
             )
             trace.data = trace.data / (trace_env_smooth + epsilon)
 
-    if method == "mad":
+    elif method == "mad":
         for trace in stream:
-            trace.data = trace.data / (
-                stats.median_absolute_deviation(trace.data) + epsilon
-            )
+            trace.data = trace.data / (stats.median_absolute_deviation(trace.data) + epsilon)
+
+    else:
+        raise ValueError("Unknown method {}".format(method))
 
 
 def phase(x):
