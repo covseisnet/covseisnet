@@ -11,7 +11,7 @@ Roadmap
 
 Different versions of the package are planned to be released:
 
-* **version 1**: contains core detection algorithms from the array covariance matrix, where two main objects are defined:
+* **version 0.4**: contains core detection algorithms from the array covariance matrix, where two main objects are defined:
 
     - :class:`~covseisnet.arraystream.ArrayStream` – a synchronous obspy stream collected from an array of seismic stations (see the :ref:`user-guide-arraystream` section below, or see the object documentation).
 
