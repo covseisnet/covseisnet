@@ -112,7 +112,7 @@ plt.colorbar(img).set_label("One-bit spectral whitening")
 stream = raw_stream.copy()
 
 # preprocess using default setting of one-bit temporal normalization
-stream.preprocess(domain='temporal', method='onebit')
+stream.preprocess(domain="temporal", method="onebit")
 
 # downsample data to 25 Hz
 stream.decimate(4)
@@ -142,8 +142,8 @@ plt.colorbar(img).set_label("One-bit temporal normalization")
 stream = raw_stream.copy()
 
 # preprocess using default setting of one-bit temporal normalization
-stream.preprocess(domain='spectral', method='smooth')
-stream.preprocess(domain='temporal', method='smooth')
+stream.preprocess(domain="spectral", method="smooth")
+stream.preprocess(domain="temporal", method="smooth")
 
 # downsample data to 25 Hz
 stream.decimate(4)

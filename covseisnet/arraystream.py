@@ -101,7 +101,11 @@ class ArrayStream(obspy.core.stream.Stream):
         elif domain == "temporal":
             normalize(self, **kwargs)
         else:
-            raise ValueError("Invalid preprocessing domain {} - please specify 'spectral' or 'temporal'".format(domain))
+            raise ValueError(
+                "Invalid preprocessing domain {} - please specify 'spectral' or 'temporal'".format(
+                    domain
+                )
+            )
         pass
 
     def synchronize(
@@ -378,7 +382,9 @@ def normalize(stream, method="onebit", smooth_length=11, smooth_order=1, epsilon
 
     elif method == "mad":
         for trace in stream:
-            trace.data = trace.data / (stats.median_absolute_deviation(trace.data) + epsilon)
+            trace.data = trace.data / (
+                stats.median_absolute_deviation(trace.data) + epsilon
+            )
 
     else:
         raise ValueError("Unknown method {}".format(method))
