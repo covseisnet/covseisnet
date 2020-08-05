@@ -75,7 +75,8 @@ img = ax.pcolormesh(times / 3600, frequencies, spectral_width.T, rasterized=True
 ax.set_ylim([0, stream[0].stats.sampling_rate / 2])
 ax.set_xlabel("2010.10.14 (hours)")
 ax.set_ylabel("Frequency (Hz)")
-plt.colorbar(img).set_label("No preprocessing")
+ax.set_title("No preprocessing")
+plt.colorbar(img).set_label("Covariance matrix spectral width")
 
 
 # create plot #2 - preprocess data with one-bit spectral whitening
@@ -105,7 +106,8 @@ img = ax.pcolormesh(times / 3600, frequencies, spectral_width.T, rasterized=True
 ax.set_ylim([0, stream[0].stats.sampling_rate / 2])
 ax.set_xlabel("2010.10.14 (hours)")
 ax.set_ylabel("Frequency (Hz)")
-plt.colorbar(img).set_label("One-bit spectral whitening")
+ax.set_title("One-bit spectral whitening")
+plt.colorbar(img).set_label("Covariance matrix spectral width")
 
 
 # create plot #3 - preprocess data with one-bit temporal normalization
@@ -135,7 +137,8 @@ img = ax.pcolormesh(times / 3600, frequencies, spectral_width.T, rasterized=True
 ax.set_ylim([0, stream[0].stats.sampling_rate / 2])
 ax.set_xlabel("2010.10.14 (hours)")
 ax.set_ylabel("Frequency (Hz)")
-plt.colorbar(img).set_label("One-bit temporal normalization")
+ax.set_title("One-bit temporal normalization")
+plt.colorbar(img).set_label("Covariance matrix spectral width")
 
 
 # create plot #4 - preprocess data with smooth spectral whitening and temporal normalization
@@ -166,4 +169,5 @@ img = ax.pcolormesh(times / 3600, frequencies, spectral_width.T, rasterized=True
 ax.set_ylim([0, stream[0].stats.sampling_rate / 2])
 ax.set_xlabel("2010.10.14 (hours)")
 ax.set_ylabel("Frequency (Hz)")
-plt.colorbar(img).set_label("Smooth spectral and temporal preprocessing")
+ax.set_title("Smooth spectral and temporal preprocessing")
+plt.colorbar(img).set_label("Covariance matrix spectral width")
