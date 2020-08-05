@@ -59,7 +59,7 @@ One of the goal of the package is to provide detection strategies based on the p
 
 The shape of a :class:`~covseisnet.covariancematrix.CovarianceMatrix` object calculated from :math:`N` traces is at least :math:`N \times N`. Depending on the averaging size and frequency content, the covariance matrix can be of shape
 
-- ``(n_sta, n_sta)`` if a single frequency and time sample is obtained.
+- ``(n_sta, n_sta)`` if a single frequency and time sample is given.
 
 - ``(n_freq, n_sta, n_sta)`` for a single time sample and ``n_freq`` frequency points
 
