@@ -11,7 +11,7 @@ Roadmap
 
 Different versions of the package are planned to be released:
 
-* **version 0.4**: contains core detection algorithms from the array covariance matrix, where two main objects are defined:
+* **version 0.4.1**: contains core detection algorithms from the array covariance matrix, where two main objects are defined:
 
     - :class:`~covseisnet.arraystream.ArrayStream` – a synchronous obspy stream collected from an array of seismic stations (see the :ref:`user-guide-arraystream` section below, or see the object documentation).
 
@@ -61,7 +61,7 @@ The shape of a :class:`~covseisnet.covariancematrix.CovarianceMatrix` object cal
 
 - ``(n_sta, n_sta)`` if a single frequency and time sample is given.
 
-- ``(n_freq, n_sta, n_sta)`` for a single time sample and ``n_freq`` frequency points
+- ``(n_freq, n_sta, n_sta)`` for a single time sample and ``n_freq`` frequency points.
 
 - ``(n_times, n_freq, n_sta, n_sta)`` for ``n_times`` and ``n_freq`` dimensions.
 
@@ -77,13 +77,14 @@ In order to estimate the covariance matrix, two main parameters are of importanc
 2. Wavefield coherence with :meth:`~covseisnet.covariancematrix.CovarianceMatrix.coherence`
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-The spatial coherence is a well-defined concept for continuous wavefields. Indeed, it related to the number of coefficients required to decompose the observed wavefield onto a basis. When the wavefield is recorded at discrete spatial locations (seismic stations), the concept of wavefield coherence can still be assessed from the covariance matrix eigenstructure. In particular, we provide two measurements for assessing the spatial coherence: the covariance matrix spectral width and the Shannon entropy.
+The spatial coherence is a well-defined concept for continuous wavefields. Indeed, it is related to the number of coefficients required to decompose the observed wavefield onto a basis. When the wavefield is recorded at discrete spatial locations (seismic stations), the concept of wavefield coherence can still be assessed from the covariance matrix eigenstructure. In particular, we provide the covariance matrix spectral width for assessing the spatial coherence.
 
 The **covariance matrix spectral width** is a real positive scalar number which measures the width of the network covariance matrix eigenvalues distribution. This measurement can be represented in a time and frequency diagram.
 
-The **Shannon entropy** provides a measurement of the degree of information present in a given dataset. Extended to the case of discrete operators by Van Neumann, it can also be calculated from the eigenvalue distribution.
+..
+	The **Shannon entropy** provides a measurement of the degree of information present in a given dataset. Extended to the case of discrete operators by Van Neumann, it can also be calculated from the eigenvalue distribution.
 
-Both these coherence measurements are delivered by the :meth:`~covseisnet.covariancematrix.CovarianceMatrix.coherence` method (see the documentation of the method for more details). Please visit the :ref:`examples` page for examples.
+This coherence measurement is delivered by the :meth:`~covseisnet.covariancematrix.CovarianceMatrix.coherence` method (see the documentation of the method for more details). Please visit the :ref:`examples` page for examples.
 
 
 3. direct eigenvalue assessment with :meth:`~covseisnet.covariancematrix.CovarianceMatrix.eigenvalues`

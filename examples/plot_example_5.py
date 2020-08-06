@@ -71,7 +71,9 @@ spectral_width = covariances.coherence(kind="spectral_width")
 
 # show network covariance matrix spectral width
 fig, ax = plt.subplots(1, constrained_layout=True)
-img = ax.pcolormesh(times / 3600, frequencies, spectral_width.T, rasterized=True)
+img = ax.pcolormesh(
+    times / 3600, frequencies, spectral_width.T, rasterized=True, cmap="viridis_r"
+)
 ax.set_ylim([0, stream[0].stats.sampling_rate / 2])
 ax.set_xlabel("2010.10.14 (hours)")
 ax.set_ylabel("Frequency (Hz)")
@@ -82,15 +84,14 @@ plt.colorbar(img).set_label("Covariance matrix spectral width")
 # create plot #2 - preprocess data with one-bit spectral whitening
 stream = raw_stream.copy()
 
-# preprocess using default setting of one-bit spectral whitening
-stream.preprocess()
-
 # downsample data to 25 Hz
 stream.decimate(4)
 
 # synchronize data
 stream = stream.synchronize(start=t, duration_sec=signal_duration_sec, method="linear")
 
+# preprocess using default setting of one-bit spectral whitening
+stream.preprocess()
 
 # calculate covariance from stream
 times, frequencies, covariances = csn.covariancematrix.calculate(
@@ -102,7 +103,9 @@ spectral_width = covariances.coherence(kind="spectral_width")
 
 # show network covariance matrix spectral width
 fig, ax = plt.subplots(1, constrained_layout=True)
-img = ax.pcolormesh(times / 3600, frequencies, spectral_width.T, rasterized=True)
+img = ax.pcolormesh(
+    times / 3600, frequencies, spectral_width.T, rasterized=True, cmap="viridis_r"
+)
 ax.set_ylim([0, stream[0].stats.sampling_rate / 2])
 ax.set_xlabel("2010.10.14 (hours)")
 ax.set_ylabel("Frequency (Hz)")
@@ -113,15 +116,14 @@ plt.colorbar(img).set_label("Covariance matrix spectral width")
 # create plot #3 - preprocess data with one-bit temporal normalization
 stream = raw_stream.copy()
 
-# preprocess using default setting of one-bit temporal normalization
-stream.preprocess(domain="temporal", method="onebit")
-
 # downsample data to 25 Hz
 stream.decimate(4)
 
 # synchronize data
 stream = stream.synchronize(start=t, duration_sec=signal_duration_sec, method="linear")
 
+# preprocess using one-bit temporal normalization
+stream.preprocess(domain="temporal", method="onebit")
 
 # calculate covariance from stream
 times, frequencies, covariances = csn.covariancematrix.calculate(
@@ -133,7 +135,9 @@ spectral_width = covariances.coherence(kind="spectral_width")
 
 # show network covariance matrix spectral width
 fig, ax = plt.subplots(1, constrained_layout=True)
-img = ax.pcolormesh(times / 3600, frequencies, spectral_width.T, rasterized=True)
+img = ax.pcolormesh(
+    times / 3600, frequencies, spectral_width.T, rasterized=True, cmap="viridis_r"
+)
 ax.set_ylim([0, stream[0].stats.sampling_rate / 2])
 ax.set_xlabel("2010.10.14 (hours)")
 ax.set_ylabel("Frequency (Hz)")
@@ -144,16 +148,15 @@ plt.colorbar(img).set_label("Covariance matrix spectral width")
 # create plot #4 - preprocess data with smooth spectral whitening and temporal normalization
 stream = raw_stream.copy()
 
-# preprocess using default setting of one-bit temporal normalization
-stream.preprocess(domain="spectral", method="smooth")
-stream.preprocess(domain="temporal", method="smooth")
-
 # downsample data to 25 Hz
 stream.decimate(4)
 
 # synchronize data
 stream = stream.synchronize(start=t, duration_sec=signal_duration_sec, method="linear")
 
+# preprocess using smooth spectral whitening and temporal normalization
+stream.preprocess(domain="spectral", method="smooth")
+stream.preprocess(domain="temporal", method="smooth")
 
 # calculate covariance from stream
 times, frequencies, covariances = csn.covariancematrix.calculate(
@@ -165,7 +168,9 @@ spectral_width = covariances.coherence(kind="spectral_width")
 
 # show network covariance matrix spectral width
 fig, ax = plt.subplots(1, constrained_layout=True)
-img = ax.pcolormesh(times / 3600, frequencies, spectral_width.T, rasterized=True)
+img = ax.pcolormesh(
+    times / 3600, frequencies, spectral_width.T, rasterized=True, cmap="viridis_r"
+)
 ax.set_ylim([0, stream[0].stats.sampling_rate / 2])
 ax.set_xlabel("2010.10.14 (hours)")
 ax.set_ylabel("Frequency (Hz)")

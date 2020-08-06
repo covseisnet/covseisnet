@@ -40,7 +40,9 @@ spectral_width = covariances.coherence(kind="spectral_width")
 
 # show network covariance matrix spectral width
 fig, ax = plt.subplots(1, constrained_layout=True)
-img = ax.pcolormesh(10 + times / 3600, frequencies, spectral_width.T, rasterized=True)
+img = ax.pcolormesh(
+    10 + times / 3600, frequencies, spectral_width.T, rasterized=True, cmap="viridis_r"
+)
 ax.set_ylim([0, stream[0].stats.sampling_rate / 2])
 ax.set_xlabel("2010.10.14 (hours)")
 ax.set_ylabel("Frequency (Hz)")
