@@ -17,6 +17,7 @@ import os
 import sys
 
 from sphinx_gallery.scrapers import matplotlib_scraper
+from sphinx_gallery.sorting import FileNameSortKey
 
 sys.path.insert(0, os.path.abspath("../../"))
 
@@ -76,6 +77,7 @@ sphinx_gallery_conf = {
     "examples_dirs": "../../examples",
     "gallery_dirs": "auto_examples",
     "image_scrapers": (MatplotlibSVG(),),
+    "within_subsection_order": FileNameSortKey,
 }
 
 # Add any paths that contain templates here, relative to this directory.
