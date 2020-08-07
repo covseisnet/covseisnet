@@ -10,7 +10,7 @@ This example shows how to calculate the spectral width of the interchannel spect
 
 Considering a single seismic station with three channels (NS, EW, and Z), the covariance is of dimensions 3 times 3. The following example use a Fourier estimation window of 1 second and is estimated over 5 consecutive windows. The overlapping between the Fourier windows is 50%, and the step between two consecutive averaging window is 50%.
 
-The lower the covariance matrix spectral width (dark blue), the more polarized the seismic wavefield (into a given direction). Note that the sampling rate of the seismic station is 100 Hz, the dark band at 50 Hz therefore corresponds to the Nyquist frequency (and should be disregarded).
+The lower the covariance matrix spectral width (yellow), the more polarized the seismic wavefield (into a given direction). Note that the sampling rate of the seismic station is 100 Hz, the dark band at 50 Hz therefore corresponds to the Nyquist frequency (and should be disregarded).
 """
 
 import covseisnet as csn

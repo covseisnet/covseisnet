@@ -10,7 +10,7 @@ This example shows how to calculate the spectral width of the network covariance
 
 Considering 15 stations of the Piton de la Fournaise seismic network (using only the vertical component), the covariance is of dimensions 15 times 15. The following example use a Fourier estimation window of 20 seconds and is estimated over 15 consecutive windows. The overlapping between the Fourier windows is 50%, and the step between two consecutive averaging window is 50%.
 
-The lower the covariance matrix spectral width (dark blue), the more coherent the seismic wavefield. 
+The lower the covariance matrix spectral width (yellow), the more coherent the seismic wavefield. 
 """
 
 import covseisnet as csn
