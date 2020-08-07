@@ -3,24 +3,21 @@
 User's Guide
 ============
 
-This package provides tools for array signal processing, with a focus on seismic data. In addition to the classical array processing tools (e.g. beaforming, inter-station cross-correlation) we provide various tools for source detection and location with blind source separation algorithms. The project also includes diverse spectral analysis tools. `covseisnet` mostly inherits from the `obspy` seismic-oriented python package and `numpy`.
+
+The `covseisnet` package provides tools for array signal processing, with a focus on data from seismic networks. The central analyzed mathematical construction is the array covariance matrix (sometimes called network covariance matrix). The core signal detection algorithms are based on the analysis of the eigenvalues of this matrix. Eigenvector decomposition provides a basis for a blind source separation. In addition, the covariance matrix can be used as input for classical array processing tools such as beaforming and inter-station cross-correlations. Covseisnet objects are mostly inherited from obspy (seismology-oriented python package) and `numpy`.
 
 Roadmap
 -------
 
 Different versions of the package are planned to be released:
 
-* **version 1**: detection from array covariance matrix, where two main objects are defined:
+* **version 0.4.1**: contains core detection algorithms from the array covariance matrix, where two main objects are defined:
 
     - :class:`~covseisnet.arraystream.ArrayStream` – a synchronous obspy stream collected from an array of seismic stations (see the :ref:`user-guide-arraystream` section below, or see the object documentation).
 
     - :class:`~covseisnet.covariancematrix.CovarianceMatrix` – a numpy array with covariance-analysis methods (see the :ref:`user-guide-covariancematrix` section below, or see the object documentation).
 
-
-* **version 2**: source separation and location from the covariance matrix eigenvectors, temporal cross-correlation and backpropagation.
-
-
-* **version 3**: equalization method for coherent source removal and wavefield equipartionning enhancement.
+Later versions well be complemented with source separation and location from the covariance matrix eigenvectors, temporal cross-correlation and backpropagation, equalization method for coherent source removal and wavefield equipartionning enhancement, and other developments of the array covariance analysis.
 
 .. _user-guide-arraystream:
 
@@ -62,9 +59,9 @@ One of the goal of the package is to provide detection strategies based on the p
 
 The shape of a :class:`~covseisnet.covariancematrix.CovarianceMatrix` object calculated from :math:`N` traces is at least :math:`N \times N`. Depending on the averaging size and frequency content, the covariance matrix can be of shape
 
-- ``(n_sta, n_sta)`` if a single frequency and time sample is obtained.
+- ``(n_sta, n_sta)`` if a single frequency and time sample is given.
 
-- ``(n_freq, n_sta, n_sta)`` for a single time sample and ``n_freq`` frequency points
+- ``(n_freq, n_sta, n_sta)`` for a single time sample and ``n_freq`` frequency points.
 
 - ``(n_times, n_freq, n_sta, n_sta)`` for ``n_times`` and ``n_freq`` dimensions.
 
@@ -80,13 +77,14 @@ In order to estimate the covariance matrix, two main parameters are of importanc
 2. Wavefield coherence with :meth:`~covseisnet.covariancematrix.CovarianceMatrix.coherence`
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-The spatial coherence is a well-defined concept for continuous wavefields. Indeed, it related to the number of coefficients required to decompose the observed wavefield onto a basis. When the wavefield is recorded at discrete spatial locations (seismic stations), the concept of wavefield coherence can still be assessed from the covariance matrix eigenstructure. In particular, we provide two measurements for assessing the spatial coherence: the covariance matrix spectral width and the Shannon entropy.
+The spatial coherence is a well-defined concept for continuous wavefields. Indeed, it is related to the number of coefficients required to decompose the observed wavefield onto a basis. When the wavefield is recorded at discrete spatial locations (seismic stations), the concept of wavefield coherence can still be assessed from the covariance matrix eigenstructure. In particular, we provide the covariance matrix spectral width for assessing the spatial coherence.
 
 The **covariance matrix spectral width** is a real positive scalar number which measures the width of the network covariance matrix eigenvalues distribution. This measurement can be represented in a time and frequency diagram.
 
-The **Shannon entropy** provides a measurement of the degree of information present in a given dataset. Extended to the case of discrete operators by Van Neumann, it can also be calculated from the eigenvalue distribution.
+..
+	The **Shannon entropy** provides a measurement of the degree of information present in a given dataset. Extended to the case of discrete operators by Van Neumann, it can also be calculated from the eigenvalue distribution.
 
-Both these coherence measurements are delivered by the :meth:`~covseisnet.covariancematrix.CovarianceMatrix.coherence` method (see the documentation of the method for more details). Please visit the :ref:`examples` page for examples.
+This coherence measurement is delivered by the :meth:`~covseisnet.covariancematrix.CovarianceMatrix.coherence` method (see the documentation of the method for more details). Please visit the :ref:`examples` page for examples.
 
 
 3. direct eigenvalue assessment with :meth:`~covseisnet.covariancematrix.CovarianceMatrix.eigenvalues`

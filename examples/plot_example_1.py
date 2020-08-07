@@ -32,7 +32,7 @@ times, frequencies, covariances = csn.covariancematrix.calculate(
 # show covariance from first window and first frequency
 covariance_show = np.abs(covariances[0, 0])
 fig, ax = plt.subplots(1, constrained_layout=True)
-img = ax.imshow(covariance_show, origin="lower", cmap="cividis")
+img = ax.imshow(covariance_show, origin="lower", cmap="viridis_r")
 ax.set_xticks(range(len(channels)))
 ax.set_xticklabels(channels)
 ax.set_yticks(range(len(channels)))

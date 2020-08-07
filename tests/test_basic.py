@@ -44,8 +44,21 @@ def test_arraystream():
         starttime=stream[0].stats.starttime + 1, endtime=stream[0].stats.endtime - 1
     )
 
-    # test normalize
-    stream.normalize(method="onebit")
+    # test synchronize
+    stream.synchronize()
+
+    # test all preprocessing methods
+    stream.preprocess()  # default preprocessing
+    stream.preprocess(domain="spectral")  # default method for spectral whitening
+    stream.preprocess(domain="spectral", method="onebit")
+    stream.preprocess(domain="spectral", method="smooth")
+    stream.preprocess(
+        domain="spectral", method="smooth", smooth_length=33, smooth_order=2
+    )
+    stream.preprocess(domain="temporal")  # default method for temporal normalization
+    stream.preprocess(domain="temporal", method="onebit")
+    stream.preprocess(domain="temporal", method="smooth")
+    stream.preprocess(domain="temporal", method="mad")
 
     # test times
-    times = stream.times()
+    stream.times()
