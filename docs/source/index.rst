@@ -8,6 +8,8 @@ Home
 
 This package provides tools for array signal processing, with a focus on seismic data. In addition to the classical array processing tools (e.g. beaforming, inter-station cross-correlation) we provide various tools for source detection and location with blind source separation algorithms. The project also includes diverse spectral analysis tools. `covseisnet` mostly inherits from `obpsy` (seismic-data analysis) and `numpy`.
 
+The code repository is hosted on GitHub at https://github.com/covseisnet/covseisnet
+
 
 Contents
 --------
