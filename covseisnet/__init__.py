@@ -5,6 +5,7 @@
 __all__ = [
     "covariancematrix",
     "arraystream",
+    "crosscorrelation",
 ]
 
 from . import *
