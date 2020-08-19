@@ -21,7 +21,7 @@ py37-test:
   script:
     - apt update
     - apt install -y gcc
-    - pip install pytest-cov codecov numpy==1.18.5
+    - pip install pytest-cov codecov numpy==1.18.5 scipy
     - pip install obspy
     - python -m pytest --cov=./
     - codecov --token=45d540c0-9bbc-467c-88d8-df523062d634
@@ -37,6 +37,8 @@ py35-test:
     - pip install pytest-cov codecov numpy
     - pip install obspy
     - python -m pytest --cov=./
+  only:
+    - develop
   except:
     - tags
     
@@ -49,6 +51,8 @@ py36-test:
     - pip install pytest-cov codecov numpy==1.18.5
     - pip install obspy
     - python -m pytest --cov=./
+  only:
+    - develop
   except:
     - tags
 
@@ -61,6 +65,8 @@ py38-test:
     - pip install pytest-cov codecov numpy==1.18.5
     - pip install obspy
     - python -m pytest --cov=./
+  only:
+    - develop
   except:
     - tags
 
