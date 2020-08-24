@@ -18,7 +18,7 @@ from skimage.util.shape import view_as_windows
 
 
 def cross_correlation(
-    streamZ, streamN, streamE, window_duration=200, overlap=1, lag_time=50
+    streamZ, streamN, streamE, window_duration=200, overlap=1, lag_time=50, consec_win=6
 ):
     r"""Calculate cross correlation coefficients from three streams.
 
@@ -42,19 +42,29 @@ def cross_correlation(
     lagtime: int
         Amount of lag in seconds. If unspecified, a default of 50 seconds is used.
 
-
+    consec_win
+        Number of consecutive windows used to average the correlation coefficients. If unspecified, a default of 6 is used.
+        
     Returns
     -------
     The cross-correlation coefficient matrix.
     """
 
-    # TODO: check sampling rate is the same for each component
-    # TODO: check stream lengths are the same for each component
-    # TODO: check window_duration, overlap, and lagtime are acceptable
-
     nsta = len(streamZ)
     fs = streamZ[0].stats.sampling_rate
     npts = streamZ[0].stats.npts
+
+    # check sampling rate is the same for all streams
+    if not all(st.stats.sampling_rate == fs for st in streamZ and streamN and streamE):
+        raise ValueError("Not all streams have the same sampling rate.")
+
+    # check every component has the same number of streams
+    if not len(streamZ) == len(streamN) == len(streamE):
+        raise ValueError(
+            "Not all three componenets streams have the same length (ie. same number of stations)"
+        )
+
+    # TODO: check window_duration, overlap, and lagtime are acceptable
 
     # Extract data into numpy arrays
     data_Z = np.zeros((nsta, npts))
@@ -110,12 +120,11 @@ def cross_correlation(
     cc3 = cc3.reshape(nslide, npairs, nsta, ncc)
     cc3 = cc3[:, :, :, center - lag_npts : center + lag_npts]
 
-    x = 6
-    delta = np.arange(1, x)
-    sizelim = nslide - x
+    delta = np.arange(1, consec_win)
+    sizelim = nslide - consec_win
 
     ccc = np.zeros([sizelim, npairs, nsta])
-    slide_loop = np.linspace(x, nslide - 1, sizelim)
+    slide_loop = np.linspace(consec_win, nslide - 1, sizelim)
 
     ### Compute correlation coefficient and average over consecutive windows
     for n in range(0, npairs):
@@ -124,7 +133,7 @@ def cross_correlation(
             c = int(c)
             for k in range(0, nsta):
 
-                tmp = np.zeros((x))
+                tmp = np.zeros((consec_win))
                 for j in delta:
                     tmp[j - 1] = np.corrcoef(cc3[c, n, k], cc3[c - j, n, k])[0, 1]
                 ccc[i, n, k] = tmp.mean()
