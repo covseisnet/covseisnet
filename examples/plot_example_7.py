@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 import covseisnet as csn
 from obspy import UTCDateTime
 from obspy.clients.fdsn import Client
-  
+
 # Download data from the YA Undervolc seismic network with RESIF Seismic data portal
 client = Client("RESIF")
 signal_duration_sec = 24 * 3600
@@ -55,24 +55,25 @@ for sta in list_stations:
 stream.decimate(4)
 
 # Merge traces in stream
-stream.merge(method=1,fill_value='interpolate',interpolation_samples=-1)
+stream.merge(method=1, fill_value="interpolate", interpolation_samples=-1)
 
 # Synchronize traces in stream
-stream = stream.synchronize(t,signal_duration_sec)
+stream = stream.synchronize(t, signal_duration_sec)
 
 # Filter data with bandpass between 1Hz and 10Hz
-band = [1., 10.]
+band = [1.0, 10.0]
 stream.filter("bandpass", freqmin=band[0], freqmax=band[1])
 
 # Preprocess data
 stream.preprocess()
 
 # Compute the network response function, specify the location of the per-station travel time grids
-NRF = csn.crosscorrelation.nrf(stream, T_path='./data')
+NRF = csn.crosscorrelation.nrf(stream, T_path="./data")
 
 # Plot the network response function
-plt.figure();plt.plot(np.linspace(0,24,len(NRF)),NRF,'k')
+plt.figure()
+plt.plot(np.linspace(0, 24, len(NRF)), NRF, "k")
 plt.title("Seismovolcanic activity on October 14, 2010")
-plt.ylabel('Network response function, unnormalized')
-plt.xlabel('14.10.2010 (hours)')
+plt.ylabel("Network response function, unnormalized")
+plt.xlabel("14.10.2010 (hours)")
 plt.xlim(0, 24)
