@@ -6,9 +6,7 @@ Cross correlation coefficients
 =========================================================
 
 
-This example shows how to use cross-correlation coefficients 
-
-
+This example shows how to calculate cross-correlation coefficients. Data from the Piton de la Fournaise seismic network is used to illustrate how cross correlation coefficients relate to seismovolcanic activity. A 24 hour period of data from October 14, 2010 is used. This data contains seismovolcanic signals linked to a pre-eruptive seismic swarm and to the beginning of a co-eruptive tremor starting at 15:20 (GMT).
 """
 
 import numpy as np
@@ -79,6 +77,7 @@ ccc_network = ccc_mean.mean(axis=1)
 ### plot cc function averaged over all stations
 plt.figure()
 plt.plot(np.linspace(0, 24, len(ccc_network)), ccc_network, "k")
-plt.title("Average over all stations")
-plt.ylabel("Correlation coefficient")
+plt.title("Seismovolcanic activity on October 14, 2010")
+plt.ylabel("Correlation coefficient averaged over all stations")
 plt.xlabel("14.10.2010 (hours)")
+plt.xlim(0, 24)
