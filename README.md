@@ -1,3 +1,4 @@
+![covseisnet logo](docs/logo_wide_25pc.png)
 # CovSeisNet
 
 Analyzing seismic data with array processing tools. 
