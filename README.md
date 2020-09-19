@@ -1,7 +1,7 @@
 ![covseisnet logo](docs/logo_wide_25pc.png)
 # CovSeisNet
 
-Analyzing seismic data with array processing tools. 
+This package provides tools for array signal processing, with a focus on seismic data. In addition to the classical array processing tools (e.g. beaforming, inter-station cross-correlation) we provide various tools for source detection and location with blind source separation algorithms. The project also includes diverse spectral analysis tools. covseisnet mostly inherits from obpsy (seismic-data analysis) and numpy.
 
 Please see the full documentation available at https://covseisnet.gricad-pages.univ-grenoble-alpes.fr/covseisnet
 
