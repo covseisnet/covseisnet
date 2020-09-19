@@ -1,8 +1,4 @@
-<img src="docs/source/_static/logo.png" width="40%"/>
-
-This package provides tools for array signal processing, with a focus on seismic data. In addition to the classical array processing tools (e.g. beaforming, inter-station cross-correlation) we provide various tools for source detection and location with blind source separation algorithms. The project also includes diverse spectral analysis tools. covseisnet mostly inherits from obpsy (seismic-data analysis) and numpy.
-
-Please see the full documentation available at https://covseisnet.gricad-pages.univ-grenoble-alpes.fr/covseisnet
+<img src="docs/source/_static/logo.png" width="200px" style="margin-top: 50px; margin-bottom: 50px"/>
 
 [![PyPI Version](https://img.shields.io/pypi/v/covseisnet.svg)](https://pypi.org/project/covseisnet/)
 [![Conda Version](https://img.shields.io/conda/v/conda-forge/covseisnet)](https://anaconda.org/conda-forge/covseisnet)
@@ -12,4 +8,14 @@ Please see the full documentation available at https://covseisnet.gricad-pages.u
 [![Platform](https://img.shields.io/conda/pn/conda-forge/covseisnet)](https://anaconda.org/conda-forge/covseisnet)
 [![Pipeline Build](https://gricad-gitlab.univ-grenoble-alpes.fr/covseisnet/covseisnet/badges/develop/pipeline.svg)]()
 [![codecov](https://codecov.io/gh/covseisnet/covseisnet/branch/develop/graph/badge.svg?token=N462A7PPRF)](https://codecov.io/gh/covseisnet/covseisnet)
+
+
+## Overview
+
+This package provides tools for array signal processing, with a focus on seismic data. In addition to the classical array processing tools (e.g. beaforming, inter-station cross-correlation) we provide various tools for source detection and location with blind source separation algorithms. The project also includes diverse spectral analysis tools. covseisnet mostly inherits from obpsy (seismic-data analysis) and numpy.
+
+## Documentation
+
+Please see the full documentation available at https://covseisnet.gricad-pages.univ-grenoble-alpes.fr/covseisnet
+
 
