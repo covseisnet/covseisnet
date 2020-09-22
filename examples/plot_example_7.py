@@ -19,8 +19,8 @@ from obspy.clients.fdsn import Client
 
 # Download data from the YA Undervolc seismic network with RESIF Seismic data portal
 client = Client("RESIF")
-signal_duration_sec = 24 * 3600
-t = UTCDateTime("2010-10-14T00:00:00.00")
+signal_duration_sec = 16 * 3600
+t = UTCDateTime("2010-10-14T08:00:00.00")
 
 # Download stream for each component
 list_stations = [
@@ -72,8 +72,8 @@ NRF = csn.crosscorrelation.nrf(stream, T_path="./data")
 
 # Plot the network response function
 plt.figure()
-plt.plot(np.linspace(0, 24, len(NRF)), NRF, "k")
+plt.plot(np.linspace(8, 24, len(NRF)), NRF, "k")
 plt.title("Seismovolcanic activity on October 14, 2010")
 plt.ylabel("Network response function, unnormalized")
 plt.xlabel("14.10.2010 (hours)")
-plt.xlim(0, 24)
+plt.xlim(8, 24)
