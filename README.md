@@ -16,7 +16,7 @@
 
 ## Overview
 
-This package provides tools for __array signal processing__, with a focus on seismic data. In addition to the classical array processing tools (e.g. beaforming, inter-station cross-correlation) we provide various tools for __source detection and location with blind source separation algorithms__. The project also includes diverse __spectral analysis__ tools. `covseisnet` mostly inherits from [`obpsy`](https://docs.obspy.org) (seismic-data analysis) and [`numpy`](https://numpy.org).
+This package provides tools for __array signal processing__, with a focus on seismic data. In addition to the classical array processing tools (e.g. beaforming, inter-station cross-correlations) we provide various tools for __source detection and location with blind source separation algorithms__. The project also includes diverse __spectral analysis__ tools. `covseisnet` mostly inherits from [`obpsy`](https://docs.obspy.org) (seismic-data analysis) and [`numpy`](https://numpy.org).
 
 ## Documentation
 
