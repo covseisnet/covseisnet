@@ -9,3 +9,4 @@ __all__ = [
 
 from . import *
 from .covariancematrix import CovarianceMatrix
+from .arraystream import read
