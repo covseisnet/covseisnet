@@ -38,21 +38,3 @@ class TravelTime:
         self.nlon = T.shape[1]
         self.nlat = T.shape[2]
         self.ndep = T.shape[3]
-        
-    # def load(stream):
-    #     #Load travel time grids from file
-     
-    #     list_nsl = [(stream[i].stats.network, stream[i].stats.station, stream[i].stats.location) for i in range(nsta)]
-
-    #     #TODO: treat '--' and blank location code as the same
-
-    #     T = []
-    #     for nsl in list_nsl:
-    #         T_sta = np.load(T_path+'/'+nsl[1]+'.npy') # use npy, files names do not contain network or location codes
-    #         # T_sta = np.load(T_path+'/'+nsl[0]+'.'+nsl[1]+'.'+nsl[2]+'.npy') # use npy
-    #         T.append(T_sta)
-    #     T = np.array((T))
-
-    # nlon = T.shape[1]
-    # nlat = T.shape[2]
-    # ndep = T.shape[3]   
