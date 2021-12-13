@@ -19,12 +19,24 @@ class Beam(np.ndarray):
                 elevation.
         """
 
-        self.extent = west, east, south, north
+        self.extent = west, east, south, north, depth_top, depth_max
         self.lon = np.linspace(west, east, self.shape[0])
         self.lat = np.linspace(south, north, self.shape[1])
         self.dep = np.linspace(depth_top, depth_max, self.shape[2])
         self.grid = np.meshgrid(self.lon, self.lat, self.dep)
         self.grid_size = len(self.grid[0].ravel())
+
+
+    def max_likelihood(self):
+        beam_max_index = np.nanargmax(self) #1D index of max likelihood
+        beam_max_indices = np.unravel_index(np.ravel_multi_index([beam_max_index], self.flatten().shape), self.shape) #get 3D index of max likelihood
+        beam_max = self[beam_max_indices] #return max likelihood value
+        
+        beam_max_lon = beam_max_indices[0]/self.shape[0]*(self.extent[1]-self.extent[0])+self.extent[0]
+        beam_max_lat = beam_max_indices[1]/self.shape[1]*(self.extent[3]-self.extent[2])+self.extent[2]
+        beam_max_depth = beam_max_indices[2]/self.shape[2]*(self.extent[5]-self.extent[4])+self.extent[4]
+        
+        return(beam_max_lon, beam_max_lat, beam_max_depth, beam_max)
 
 
     def calculate_nrf(self):
