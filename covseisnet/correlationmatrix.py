@@ -8,7 +8,7 @@ import numpy as np
 from scipy.signal import butter, filtfilt, hilbert
 from scipy.ndimage import gaussian_filter1d
 
-def cross_correlation(covariance, fs):
+def cross_correlation(covariance, sampling_rate):
     """Extract correlation in time domain from the given covariance matrix.
     Arguments:
     ----------
@@ -25,7 +25,7 @@ def cross_correlation(covariance, fs):
     # Calculate lags (note: omit from code for now as plotting functionality not provided)
     # n_lags = correlation.shape[-2]
     # n_lag_symm = (n_lags - 1) // 2
-    # lags = np.arange(-n_lag_symm, n_lag_symm + 1) / fs
+    # lags = np.arange(-n_lag_symm, n_lag_symm + 1) / sampling_rate
 
     # return lags, correlation.view(CorrelationMatrix)
     return correlation.view(CorrelationMatrix)
@@ -39,10 +39,10 @@ class CorrelationMatrix(np.ndarray):
         obj = np.asarray(input_array).view(cls)
         return obj
 
-    def hilbert(self):
+    def hilbert_envelope(self):
         return np.abs(hilbert(self, axis=0)).view(CorrelationMatrix)
 
-    def smooth(self, sigma=5):
+    def smooth(self, sigma):
         return gaussian_filter1d(self, sigma, axis=0).view(CorrelationMatrix)
 
     def bandpass(self, low_cut, high_cut, sampling_rate):

@@ -35,6 +35,6 @@ class TravelTime:
             
         T = np.array((T))
         self.grid = T
-        self.nlon = T.shape[1]
-        self.nlat = T.shape[2]
-        self.ndep = T.shape[3]
+        self.nx = T.shape[1]
+        self.ny = T.shape[2]
+        self.nz = T.shape[3]
