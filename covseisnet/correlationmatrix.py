@@ -39,6 +39,9 @@ class CorrelationMatrix(np.ndarray):
         obj = np.asarray(input_array).view(cls)
         return obj
 
+    def nwin(self):
+        return self.shape[0]
+
     def hilbert_envelope(self):
         return np.abs(hilbert(self, axis=0)).view(CorrelationMatrix)
 

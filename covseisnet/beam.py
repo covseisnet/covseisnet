@@ -6,30 +6,17 @@
 import numpy as np
 import sys
 
-# class Beam(np.ndarray):
 class Beam:
 
-    # def __new__(cls, nwin, traveltime_grid):
-    #     stockbeam = [np.zeros((traveltime_grid.nx, traveltime_grid.ny, traveltime_grid.nz)) for i in range(0,nwin)]
-    #     return stockbeam
-        # return super(Beam, cls).__new__(cls)
-        # return np.zeros((nwin, traveltime_grid.nx, traveltime_grid.ny, traveltime_grid.nz))
 
-    def __init__(self, nwin, T):
-    # def __init__(self):
-        # print("inited")
-        # self = np.zeros((traveltime.nx, traveltime.ny, traveltime.nz))
-        # self = np.zeros(shape)
+    def __init__(self, nwin, traveltimes):
         self.nwin = nwin
-        self.nx = T.nx
-        self.ny = T.ny
-        self.nz = T.nz
-        self.grid = np.zeros((self.nx,self.ny,self.nz))
+        self.nx = traveltimes.nx
+        self.ny = traveltimes.ny
+        self.nz = traveltimes.nz
+        self.traveltimes = traveltimes
         self.likelihood = np.zeros((self.nwin, self.nx, self.ny, self.nz))
         self.nrf = np.zeros(self.nwin)
-        
-        # self.likelihood = np.zeros((nwin, traveltime_grid.nx, traveltime_grid.ny, traveltime_grid.nz))
-        # self.nrf = np.zeros(nwin)
 
 
     def set_extent(self, west, east, south, north, depth_top, depth_max):
@@ -43,7 +30,6 @@ class Beam:
                 elevation.
         """
 
-        # self.extent = west, east, south, north, depth_top, depth_max
         self.xmin = west
         self.xmax = east
         self.ymin = south
@@ -57,10 +43,10 @@ class Beam:
         self.meshgrid_size = len(self.likelihood[0][0].ravel())
 
 
-    def max_likelihood(self, i):
-        beam_max_index = np.nanargmax(self.likelihood[i]) #1D index of max likelihood
-        beam_max_indices = np.unravel_index(np.ravel_multi_index([beam_max_index], self.likelihood[i].flatten().shape), self.likelihood[i].shape) #get 3D index of max likelihood
-        beam_max = self.likelihood[i][beam_max_indices] #return max likelihood value
+    def max_likelihood(self, win_idx):
+        beam_max_index = np.nanargmax(self.likelihood[win_idx]) #1D index of max likelihood
+        beam_max_indices = np.unravel_index(np.ravel_multi_index([beam_max_index], self.likelihood[win_idx].flatten().shape), self.likelihood[win_idx].shape) #get 3D index of max likelihood
+        beam_max = self.likelihood[win_idx][beam_max_indices] #return max likelihood value
         
         beam_max_lon = beam_max_indices[0]/self.nx*(self.xmax-self.xmin)+self.xmin
         beam_max_lat = beam_max_indices[1]/self.ny*(self.ymax-self.ymin)+self.ymin
@@ -69,32 +55,22 @@ class Beam:
         return(beam_max_lon, beam_max_lat, beam_max_depth, beam_max)
 
 
-    def calculate_nrf(self, i):
-        
-        # self.nrf = np.zeros(self.nwin)
+    def calculate_nrf(self, win_idx):
+        self.nrf[win_idx] = np.max(self.likelihood[win_idx])*np.size(self.likelihood[win_idx])/np.sum(self.likelihood[win_idx]) 
+        return self.nrf[win_idx]
 
-        # for i in range(0, self.nwin):
-            # self.nrf[i] = np.max(self.grid[i])*np.size(self.grid[i])/np.sum(self.grid[i]) 
-        
-        self.nrf[i] = np.max(self.likelihood[i])*np.size(self.likelihood[i])/np.sum(self.likelihood[i]) 
-        return self.nrf[i]
-        # return np.max(self.likelihood[i])*np.size(self.likelihood[i])/np.sum(self.likelihood[i]) 
-        # return np.max(self.grid)*np.size(self.grid)/np.sum(self.grid) 
-
-    def calculate_likelihood(self, xcorr, sampling_rate, traveltimes, window_index, close=None):
+    def calculate_likelihood(self, xcorr, sampling_rate, win_idx, close=None):
         """ Shift cross-correlation for each source in grid.
         xcorr.shape = (stat_combinations, lags)
         """
 
-        # beam = np.zeros((T.nx, T.ny, T.nz)).view(csn.beam.Beam)
-
         # Initialization
         beam_max = 0
-        trii, trij = np.triu_indices(traveltimes.nsta, k=1)
+        trii, trij = np.triu_indices(self.traveltimes.nsta, k=1)
         # xcorr_shifted_best = 0
-        n_lon = traveltimes.nx
-        n_lat = traveltimes.ny
-        n_dep = traveltimes.nz
+        n_lon = self.nx
+        n_lat = self.ny
+        n_dep = self.nz
         center = (xcorr.shape[1] - 1) // 2 + 1
 
         for k in range(n_lon * n_lat * n_dep):
@@ -102,7 +78,7 @@ class Beam:
             # Complicated way of making a loop over lon, lat, dep
             i, j, k = np.unravel_index(k, (n_lon, n_lat, n_dep))
             # Extract the travel times of all stations from specific source at i, j ,k
-            tt = traveltimes.grid[:, i, j, k]
+            tt = self.traveltimes.grid[:, i, j, k]
             # Increase the dimension and find the substraction between all the stations in a NxN matrix
             tt = tt[:, None] - tt
             # Extract the upper triangle values (and invert sign)
@@ -126,7 +102,7 @@ class Beam:
             # beam is sum of the CCs after being shifted the arrival time difference
             # extract for each stat comb, the sum of the CCs with the delay
             beam = xcorr[range(xcorr.shape[0]), dt_int].sum()
-            self.likelihood[window_index, i, j, k] = beam
+            self.likelihood[win_idx, i, j, k] = beam
 
             if beam_max < beam:
                 # Keep that into memory
@@ -142,4 +118,5 @@ class Beam:
         column_indices = column_indices - dt_int_abs[:, np.newaxis]
         xcorr_best = xcorr[rows, column_indices]
 
-        # return xcorr_best.T #don't return anything because xcorr not widely used
+        return self.likelihood[win_idx]
+        # return xcorr_best.T #don't because xcorr not widely used
