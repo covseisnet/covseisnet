@@ -62,3 +62,8 @@ def test_arraystream():
 
     # test times
     stream.times()
+    
+def test_pkg_attributes():
+    
+    version = csn.__version__
+    assert type(version) is str
