@@ -37,6 +37,7 @@ py38-test:
     - apt install -y gcc
     - pip install pytest-cov codecov numpy
     - pip install obspy
+    - pip install -e .
     - python -m pytest --cov=./
   except:
     - tags
@@ -49,6 +50,7 @@ py39-test:
     - apt install -y gcc
     - pip install pytest-cov codecov numpy
     - pip install obspy
+    - pip install -e .
     - python -m pytest --cov=./
   except:
     - tags
@@ -61,6 +63,7 @@ py310-test:
     - apt install -y gcc
     - pip install pytest-cov codecov numpy
     - pip install obspy
+    - pip install -e .
     - python -m pytest --cov=./
   except:
     - tags
