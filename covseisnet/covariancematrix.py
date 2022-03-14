@@ -117,7 +117,7 @@ class CovarianceMatrix(np.ndarray):
             eigenvalues = self.eigenvalues(norm=sum)
             indices = np.arange(self.shape[-1])
             return np.multiply(eigenvalues, indices).sum(axis=-1)
-        elif kind == "coherence":
+        elif kind == "entropy":
             eigenvalues = self.eigenvalues(norm=sum)
             log_eigenvalues = np.log(eigenvalues + epsilon)
             return -np.sum(eigenvalues * log_eigenvalues, axis=-1)

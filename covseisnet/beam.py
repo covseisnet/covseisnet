@@ -17,6 +17,8 @@ class Beam:
         self.traveltimes = traveltimes
         self.likelihood = np.zeros((self.nwin, self.nx, self.ny, self.nz))
         self.nrf = np.zeros(self.nwin)
+        self.correlation_shifted = []
+        self.correlation_unshifted = []
 
 
     def set_extent(self, west, east, south, north, depth_top, depth_max):
@@ -66,9 +68,10 @@ class Beam:
 
         # Initialization
         cross_correlation = cross_correlation.T
+        self.correlation_unshifted.append(cross_correlation)
+
         beam_max = 0
         trii, trij = np.triu_indices(self.traveltimes.nsta, k=1)
-        # cross_correlation_shifted_best = 0
         n_lon = self.nx
         n_lat = self.ny
         n_dep = self.nz
@@ -112,12 +115,12 @@ class Beam:
 
         # Move
         rows, column_indices = np.ogrid[:cross_correlation.shape[0], :cross_correlation.shape[1]]
+
         # Find where the time delay is bigger than the possible correlation time; this condition will never be fulfilled
         dt_int_abs[np.abs(dt_int_abs) > cross_correlation.shape[1]] = cross_correlation.shape[1] - 1
         # Move the negatives (almost all of them)
         dt_int_abs[dt_int_abs < 0] += cross_correlation.shape[1]
         column_indices = column_indices - dt_int_abs[:, np.newaxis]
-        cross_correlation_best = cross_correlation[rows, column_indices]
-
-        return self.likelihood[window_index]
-        # return cross_correlation_best.T #don't because cross_correlation not widely used
+        self.correlation_shifted.append(cross_correlation[rows, column_indices])
+        # return self.likelihood[window_index]
+        # return cross_correlation_best.T
