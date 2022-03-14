@@ -20,7 +20,7 @@ def test_covariance():
     assert spectral_width.all() != None
 
     # test coherence
-    coherence = covariances.coherence(kind="coherence")
+    coherence = covariances.coherence(kind="entropy")
     assert coherence.all() != None
 
     with pytest.raises(ValueError):

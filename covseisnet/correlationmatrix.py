@@ -22,13 +22,13 @@ def cross_correlation(covariance, sampling_rate):
     correlation = np.real(np.fft.fftshift(
         np.fft.ifft(covariance, axis=-2), axes=-2))
 
-    # Calculate lags (note: omit from code for now as plotting functionality not provided)
-    # n_lags = correlation.shape[-2]
-    # n_lag_symm = (n_lags - 1) // 2
-    # lags = np.arange(-n_lag_symm, n_lag_symm + 1) / sampling_rate
+    # Calculate lags
+    n_lags = correlation.shape[-2]
+    n_lag_symm = (n_lags - 1) // 2
+    lags = np.arange(-n_lag_symm, n_lag_symm + 1) / sampling_rate
 
-    # return lags, correlation.view(CorrelationMatrix)
-    return correlation.view(CorrelationMatrix)
+    correlation_unshifted = correlation.view(CorrelationMatrix)
+    return lags, correlation_unshifted
 
 class CorrelationMatrix(np.ndarray):
     """Correlation Matrix.
