@@ -18,7 +18,7 @@ with open(os.path.join(here, "README.md"), encoding="utf-8") as f:
 try:
     version = os.environ["CI_COMMIT_TAG"]
 except KeyError:
-    version = None
+    version = "0.x.x"
 
 
 # Arguments marked as "Required" below must be included for upload to PyPI.
@@ -78,7 +78,7 @@ setup(
     author="The covseisnet team",  # Optional
     # This should be a valid email address corresponding to the author listed
     # above.
-    author_email="covseisnet@gmail.com",  # Optional
+    #author_email="",  # Optional
     # Classifiers help users find your project by categorizing it.
     #
     # For a list of valid classifiers, see https://pypi.org/classifiers/
@@ -98,10 +98,10 @@ setup(
         # These classifiers are *not* checked by 'pip install'. See instead
         # 'python_requires' below.
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
     ],
     # This field adds keywords for your project which will appear on the
     # project page. What does your project relate to?
@@ -126,7 +126,7 @@ setup(
     # and refuse to install the project if the version does not match. If you
     # do not support Python 2, you can simplify this to '>=3.5' or similar, see
     # https://packaging.python.org/guides/distributing-packages-using-setuptools/#python-requires
-    python_requires=">=3, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, <4",
+    python_requires=">=3, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*, <4",
     # This field lists other packages that your project depends on to run.
     # Any package you put here will be installed by pip when your project is
     # installed, so they must be valid existing projects.

@@ -21,34 +21,11 @@ py37-test:
   script:
     - apt update
     - apt install -y gcc
-    - pip install pytest-cov codecov numpy==1.18.5
-    - pip install obspy
-    - python -m pytest --cov=./
-    - codecov --token=$CODECOV_TOKEN
-  except:
-    - tags
-
-py35-test:
-  image: python:3.5-slim
-  stage: test
-  script:
-    - apt update
-    - apt install -y gcc
     - pip install pytest-cov codecov numpy
     - pip install obspy
+    - pip install -e .
     - python -m pytest --cov=./
-  except:
-    - tags
-    
-py36-test:
-  image: python:3.6-slim
-  stage: test
-  script:
-    - apt update
-    - apt install -y gcc
-    - pip install pytest-cov codecov numpy==1.18.5
-    - pip install obspy
-    - python -m pytest --cov=./
+    - codecov --token=$CODECOV_TOKEN
   except:
     - tags
 
@@ -58,12 +35,38 @@ py38-test:
   script:
     - apt update
     - apt install -y gcc
-    - pip install pytest-cov codecov numpy==1.18.5
+    - pip install pytest-cov codecov numpy
     - pip install obspy
+    - pip install -e .
     - python -m pytest --cov=./
   except:
     - tags
 
+py39-test:
+  image: python:3.9-slim
+  stage: test
+  script:
+    - apt update
+    - apt install -y gcc
+    - pip install pytest-cov codecov numpy
+    - pip install obspy
+    - pip install -e .
+    - python -m pytest --cov=./
+  except:
+    - tags
+    
+py310-test:
+  image: python:3.10-slim
+  stage: test
+  script:
+    - apt update
+    - apt install -y gcc
+    - pip install pytest-cov codecov numpy
+    - pip install obspy
+    - pip install -e .
+    - python -m pytest --cov=./
+  except:
+    - tags
 
 deploy_to_PyPI:
   image: python:3.7-slim
@@ -78,20 +81,20 @@ deploy_to_PyPI:
   only:
     - tags
 
-deploy_to_Conda:
-  image: continuumio/miniconda3:4.8.2
-  stage: deploy to Conda
-  variables:
-    TWINE_USERNAME: $PYPI_USERNAME
-    TWINE_PASSWORD: $PYPI_PASSWORD
-  script:
-    - sed -i "s/covseisnet_version/$CI_COMMIT_TAG/g" conda-config/meta.yaml
-    - conda install conda-build anaconda-client
-    - conda config --set anaconda_upload yes
-    - conda config --append channels conda-forge
-    - conda-build --token $ANACONDA_PASSWORD conda-config
-  only:
-    - tags
+# deploy_to_Conda:
+  # image: continuumio/miniconda3:4.8.2
+  # stage: deploy to Conda
+  # variables:
+    # TWINE_USERNAME: $PYPI_USERNAME
+    # TWINE_PASSWORD: $PYPI_PASSWORD
+  # script:
+    # - sed -i "s/covseisnet_version/$CI_COMMIT_TAG/g" conda-config/meta.yaml
+    # - conda install conda-build anaconda-client
+    # - conda config --set anaconda_upload yes
+    # - conda config --append channels conda-forge
+    # - conda-build --token $ANACONDA_PASSWORD conda-config
+  # only:
+    # - tags
 
 pages:
   image: python:3.7-slim
@@ -107,4 +110,3 @@ pages:
       - public
   only:
     - master
-    - develop

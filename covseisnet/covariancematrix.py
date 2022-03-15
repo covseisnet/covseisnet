@@ -117,7 +117,7 @@ class CovarianceMatrix(np.ndarray):
             eigenvalues = self.eigenvalues(norm=sum)
             indices = np.arange(self.shape[-1])
             return np.multiply(eigenvalues, indices).sum(axis=-1)
-        elif kind == "coherence":
+        elif kind == "entropy":
             eigenvalues = self.eigenvalues(norm=sum)
             log_eigenvalues = np.log(eigenvalues + epsilon)
             return -np.sum(eigenvalues * log_eigenvalues, axis=-1)
@@ -331,9 +331,14 @@ def calculate(stream, window_duration_sec, average, average_step=None, **kwargs)
     for t in range(n_average):
         covariance[t] = xcov(t, spectra, step, average)
 
+    # Create frequencies vector for plotting as matplotlib now requires coordinates of pixel edges
+    fs = stream[0].stats.sampling_rate
+    frequencies_plotting = np.linspace(0, fs, len(frequencies) + 1)
+
+
     return (
         times,
-        frequencies,
+        frequencies_plotting,
         covariance.view(CovarianceMatrix).transpose([0, -1, 1, 2]),
     )
 

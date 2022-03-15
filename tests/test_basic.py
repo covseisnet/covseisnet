@@ -20,7 +20,7 @@ def test_covariance():
     assert spectral_width.all() != None
 
     # test coherence
-    coherence = covariances.coherence(kind="coherence")
+    coherence = covariances.coherence(kind="entropy")
     assert coherence.all() != None
 
     with pytest.raises(ValueError):
@@ -62,3 +62,8 @@ def test_arraystream():
 
     # test times
     stream.times()
+    
+def test_pkg_attributes():
+    
+    version = csn.__version__
+    assert type(version) is str
