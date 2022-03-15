@@ -28,6 +28,7 @@ py37-test:
     - codecov --token=$CODECOV_TOKEN
   except:
     - tags
+    - master
 
 py38-test:
   image: python:3.8-slim
@@ -41,6 +42,7 @@ py38-test:
     - python -m pytest --cov=./
   except:
     - tags
+    - master
 
 py39-test:
   image: python:3.9-slim
@@ -54,6 +56,7 @@ py39-test:
     - python -m pytest --cov=./
   except:
     - tags
+    - master
     
 py310-test:
   image: python:3.10-slim
@@ -67,6 +70,7 @@ py310-test:
     - python -m pytest --cov=./
   except:
     - tags
+    - master
 
 deploy_to_PyPI:
   image: python:3.7-slim
@@ -104,6 +108,7 @@ pages:
     - apt install -y gcc
     - pip install sphinx sphinx_gallery recommonmark sphinx_rtd_theme numpy scipy
     - pip install obspy
+    - pip install -e .
     - sphinx-build -b html ./docs/source public
   artifacts:
     paths:
