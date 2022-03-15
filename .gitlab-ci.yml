@@ -105,10 +105,11 @@ pages:
   stage: deploy
   script:
     - apt update
-    - apt install -y gcc
-    - pip install sphinx sphinx_gallery recommonmark sphinx_rtd_theme numpy scipy
+    - apt install -y gcc make curl unzip gdal-bin
+    - pip install sphinx sphinx_gallery recommonmark sphinx_rtd_theme numpy scipy rasterio elevation
     - pip install obspy
     - pip install -e .
+    - eio selfcheck
     - sphinx-build -b html ./docs/source public
   artifacts:
     paths:
