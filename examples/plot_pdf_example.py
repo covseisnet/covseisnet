@@ -9,19 +9,21 @@ the tremor associated with the eruption at the Piton de la Fournaise on
 December 21, 2021.
 
 One hour of seismic data from 17 stations is processed, starting at 23:35 UTC 
-on December 21, 2021. The data is processed in 6 windows and the last window 
-is selected for plotting the likelihood function because it is where tremor 
-signal is strongest.
+on December 21, 2021. The data is processed in 6 windows and the last window,
+when the tremor signal is strongest, is selected for plotting the likelihood 
+function.
 
 Figures, from top to bottom:
-1) Seismic waveforms from station FOR, closest to the tremor 
-2) Spectral width, from 0.5Hz to 10Hz
-3) Network response function
-4) Likelihood location function, map view
-5) Likelihood location function, longitudinal cross-section
-6) Likelihood location function, latitudinal cross-section
-7) Unshifted cross-correlation envelopes (obtained before calculating the beam)
-8) Shifted cross-correlation envelopes (corresponding to the maximum of the beam)
+    
+#. Seismic waveforms from station FOR, closest to the tremor 
+#. Spectral width, between 0.5Hz and 10Hz
+#. Average spectral width between 0.5Hz to 5Hz
+#. Network response function
+#. Likelihood location function, map view
+#. Likelihood location function, longitudinal cross-section
+#. Likelihood location function, latitudinal cross-section
+#. Unshifted cross-correlation envelopes (obtained before calculating the beam)
+#. Shifted cross-correlation envelopes (corresponding to the maximum of the beam)
 
 """
 
@@ -136,7 +138,12 @@ times, frequencies, covariances = csn.covariancematrix.calculate(
 
 # Spectral width
 spectral_width = covariances.coherence(kind="spectral_width")
-   
+
+# Average spectral width between 0.5Hz and 5Hz
+i_freq_low = round(0.5*spectral_width.shape[1]/sampling_rate)
+i_freq_high = round(5*spectral_width.shape[1]/sampling_rate)
+spectral_width_average = np.mean(spectral_width[:,i_freq_low:i_freq_high], axis=1)
+
 # Eigenvector decomposition - covariance matrix filtered by the 1st eigenvector to show the dominant source
 covariance_1st = covariances.eigenvectors(covariance=True, rank=0)
 
@@ -173,12 +180,13 @@ for i in range(0, nwin):
 
 
 # plot nrf and spectral width and waveforms from closest station
-fig, ax = plt.subplots(3, constrained_layout=True, figsize=(10,8)) #stretched plot
+duration_min = duration_sec/60
+fig, ax = plt.subplots(4, constrained_layout=True, figsize=(10,8)) #stretched plot
 
-ax[0].plot(np.linspace(0,duration_sec/60, len(trace_plot)), trace_plot, "k")
+ax[0].plot(np.linspace(0, duration_min, len(trace_plot)), trace_plot, "k")
 ax[0].set_title("Vertical channel of station FOR")
 ax[0].set_ylabel("FOR.HHZ (counts)")
-ax[0].set_xlim([0, duration_sec/60])
+ax[0].set_xlim([0, duration_min])
 
 img = ax[1].imshow(spectral_width.T, origin='lower', cmap='jet_r', interpolation='none', extent=[0, duration_sec/60, 0, sampling_rate], aspect='auto')
 ax[1].set_ylim([0.5, stream[0].stats.sampling_rate / 2]) # hide microseismic background noise below 0.5Hz
@@ -187,11 +195,17 @@ ax[1].set_yscale("log")
 ax[1].set_title("Spectral Width")
 plt.colorbar(img, ax=ax[1]).set_label("Covariance matrix spectral width")
 
-ax[2].plot(np.linspace(0, duration_sec/60, nwin), PdF_beam.nrf, "k")
-ax[2].set_title("Network response function (NRF)")
-ax[2].set_ylabel("NRF, unnormalized")
-ax[2].set_xlim(0,duration_sec/60)
+ax[2].plot(np.linspace(0, duration_min, nwin), spectral_width_average, "k")
+ax[2].set_title("Average spectral width between 0.5Hz and 5Hz")
+ax[2].set_ylabel("Spectral width")
+ax[2].set_xlim(0, duration_min)
 ax[2].set_xlabel("Minutes")
+
+ax[3].plot(np.linspace(0, duration_min, nwin), PdF_beam.nrf, "k")
+ax[3].set_title("Network response function (NRF)")
+ax[3].set_ylabel("NRF, unnormalized")
+ax[3].set_xlim(0, duration_min)
+ax[3].set_xlabel("Minutes")
 
 # extract max likelihood position
 beam_max = PdF_beam.max_likelihood(i_win)
@@ -298,7 +312,7 @@ for xcorr_label, xcorr in ("Unshifted", PdF_beam.correlation_unshifted[i_win]), 
     xcorr_max = np.nanmax(xcorr)
     
     # Extract
-    fig, ax = plt.subplots(2, figsize=(2.5, 10), gridspec_kw=dict(height_ratios=[4, 1], hspace=0.1), dpi=100)
+    fig, ax = plt.subplots(2, figsize=(2.7, 10), gridspec_kw=dict(height_ratios=[4, 1], hspace=0.1), dpi=100)
     n_xcorr = xcorr.shape[0]
     for d, x in zip(range(1, n_xcorr + 1), xcorr):
         x = 0.5 * np.abs(x) / xcorr_max
