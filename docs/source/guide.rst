@@ -11,15 +11,21 @@ The code repository is hosted on GitHub at https://github.com/covseisnet/covseis
 Roadmap
 -------
 
-Different versions of the package are planned to be released:
+A brief summary of the evolution of the 'covseisnet' package:
 
-* **version 0.4.1**: contains core detection algorithms from the array covariance matrix, where two main objects are defined:
+* **version 0.4.1**: introduced the core detection algorithms from the array covariance matrix, where two main objects are defined:
 
     - :class:`~covseisnet.arraystream.ArrayStream` – a synchronous obspy stream collected from an array of seismic stations (see the :ref:`user-guide-arraystream` section below, or see the object documentation).
 
     - :class:`~covseisnet.covariancematrix.CovarianceMatrix` – a numpy array with covariance-analysis methods (see the :ref:`user-guide-covariancematrix` section below, or see the object documentation).
 
-Later versions well be complemented with source separation and location from the covariance matrix eigenvectors, temporal cross-correlation and backpropagation, equalization method for coherent source removal and wavefield equipartionning enhancement, and other developments of the array covariance analysis.
+* **version 0.5.2**: introduced beamforming and the ability to create more advanced products such as likelihood and network response functions: 
+
+    - :class:`~covseisnet.traveltime.TravelTime` – a list-like object containing traveltime grids loaded from file (see the :ref:`user-guide-traveltime` section below, or see the object documentation).
+
+    - :class:`~covseisnet.correlationmatrix.CorrelationMatrix` – a numpy array with methods to extract correlation in time domain from a given covariance matrix (see the :ref:`user-guide-beam` section below, or see the object documentation).
+
+    - :class:`~covseisnet.beam.Beam` – a class containing methods for calculating the likelihood location and network response function from a correlation matrix (see the :ref:`user-guide-beam` section below, or see the object documentation).
 
 .. _user-guide-arraystream:
 

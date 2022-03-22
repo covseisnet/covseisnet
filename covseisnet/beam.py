@@ -6,9 +6,8 @@
 import numpy as np
 import sys
 
+
 class Beam:
-
-
     def __init__(self, nwin, traveltimes):
         self.nwin = nwin
         self.nx = traveltimes.nx
@@ -20,9 +19,8 @@ class Beam:
         self.correlation_shifted = []
         self.correlation_unshifted = []
 
-
     def set_extent(self, west, east, south, north, depth_top, depth_max):
-        """ Limits of the beamforming domain.
+        """Limits of the beamforming domain.
 
         Args
         ----
@@ -44,25 +42,44 @@ class Beam:
         self.meshgrid = np.meshgrid(self.lon, self.lat, self.dep)
         self.meshgrid_size = len(self.likelihood[0][0].ravel())
 
-
     def max_likelihood(self, window_index):
-        beam_max_index = np.nanargmax(self.likelihood[window_index]) #1D index of max likelihood
-        beam_max_indices = np.unravel_index(np.ravel_multi_index([beam_max_index], self.likelihood[window_index].flatten().shape), self.likelihood[window_index].shape) #get 3D index of max likelihood
-        beam_max = self.likelihood[window_index][beam_max_indices] #return max likelihood value
-        
-        beam_max_lon = beam_max_indices[0]/self.nx*(self.xmax-self.xmin)+self.xmin
-        beam_max_lat = beam_max_indices[1]/self.ny*(self.ymax-self.ymin)+self.ymin
-        beam_max_depth = beam_max_indices[2]/self.nz*(self.zmax-self.zmin)+self.zmin
-        
-        return(beam_max_lon, beam_max_lat, beam_max_depth, beam_max)
+        beam_max_index = np.nanargmax(
+            self.likelihood[window_index]
+        )  # 1D index of max likelihood
+        beam_max_indices = np.unravel_index(
+            np.ravel_multi_index(
+                [beam_max_index], self.likelihood[window_index].flatten().shape
+            ),
+            self.likelihood[window_index].shape,
+        )  # get 3D index of max likelihood
+        beam_max = self.likelihood[window_index][
+            beam_max_indices
+        ]  # return max likelihood value
 
+        beam_max_lon = (
+            beam_max_indices[0] / self.nx * (self.xmax - self.xmin) + self.xmin
+        )
+        beam_max_lat = (
+            beam_max_indices[1] / self.ny * (self.ymax - self.ymin) + self.ymin
+        )
+        beam_max_depth = (
+            beam_max_indices[2] / self.nz * (self.zmax - self.zmin) + self.zmin
+        )
+
+        return (beam_max_lon, beam_max_lat, beam_max_depth, beam_max)
 
     def calculate_nrf(self, window_index):
-        self.nrf[window_index] = np.max(self.likelihood[window_index])*np.size(self.likelihood[window_index])/np.sum(self.likelihood[window_index]) 
+        self.nrf[window_index] = (
+            np.max(self.likelihood[window_index])
+            * np.size(self.likelihood[window_index])
+            / np.sum(self.likelihood[window_index])
+        )
         return self.nrf[window_index]
 
-    def calculate_likelihood(self, cross_correlation, sampling_rate, window_index, close=None):
-        """ Shift cross-correlation for each source in grid.
+    def calculate_likelihood(
+        self, cross_correlation, sampling_rate, window_index, close=None
+    ):
+        """Shift cross-correlation for each source in grid.
         cross_correlation.shape = (stat_combinations, lags)
         """
 
@@ -99,9 +116,14 @@ class Beam:
             dt_int = center + dt_int
 
             max_time_diff = np.max(np.abs(dt_int))
-            
+
             if max_time_diff >= cross_correlation.shape[1]:
-                sys.exit("ERROR: the max time difference " + str(max_time_diff) + " is bigger than the correlation duration " + str(cross_correlation.shape[1]))
+                sys.exit(
+                    "ERROR: the max time difference "
+                    + str(max_time_diff)
+                    + " is bigger than the correlation duration "
+                    + str(cross_correlation.shape[1])
+                )
 
             # beam is sum of the CCs after being shifted the arrival time difference
             # extract for each stat comb, the sum of the CCs with the delay
@@ -114,10 +136,14 @@ class Beam:
                 dt_int_abs = -(dt_int - center)
 
         # Move
-        rows, column_indices = np.ogrid[:cross_correlation.shape[0], :cross_correlation.shape[1]]
+        rows, column_indices = np.ogrid[
+            : cross_correlation.shape[0], : cross_correlation.shape[1]
+        ]
 
         # Find where the time delay is bigger than the possible correlation time; this condition will never be fulfilled
-        dt_int_abs[np.abs(dt_int_abs) > cross_correlation.shape[1]] = cross_correlation.shape[1] - 1
+        dt_int_abs[np.abs(dt_int_abs) > cross_correlation.shape[1]] = (
+            cross_correlation.shape[1] - 1
+        )
         # Move the negatives (almost all of them)
         dt_int_abs[dt_int_abs < 0] += cross_correlation.shape[1]
         column_indices = column_indices - dt_int_abs[:, np.newaxis]

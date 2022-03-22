@@ -78,7 +78,7 @@ setup(
     author="The covseisnet team",  # Optional
     # This should be a valid email address corresponding to the author listed
     # above.
-    #author_email="",  # Optional
+    # author_email="",  # Optional
     # Classifiers help users find your project by categorizing it.
     #
     # For a list of valid classifiers, see https://pypi.org/classifiers/
@@ -142,7 +142,10 @@ setup(
     #
     # Similar to `install_requires` above, these must be valid existing
     # projects.
-    extras_require={"dev": ["check-manifest"], "test": ["coverage"],},  # Optional
+    extras_require={
+        "dev": ["check-manifest"],
+        "test": ["coverage"],
+    },  # Optional
     # If there are data files included in your packages that need to be
     # installed, specify them here.
     #

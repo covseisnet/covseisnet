@@ -335,7 +335,6 @@ def calculate(stream, window_duration_sec, average, average_step=None, **kwargs)
     fs = stream[0].stats.sampling_rate
     frequencies_plotting = np.linspace(0, fs, len(frequencies) + 1)
 
-
     return (
         times,
         frequencies_plotting,
