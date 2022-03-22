@@ -40,7 +40,7 @@ import scipy.interpolate
 import elevation
 
 # # download seismic data near using the RESIF Seismic data portal
-client = Client("RESIF")
+client = Client("http://ws.ipgp.fr")
 duration_sec = 60 * 60 # length of stream to be processed, in seconds
 t = UTCDateTime("2021-12-21T23:35:00.00")
 list_stations = [
@@ -60,8 +60,8 @@ list_stations = [
     "HIM",
     "PHR",
     "PRA",
-    # "PVD", #not available publicly
-    # "RVA", #not available publicly
+    "PVD",
+    "RVA",
     "SNE",
 ]
 stream = csn.arraystream.ArrayStream()
