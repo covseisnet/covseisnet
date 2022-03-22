@@ -8,6 +8,7 @@ import numpy as np
 from scipy.signal import butter, filtfilt, hilbert
 from scipy.ndimage import gaussian_filter1d
 
+
 def cross_correlation(covariance, sampling_rate):
     """Extract correlation in time domain from the given covariance matrix.
     Arguments:
@@ -19,8 +20,7 @@ def cross_correlation(covariance, sampling_rate):
     covariance = covariance.triu(k=1)
 
     # Inverse Fourier transform
-    correlation = np.real(np.fft.fftshift(
-        np.fft.ifft(covariance, axis=-2), axes=-2))
+    correlation = np.real(np.fft.fftshift(np.fft.ifft(covariance, axis=-2), axes=-2))
 
     # Calculate lags
     n_lags = correlation.shape[-2]
@@ -30,10 +30,9 @@ def cross_correlation(covariance, sampling_rate):
     correlation_unshifted = correlation.view(CorrelationMatrix)
     return lags, correlation_unshifted
 
-class CorrelationMatrix(np.ndarray):
-    """Correlation Matrix.
 
-    """
+class CorrelationMatrix(np.ndarray):
+    """Correlation Matrix."""
 
     def __new__(cls, input_array):
         obj = np.asarray(input_array).view(cls)
@@ -53,13 +52,12 @@ class CorrelationMatrix(np.ndarray):
 
         # calculate the Nyquist frequency
         nyquist = 0.5 * sampling_rate
-   
+
         # design filter
         order = 4
         low = low_cut / nyquist
-        high = high_cut / nyquist -0.1
-        b, a = butter(order, [low, high], btype='band')
-
+        high = high_cut / nyquist - 0.1
+        b, a = butter(order, [low, high], btype="band")
 
         filtered = np.zeros(self.shape)
         for i in range(self.shape[1]):
