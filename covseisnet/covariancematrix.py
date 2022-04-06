@@ -23,8 +23,8 @@ class CovarianceMatrix(np.ndarray):
     all the methods available with regular numpy arrays are also available
     here, plus additional arrayprocessing-oriented methods. Note that
     any numpy method or function applied to a
-    :class:`~arrayprocessing.covariance.CovarianceMatrix` instance returns a
-    :class:`~arrayprocessing.covariance.CovarianceMatrix` instance.
+    :class:`~covseisnet.covariancematrix.CovarianceMatrix` instance returns a
+    :class:`~covseisnet.covariancematrix.CovarianceMatrix` instance.
 
     The shape of a covariance matrix calculate from :math:`N` traces is at
     least :math:`N \times N`. Depending on the averaging size and frequency
@@ -39,9 +39,9 @@ class CovarianceMatrix(np.ndarray):
       dimensions.
 
     All the methods defined in the the
-    :class:`~arrayprocessing.covariance.CovarianceMatrix` class are performed
+    :class:`~covseisnet.covariancematrix.CovarianceMatrix` class are performed
     on the flattened array with the private method
-    :class:`~arrayprocessing.covariance.CovarianceMatrix._flat`, which allow
+    :func:`~covseisnet.covariancematrix.CovarianceMatrix._flat`, which allow
     to obtain as many :math:`N \times N` covariance matrices as time and
     frequency samples. Given a method that outputs a shape ``shape_out``
     given a covariance matrix of shape ``(n_sta, n_sta)``, the output of this
@@ -51,7 +51,7 @@ class CovarianceMatrix(np.ndarray):
     Tip
     ---
     Any :class:`numpy.ndarray` can be turned into a
-    :class:`~arrayprocessing.covariance.CovarianceMatrix` object with
+    :class:`~covseisnet.covariancematrix.CovarianceMatrix` object with
 
     >>> import covseisnet as cn
     >>> import numpy as np
@@ -73,7 +73,7 @@ class CovarianceMatrix(np.ndarray):
 
         The measured is performed onto all the covariance matrices from
         the eigenvalues obtained with the method
-        :meth:`~arrayprocessing.covariance.CovarianceMatrix.eigenvalues`.
+        :meth:`~covseisnet.covariancematrix.CovarianceMatrix.eigenvalues`.
         For a given matrix :math:`N \times N` matrix :math:`M` with
         eigenvalues :math:`\mathbf{\lambda} = \lambda_i` where
         :math:`i=1\ldots n`. The coherence is obtained as :math:`F(\lambda)`,
@@ -109,7 +109,7 @@ class CovarianceMatrix(np.ndarray):
         Returns
         -------
 
-        :class:`np.ndarray`
+        :class:`numpy.ndarray`
             The spectral width of maximal shape ``(n_times, n_frequencies)``.
 
         """
@@ -129,7 +129,7 @@ class CovarianceMatrix(np.ndarray):
         """Eigenvalue decomposition.
 
         The eigenvalue decomposition is performed onto the two last dimensions
-        of the :class:`~arrayprocessing.covariance.CovarianceMatrix` object.
+        of the :class:`~covseisnet.covariancematrix.CovarianceMatrix` object.
         The function used for eigenvalue decomposition is
         :func:`scipy.linalg.eigvalsh`. It assumes that the input matrix is 2D
         and hermitian. The decomposition is performed onto the lower triangular
@@ -143,7 +143,7 @@ class CovarianceMatrix(np.ndarray):
 
         Returns
         -------
-        :class:`np.ndarray`
+        :class:`numpy.ndarray`
             The eigenvalues of maximal shape ``(n_times, n_freq, n_sta)``.
 
         """
@@ -172,7 +172,7 @@ class CovarianceMatrix(np.ndarray):
 
         Returns
         -------
-        :class:`np.ndarray`
+        :class:`numpy.ndarray`
             The complex-valued eigenvector array of shape
             ``(n_times, n_freq, n_sta)`` if the parameter ``covariance`` is
             ``False``, else ``(n_times, n_freq, n_sta, n_sta)``.
@@ -293,7 +293,7 @@ def calculate(stream, window_duration_sec, average, average_step=None, **kwargs)
     averaged over 5 windows:
 
     >>> import covseisnet as cn
-    >>> stream = cn.data.read()
+    >>> stream = cn.arraystream.read()
     >>> t, f, c = cn.covariance.calculate(stream, 1., 5)
     >>> print(c.shape)  # (n_times, n_freq, n_cha, n_cha)
         (28, 199, 3, 3)

@@ -4,8 +4,8 @@
 
 Todo
 ----
-- Implement the new :meth:`~covseisnet.data.ArrayStream.synchronize` method.
-- Implement a :meth:`covseisnet.data.ArrayStream.check_synchronicity` method.
+- Implement the new :meth:`~covseisnet.arraystream.ArrayStream.synchronize` method.
+- Implement a :meth:`covseisnet.arraystream.ArrayStream.check_synchronicity` method.
 """
 
 import obspy
@@ -25,24 +25,24 @@ class ArrayStream(obspy.core.stream.Stream):
     different traces objects is not automatic. There are two options for
     synchronizing the stream:
 
-    (1) use the :meth:`~covseisnet.data.ArrayStream.synchronize`
+    (1) use the :meth:`~covseisnet.arraystream.ArrayStream.synchronize`
 
         >>> import covseisnet as cn
-        >>> stream = cn.data.read()
+        >>> stream = cn.arraystream.read()
         >>> stream.synchronize()
 
     (2) perform a manual synchronization before turning the stream
-        into an :class:`covseisnet.ArrayStream` object with
+        into an :class:`~covseisnet.arraystream.ArrayStream` object with
 
         >>> import covseisnet as cn
         >>> stream = obspy.read()
         >>> # manually synchronize
-        >>> stream = cn.data.ArrayStream(stream)
+        >>> stream = cn.arraystream.ArrayStream(stream)
 
     Note
     -----
     All the original methods of :class:`obspy.core.stream.Stream` objects
-    remain available in :class:`~covseisnet.data.ArrayStream` objects. For more
+    remain available in :class:`~covseisnet.arraystream.ArrayStream` objects. For more
     information, please visit the ObsPy documentation at
     https://examples.obspy.org.
     """
@@ -81,7 +81,7 @@ class ArrayStream(obspy.core.stream.Stream):
         Example
         -------
 
-        >>> stream = cn.data.read()
+        >>> stream = cn.arraystream.read()
         >>> stream.cut('2009-08-24 00:20:05', '2009-08-24 00:20:12')
         >>> print(stream)
         3 Trace(s) in Stream:
@@ -155,7 +155,7 @@ class ArrayStream(obspy.core.stream.Stream):
     def times(self, station_index=0, **kwargs):
         r"""Common time vector of the ArrayStream.
 
-        Because the :class:`~covseisnet.data.ArrayStream` is supposed to handle
+        Because the :class:`~covseisnet.arraystream.ArrayStream` is supposed to handle
         traces with exact same number of samples (and sampling frequency), the
         time vector of each traces is supposed to be the same. This function
         only returns the times of one of the traces, accessible from the
@@ -195,7 +195,7 @@ class ArrayStream(obspy.core.stream.Stream):
         :meth:`~obspy.core.trace.Trace.times` method such as
 
         >>> import covseisnet as cn
-        >>> st = cn.data.read()
+        >>> st = cn.arraystream.read()
         >>> st.times(type='matplotlib')
         array([ 733643.01392361,  733643.01392373,  733643.01392384, ...,
         733643.01427049,  733643.0142706 ,  733643.01427072])
@@ -214,7 +214,7 @@ def read(pathname_or_url=None, **kwargs):
     if not given. See the `Supported Formats` section in
     the :func:`obspy.core.stream.read` function.
 
-    This function returns an :class:`~covseisnet.data.ArrayStream` object, an
+    This function returns an :class:`~covseisnet.arraystream.ArrayStream` object, an
     object directly inherited from the :class:`obspy.core.stream.Stream`
     object.
 
@@ -223,7 +223,7 @@ def read(pathname_or_url=None, **kwargs):
     pathname_or_url: str or io.BytesIO or None
         String containing a file name or a URL or a open file-like object.
         Wildcards are allowed for a file name. If this attribute is omitted,
-        an example :class:`~covseisnet.data.ArrayStream` object will be
+        an example :class:`~covseisnet.arraystream.ArrayStream` object will be
         returned.
 
     Other parameters
@@ -234,8 +234,8 @@ def read(pathname_or_url=None, **kwargs):
 
     Returns
     -------
-    :class:`~covseisnet.data.ArrayStream`
-        An :class:`~covseisnet.data.ArrayStream` object.
+    :class:`~covseisnet.arraystream.ArrayStream`
+        An :class:`~covseisnet.arraystream.ArrayStream` object.
 
     Example
     -------
@@ -246,7 +246,7 @@ def read(pathname_or_url=None, **kwargs):
     Further usages of this function can be seen in the ObsPy documentation.
 
     >>> import covseisnet as cn
-    >>> stream = cn.data.read()
+    >>> stream = cn.arraystream.read()
     >>> print(stream)
     3 Trace(s) in Stream:
     BW.RJOB..EHZ | 2009-08-24T00:20:03.000000Z - ... | 100.0 Hz, 3000 samples
