@@ -60,6 +60,7 @@ extensions = [
     "sphinx_gallery.gen_gallery",
 ]
 
+autoclass_content = 'both'
 
 class MatplotlibSVG(object):
     """Render images with SVG format."""

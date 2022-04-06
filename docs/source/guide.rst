@@ -11,7 +11,7 @@ The code repository is hosted on GitHub at https://github.com/covseisnet/covseis
 Roadmap
 -------
 
-A brief summary of the evolution of the 'covseisnet' package:
+A brief summary of the evolution of the `covseisnet` package:
 
 * **version 0.4.1**: introduced the core detection algorithms from the array covariance matrix, where two main objects are defined:
 
@@ -19,11 +19,11 @@ A brief summary of the evolution of the 'covseisnet' package:
 
     - :class:`~covseisnet.covariancematrix.CovarianceMatrix` – a numpy array with covariance-analysis methods (see the :ref:`user-guide-covariancematrix` section below, or see the object documentation).
 
-* **version 0.5.2**: introduced beamforming and the ability to create more advanced products such as likelihood and network response functions: 
+* **version 0.5.2**: introduced beamforming and the ability to create more advanced products such as likelihood and network response functions. Three additional classes were defined: 
 
     - :class:`~covseisnet.traveltime.TravelTime` – a list-like object containing traveltime grids loaded from file (see the :ref:`user-guide-traveltime` section below, or see the object documentation).
 
-    - :class:`~covseisnet.correlationmatrix.CorrelationMatrix` – a numpy array with methods to extract correlation in time domain from a given covariance matrix (see the :ref:`user-guide-beam` section below, or see the object documentation).
+    - :class:`~covseisnet.correlationmatrix.CorrelationMatrix` – a numpy array with methods to extract correlation in time domain from a given covariance matrix (see the :ref:`user-guide-correlationmatrix` section below, or see the object documentation).
 
     - :class:`~covseisnet.beam.Beam` – a class containing methods for calculating the likelihood location and network response function from a correlation matrix (see the :ref:`user-guide-beam` section below, or see the object documentation).
 
@@ -104,3 +104,30 @@ Other measurments of the wavefield coherence can be also implemented manually by
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Many source-separation algorithms are based on the eigenvectors of the network covariance matrix. We therefore provide a method :meth:`covseisnet.covariancematrix.CovarianceMatrix.eigenvectors` to access it from the covariance matrix.
+
+.. _user-guide-traveltime:
+
+Importing travel time grids
+---------------------------
+
+Travel time grids saved as numpy .npy files can be imported into `covseisnet`. There are many ways to generate travel time grids, for example by using `TauP <https://docs.obspy.org/packages/obspy.taup.html>`_.
+
+The traveltime class provides a list-like structure in which the traveltime grids can be loaded. Given a stream object, it will attempt to import a traveltime grid for each trace in the stream.
+
+.. _user-guide-correlationmatrix:
+
+Correlation in the time domain
+------------------------------
+
+Given a covariance matrix, a corresponding correlation matrix is computed by extracting the upper triangular matrix and performing an inverse fourier transform. A set of lag times is also provided as output so that the amount of shift in the correlation envelopes can be seen.
+
+The following methods are also provided to filter and smoothen the correlation matrix: bandpass filter, 1-D gaussian filter, hilbert envelope.
+
+.. _user-guide-beam:
+
+Beamforming
+-----------
+
+Using the correlation matrix, beamforming can be done to calculate the likelihood function. This is useful for locating the source of signals such as tremors and tectonic earthquakes.
+
+Another useful product to have is the network response function, which is a 1-D product generated from the 3-D likelihood function.
