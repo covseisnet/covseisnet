@@ -81,6 +81,7 @@ class CorrelationMatrix(np.ndarray):
             filtered[:, i] = filtfilt(b, a, self[:, i], **kwargs)
         return filtered.view(CorrelationMatrix)
 
+
 def cross_correlation(covariance, sampling_rate):
     """Extract correlation in time domain from the given covariance matrix.
     
@@ -96,11 +97,11 @@ def cross_correlation(covariance, sampling_rate):
 
     Returns
     -------
-    :class:`~numpy.ndarray`
-        The lag time between stations.
-
-    :class:`~covseisnet.correlationmatrix.CorrelationMatrix`
-        The correlation matrix.
+    :class:`~tuple`
+    
+        :class:`~numpy.ndarray` The lag time between stations.
+    
+        :class:`~covseisnet.correlationmatrix.CorrelationMatrix` The correlation matrix.
         
     """
 

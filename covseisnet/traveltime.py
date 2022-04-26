@@ -11,7 +11,6 @@ class TravelTime:
     
     This class is an object created by loading in travel time grids from numpy .npy files.
     """
-    
 
     def __init__(self, stream, T_path, identifiers="S"):
         """Load a travel time grid for each trace in a given stream.
@@ -51,7 +50,7 @@ class TravelTime:
         >>> traveltimes = csn.traveltime.TravelTime(stream, T_path=path, identifiers="NSL")
         
         """
-        
+
         self.nsta = len(stream)
 
         list_nsl = [
@@ -65,23 +64,22 @@ class TravelTime:
             network = nsl[0]
             station = nsl[1]
             location = nsl[2]
-            
+
             try:
                 # file names contain only the station
                 if identifiers == "S":
                     T_sta = np.load(T_path + "/" + station + ".npy")
-    
+
                 # file names contain network, station, and location codes
                 elif identifiers == "NSL":
                     T_sta = np.load(
                         T_path + "/" + network + "." + station + "." + location + ".npy"
                     )
-                
+
                 T.append(T_sta)
 
             except (FileNotFoundError):
                 raise SystemExit("Travel time grid file not found for trace", nsl)
-
 
         T = np.array((T))
         self.grid = T

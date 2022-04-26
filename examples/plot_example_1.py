@@ -16,8 +16,6 @@ import obspy
 import matplotlib.pyplot as plt
 import numpy as np
 
-from matplotlib.ticker import MaxNLocator
-
 # read ObsPy's example stream
 stream = obspy.read()
 channels = [s.stats.channel for s in stream]

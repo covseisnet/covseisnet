@@ -1,6 +1,6 @@
 .. _guide:
 
-User's Guide
+User Guide
 ============
 
 
@@ -112,7 +112,7 @@ Importing travel time grids
 
 Travel time grids saved as numpy .npy files can be imported into `covseisnet`. There are many ways to generate travel time grids, for example by using `TauP <https://docs.obspy.org/packages/obspy.taup.html>`_.
 
-The traveltime class provides a list-like structure in which the traveltime grids can be loaded. Given a stream object, it will attempt to import a traveltime grid for each trace in the stream.
+The :class:`~covseisnet.traveltime.TravelTime` class provides a list-like structure in which the traveltime grids can be loaded. Given a stream object, it will attempt to import a traveltime grid for each trace in the stream.
 
 .. _user-guide-correlationmatrix:
 
@@ -121,7 +121,10 @@ Correlation in the time domain
 
 Given a covariance matrix, a corresponding correlation matrix is computed by extracting the upper triangular matrix and performing an inverse fourier transform. A set of lag times is also provided as output so that the amount of shift in the correlation envelopes can be seen.
 
-The following methods are also provided to filter and smoothen the correlation matrix: bandpass filter, 1-D gaussian filter, hilbert envelope.
+The following methods are also provided to filter and smoothen the correlation matrix:
+* bandpass filter :meth:`~covseisnet.correlationmatrix.CorrelationMatrix.bandpass`
+* 1-D gaussian filter :meth:`~covseisnet.correlationmatrix.CorrelationMatrix.smooth`
+* hilbert envelope :meth:`~covseisnet.correlationmatrix.CorrelationMatrix.hilbert_envelope`
 
 .. _user-guide-beam:
 
