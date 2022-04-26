@@ -265,12 +265,17 @@ elevation.clip(
 dem = rasterio.open(dem_path)  # open downloaded dem file
 dem1 = dem.read(1)  # extract values
 dem1 = np.where(dem1 == -32768, 0, dem1)  # replace null values with zero
+nx_dem = dem1.shape[0]  # x dimension of dem grid
+ny_dem = dem1.shape[1]  # y dimension of dem grid
 
 # old dem grid
-x, y = np.mgrid[0:119:120j, 0:167:168j]
+x, y = np.mgrid[0 : nx_dem - 1 : complex(nx_dem), 0 : ny_dem - 1 : complex(ny_dem)]
 
 # new dem grid, with dimensions matching our traveltime grid
-x2, y2 = np.mgrid[0:119:110j, 0:167:145j]
+x2, y2 = np.mgrid[
+    0 : nx_dem - 1 : complex(PdF_traveltimes.nx),
+    0 : ny_dem - 1 : complex(PdF_traveltimes.ny),
+]
 
 # interpolate onto the new grid
 dem2 = scipy.interpolate.griddata(
@@ -391,9 +396,9 @@ ax.set_title("Likelihood location, depth view")
 plt.colorbar(img_yz).set_label("Likelihood")
 
 # plot cross-correlation envelopes
-for xcorr_label, xcorr in ("Unshifted", PdF_beam.correlation_unshifted[i_win]), (
-    "Shifted",
-    PdF_beam.correlation_shifted[i_win],
+for xcorr_label, xcorr in (
+    ("Unshifted", PdF_beam.correlation_unshifted[i_win]),
+    ("Shifted", PdF_beam.correlation_shifted[i_win],),
 ):
 
     lag_max = np.max(lags) / 2

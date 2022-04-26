@@ -12,6 +12,7 @@ class Beam:
     
     A beam object is initiated by providing a :class:`~covseisnet.traveltime.TravelTime` object and the number of time windows used 
     """
+
     def __init__(self, nwin, traveltimes):
         """Create a Beam object by providing a traveltime object and specifying
         the number of time windows.
@@ -92,21 +93,17 @@ class Beam:
         Returns
         -------
         :class:`~tuple`              
-            beam_max_x :class:`float`: The x coordinate of the 
-            maximum of the likelihood function. 
+            :class:`float`: The x coordinate of the maximum of the likelihood function. 
             
-            beam_max_y :class:`float`: The y coordinate of the 
-            maximum of the likelihood function.
+            :class:`float`: The y coordinate of the maximum of the likelihood function.
             
-            beam_max_z :class:`float`: The z coordinate or depth of the maximum
-            of the likelihood function.
+            :class:`float`: The z coordinate or depth of the maximum of the likelihood function.
             
-            beam_max :class:`float`: The maximum value (unnormalized) of the 
-            likelihood function.
+            :class:`float`: The maximum value (unnormalized) of the likelihood function.
         
 
         """
-        
+
         beam_max_index = np.nanargmax(
             self.likelihood[window_index]
         )  # 1D index of max likelihood
@@ -120,15 +117,9 @@ class Beam:
             beam_max_indices
         ]  # return max likelihood value
 
-        beam_max_x = (
-            beam_max_indices[0] / self.nx * (self.xmax - self.xmin) + self.xmin
-        )
-        beam_max_y = (
-            beam_max_indices[1] / self.ny * (self.ymax - self.ymin) + self.ymin
-        )
-        beam_max_z = (
-            beam_max_indices[2] / self.nz * (self.zmax - self.zmin) + self.zmin
-        )
+        beam_max_x = beam_max_indices[0] / self.nx * (self.xmax - self.xmin) + self.xmin
+        beam_max_y = beam_max_indices[1] / self.ny * (self.ymax - self.ymin) + self.ymin
+        beam_max_z = beam_max_indices[2] / self.nz * (self.zmax - self.zmin) + self.zmin
 
         return (beam_max_x, beam_max_y, beam_max_z, beam_max)
 

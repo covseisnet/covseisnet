@@ -10,7 +10,6 @@ This example shows how to synchronize traces in the stream before to calculate t
 """
 
 import covseisnet as csn
-import obspy
 import matplotlib.pyplot as plt
 from obspy import UTCDateTime
 from obspy.clients.fdsn import Client
