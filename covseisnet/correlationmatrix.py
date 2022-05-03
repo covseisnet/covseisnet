@@ -11,7 +11,7 @@ from scipy.ndimage import gaussian_filter1d
 
 class CorrelationMatrix(np.ndarray):
     r"""Correlation Matrix.
-    
+
     This class is a subclass of :class:`numpy.ndarray`.
     """
 
@@ -20,52 +20,52 @@ class CorrelationMatrix(np.ndarray):
         return obj
 
     def nwin(self):
-        """ Returns the number of windows in the correlation matrix.
-        
+        """Returns the number of windows in the correlation matrix.
+
         Returns
         -------
         int
             The number of windows in the correlation matrix.
-        
+
         """
         return self.shape[0]
 
     def hilbert_envelope(self, **kwargs):
         """Apply the Hilbert transform to the correlation matrix. Uses
         :func:`~scipy.signal.hilbert`
-             
+
         """
         return np.abs(hilbert(self, axis=0, **kwargs)).view(CorrelationMatrix)
 
     def smooth(self, sigma, **kwargs):
         """Apply a 1-D Gaussian filter to the correlation matrix. Uses
         :func:`~scipy.ndimage.gaussian_filter1d`.
-        
+
         Parameters
         ----------
-        
+
         sigma: float
             Standard deviation for Gaussian kernel
-                   
+
         """
         return gaussian_filter1d(self, sigma, axis=0, **kwargs).view(CorrelationMatrix)
 
     def bandpass(self, low_cut, high_cut, sampling_rate, **kwargs):
         """Apply a Butterworth bandpass filter to the correlation matrix. Uses
         :func:`~scipy.signal.butter` and :func:`~scipy.signal.filtfilt`.
-        
+
         Parameters
         ----------
-        
+
         low_cut: float
             Pass band low corner frequency.
-            
+
         high_cut: float
             Pass band high corner frequency.
-            
+
         sampling_rate: float
-            Sampling rate in Hz.        
-            
+            Sampling rate in Hz.
+
         """
         # calculate the Nyquist frequency
         nyquist = 0.5 * sampling_rate
@@ -84,25 +84,25 @@ class CorrelationMatrix(np.ndarray):
 
 def cross_correlation(covariance, sampling_rate):
     """Extract correlation in time domain from the given covariance matrix.
-    
+
     Parameters
     ----------
-    
+
     covariance: :class:`covseisnet.covariancematrix.CovarianceMatrix` object
         A covariance matrix already computed.
-        
+
     sampling_rate: float
         Sampling rate in Hz.
-        
+
 
     Returns
     -------
     :class:`~tuple`
-    
+
         :class:`~numpy.ndarray` The lag time between stations.
-    
+
         :class:`~covseisnet.correlationmatrix.CorrelationMatrix` The correlation matrix.
-        
+
     """
 
     # Extract upper triangular

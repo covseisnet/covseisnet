@@ -8,23 +8,23 @@ import sys
 
 
 class Beam:
-    r""" An object containing the likelihood function and associated products.
-    
-    A beam object is initiated by providing a :class:`~covseisnet.traveltime.TravelTime` object and the number of time windows used 
+    r"""An object containing the likelihood function and associated products.
+
+    A beam object is initiated by providing a :class:`~covseisnet.traveltime.TravelTime` object and the number of time windows used
     """
 
     def __init__(self, nwin, traveltimes):
         """Create a Beam object by providing a traveltime object and specifying
         the number of time windows.
-               
+
         Parameters
         ----------
         nwin: int
             The number of windows in the correlation matrix.
-            
+
         traveltimes: :class:`~covseisnet.traveltime.TravelTime`
             An object containing all relevant travel time grids.
-        
+
 
         """
         self.nwin = nwin
@@ -40,31 +40,31 @@ class Beam:
     def set_extent(self, x_min, x_max, y_min, y_max, z_min, z_max):
         """Sets the geographical limits of the beamforming domain.
 
-        Specify the extent of the 3D grid. Units need to match those of the 
-        travel time grids. Horizontally the units may be in degrees of 
+        Specify the extent of the 3D grid. Units need to match those of the
+        travel time grids. Horizontally the units may be in degrees of
         longitude and latitude or in km. The depth is normally in km and should
         decrease for increasing elevation.
 
         Parameters
         ----------
-        x_min: float 
+        x_min: float
             Minimum value in the X direction
-            
+
         x_max: float
             Maximum value in the X direction
-        
+
         y_min: float
             Minimum value in the Y direction
-            
+
         y_max: float
             Maximum value in the Y direction
-            
+
         z_min: float
             Minimum value in the Z direction
-            
+
         z_max: float
             Maximum value in the Z direction
-                
+
         """
 
         self.xmin = x_min
@@ -80,27 +80,27 @@ class Beam:
         self.meshgrid_size = len(self.likelihood[0][0].ravel())
 
     def max_likelihood(self, window_index):
-        """ Extract maximum likelihood location
-        
-        Returns a tuple containing the maximum likelihood location and value in the window 
+        """Extract maximum likelihood location
+
+        Returns a tuple containing the maximum likelihood location and value in the window
         specified by the window index.
-               
+
         Parameters
         ----------
         window_index : int
             The window index of the desired likelihood function.
-       
+
         Returns
         -------
-        :class:`~tuple`              
-            :class:`float`: The x coordinate of the maximum of the likelihood function. 
-            
+        :class:`~tuple`
+            :class:`float`: The x coordinate of the maximum of the likelihood function.
+
             :class:`float`: The y coordinate of the maximum of the likelihood function.
-            
+
             :class:`float`: The z coordinate or depth of the maximum of the likelihood function.
-            
+
             :class:`float`: The maximum value (unnormalized) of the likelihood function.
-        
+
 
         """
 
@@ -124,20 +124,20 @@ class Beam:
         return (beam_max_x, beam_max_y, beam_max_z, beam_max)
 
     def calculate_nrf(self, window_index):
-        """ Calculates and returns the network response function for the window
+        """Calculates and returns the network response function for the window
         specified by the window index.
-               
+
         Parameters
         ----------
         window_index: int
             The window index of the desired likelihood function upon which the
             network response function is to be calculated.
-       
+
         Returns
         -------
         :class:`~numpy.ndarray`
-            The value of the network response function in that window. 
-        
+            The value of the network response function in that window.
+
 
         """
         self.nrf[window_index] = (
@@ -151,21 +151,21 @@ class Beam:
         self, cross_correlation, sampling_rate, window_index, close=None
     ):
         """Shift the cross-correlation for each source in the grid.
-               
+
         Parameters
         ----------
         cross_correlation: :class:`~covseisnet.correlationmatrix.CorrelationMatrix`
-            The correlation matrix from which the 3D likelihood function is 
+            The correlation matrix from which the 3D likelihood function is
             calculated.
-            
+
         sampling_rate: float
             Sampling rate in Hz.
-            
+
         window_index: int
-            The index of the window upon which to calculate the 3D likelihood 
+            The index of the window upon which to calculate the 3D likelihood
             function.
-            
-        close: 
+
+        close:
         """
 
         # Initialization
