@@ -8,15 +8,15 @@ Network covariance matrix spectral width: natural case with preprocessing
 
 This example shows how to apply preprocessing in addition to the steps done in the previous examples. The spectral width of the network covariance matrix is calculated for 24 hours of real seismic data acquired on 2010.10.14 by the Piton de la Fournaise seismic network.  This dataset contains seismovolcanic signals linked to a pre-eruptive seismic swarm and to the beginning of a co-eruptive tremor starting at 15:20 (GMT).
 
-These four covariance matrix spectral width plots show the differing effects of preprocessing:
-
-#. no preprocessing
-#. reprocessing using one-bit spectral whitening
-#. preprocessing using one-bit temporal normalization
-#. preprocessing using both smooth spectral whitening and smooth temporal normalization
+Four covariance matrix spectral width plots are shown to show the effects or preprocessing:
+plot #1 - no preprocessing
+plot #2 - preprocessing using one-bit spectral whitening
+plot #3 - preprocessing using one-bit temporal normalization
+plot #4 - preprocessing using both smooth spectral whitening and smooth temporal normalization
 """
 
 import covseisnet as csn
+import obspy
 import matplotlib.pyplot as plt
 from obspy import UTCDateTime
 from obspy.clients.fdsn import Client

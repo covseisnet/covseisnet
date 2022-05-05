@@ -14,6 +14,7 @@ The lower the covariance matrix spectral width (yellow), the more coherent the s
 """
 
 import covseisnet as csn
+import obspy
 import matplotlib.pyplot as plt
 from obspy import UTCDateTime
 from obspy.clients.fdsn import Client
