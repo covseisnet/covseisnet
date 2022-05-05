@@ -1,5 +1,5 @@
 {% set name = "covseisnet" %}
-{% set version = "0.4.1" %}
+{% set version = "covseisnet_version" %}
 
 package:
   name: "{{ name|lower }}"
