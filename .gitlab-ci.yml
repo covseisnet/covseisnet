@@ -86,7 +86,7 @@ py310-test:
     # - tags
 
 deploy_to_Conda:
-  image: continuumio/miniconda3:4.8.2
+  image: continuumio/miniconda3:4.11.0
   stage: deploy to Conda
   variables:
     TWINE_USERNAME: $PYPI_USERNAME
