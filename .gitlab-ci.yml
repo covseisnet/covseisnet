@@ -93,6 +93,7 @@ deploy_to_Conda:
     TWINE_PASSWORD: $PYPI_PASSWORD
   script:
     - sed -i "s/covseisnet_version/$CI_COMMIT_TAG/g" conda-config/meta.yaml
+    - sed -i "s/covseisnet_pkg_pypi_hash/$COVSEISNET_PKG_PYPI_HASH/g" conda-config/meta.yaml
     - conda install conda-build anaconda-client
     - conda config --set anaconda_upload yes
     - conda config --append channels conda-forge
