@@ -19,7 +19,7 @@ A brief summary of the evolution of the `covseisnet` package:
 
     - :class:`~covseisnet.covariancematrix.CovarianceMatrix` – a numpy array with covariance-analysis methods (see the :ref:`user-guide-covariancematrix` section below, or see the object documentation).
 
-* **version 0.5.3**: introduced beamforming and the ability to create more advanced products such as likelihood and network response functions. Three additional classes were defined: 
+* **version 0.5.3/1.0.0**: introduced beamforming and the ability to create more advanced products such as likelihood and network response functions. Three additional classes were defined: 
 
     - :class:`~covseisnet.traveltime.TravelTime` – a list-like object containing traveltime grids loaded from file (see the :ref:`user-guide-traveltime` section below, or see the object documentation).
 
