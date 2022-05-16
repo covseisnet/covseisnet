@@ -87,7 +87,7 @@ setup(
         #   3 - Alpha
         #   4 - Beta
         #   5 - Production/Stable
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
         # Indicate who your project is intended for
         "Intended Audience :: Developers",
         "Topic :: Software Development :: Build Tools",
@@ -142,7 +142,10 @@ setup(
     #
     # Similar to `install_requires` above, these must be valid existing
     # projects.
-    extras_require={"dev": ["check-manifest"], "test": ["coverage"],},  # Optional
+    extras_require={
+        "dev": ["check-manifest"],
+        "test": ["coverage"],
+    },  # Optional
     # If there are data files included in your packages that need to be
     # installed, specify them here.
     #

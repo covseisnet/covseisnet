@@ -26,14 +26,14 @@ sys.path.insert(0, os.path.abspath("../../"))
 # -------------------
 
 project = "covseisnet"
-copyright = "2020, The CovSeisNet Team"
+copyright = "2022, The CovSeisNet Team"
 author = "L. Seydoux, J. Soubestre, C. Journeau, F. Tong & N. Shapiro"
 
 # The short X.Y version
-version = "0.5"
+version = "1.0"
 
 # The full version, including alpha/beta/rc tags
-release = "0.5.2"
+release = "1.0.0"
 
 
 # General configuration

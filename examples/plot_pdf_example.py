@@ -398,7 +398,10 @@ plt.colorbar(img_yz).set_label("Likelihood")
 # plot cross-correlation envelopes
 for xcorr_label, xcorr in (
     ("Unshifted", PdF_beam.correlation_unshifted[i_win]),
-    ("Shifted", PdF_beam.correlation_shifted[i_win],),
+    (
+        "Shifted",
+        PdF_beam.correlation_shifted[i_win],
+    ),
 ):
 
     lag_max = np.max(lags) / 2

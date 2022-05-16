@@ -8,30 +8,30 @@ import numpy as np
 
 class TravelTime:
     r"""List-like object of multiple travel time grids.
-    
+
     This class is an object created by loading in travel time grids from numpy .npy files.
     """
 
     def __init__(self, stream, T_path, identifiers="S"):
         """Load a travel time grid for each trace in a given stream.
-               
+
         Parameters
         ----------
-        
+
         stream: :class:`ArrayStream` or :class:`obspy.core.stream.Stream`
             The input data stream. It will attempt to load a traveltime grid
             for each trace in the stream.
-        
+
         T_path: str
             Path to the travel time grids.
-            
+
         identifiers: str, default
             Format of the travel time grid filenames. Defaults to "S" for using
             the station name as the filename. For situations where multiple
-            traces have a common station name, use "NSL" which requires the 
-            network code, station name, and location code to all be present in 
+            traces have a common station name, use "NSL" which requires the
+            network code, station name, and location code to all be present in
             the filename.
- 
+
 
         Example
         -------
@@ -48,7 +48,7 @@ class TravelTime:
         >>> os.listdir(path)
         ['BW.RJOB..npy']
         >>> traveltimes = csn.traveltime.TravelTime(stream, T_path=path, identifiers="NSL")
-        
+
         """
 
         self.nsta = len(stream)
