@@ -2,9 +2,8 @@
 
 <br>
 
-<p align=center>
+<div align=center>
 <img src="docs/source/_static/logo_square.svg" style="text-aligh:center;" width=150px/>
-</p>
 
 [![PyPI Version](https://img.shields.io/pypi/v/covseisnet.svg)](https://pypi.org/project/covseisnet/)
 [![Conda Version](https://img.shields.io/conda/v/conda-forge/covseisnet)](https://anaconda.org/conda-forge/covseisnet)
@@ -13,6 +12,12 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Platform](https://img.shields.io/conda/pn/conda-forge/covseisnet)](https://anaconda.org/conda-forge/covseisnet)
 [![codecov](https://codecov.io/gh/covseisnet/covseisnet/branch/develop/graph/badge.svg?token=N462A7PPRF)](https://codecov.io/gh/covseisnet/covseisnet)
+
+</div>
+
+<br>
+
+
 
 
 ## Overview
