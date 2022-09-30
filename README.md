@@ -7,10 +7,8 @@ Array signal processing in Python.
 
 [![Python Version](https://img.shields.io/pypi/pyversions/covseisnet)](https://pypi.org/project/covseisnet/) [![PyPI Version](https://img.shields.io/pypi/v/covseisnet.svg)](https://pypi.org/project/covseisnet/)[![Conda Version](https://img.shields.io/conda/v/conda-forge/covseisnet)](https://anaconda.org/conda-forge/covseisnet)\
 [![License](https://img.shields.io/conda/l/conda-forge/covseisnet)](https://www.gnu.org/licenses/lgpl.html)[![codecov](https://codecov.io/gh/covseisnet/covseisnet/branch/develop/graph/badge.svg?token=N462A7PPRF)](https://codecov.io/gh/covseisnet/covseisnet)
-[![Platform](https://img.shields.io/conda/pn/conda-forge/covseisnet)](https://anaconda.org/conda-forge/covseisnet)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-![GitHub last commit](https://img.shields.io/github/last-commit/covseisnet/covseisnet)
+[![Platform](https://img.shields.io/conda/pn/conda-forge/covseisnet)](https://anaconda.org/conda-forge/covseisnet) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)\
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) ![GitHub last commit](https://img.shields.io/github/last-commit/covseisnet/covseisnet)
 </div>
 
 
