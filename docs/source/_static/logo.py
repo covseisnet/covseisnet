@@ -167,8 +167,8 @@ def logo_square_small():
         )
 
     # Plot square braquets
-    hspace = BRACKET_HORIZONTAL_MARGIN * 2
-    wspace = BRACKET_VERTICAL_MARGIN * 2
+    hspace = BRACKET_HORIZONTAL_MARGIN * 1.7
+    wspace = BRACKET_VERTICAL_MARGIN * 1.7
 
     # Bottom left
     plt.plot(
@@ -226,7 +226,7 @@ def logo_square_small():
 
     # Text
     plt.text(
-        3.5,
+        4,
         1,
         "covseisnet",
         name="Ubuntu",
