@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# coding: utf-8
 """Covariance matrix in spectral domain.
 
 Todo
@@ -191,7 +190,9 @@ class CovarianceMatrix(np.ndarray):
         """
         # Initialization
         matrices = self._flat()
-        eigenvectors = np.zeros((matrices.shape[0], matrices.shape[-1]), dtype=complex)
+        eigenvectors = np.zeros(
+            (matrices.shape[0], matrices.shape[-1]), dtype=complex
+        )
 
         # Calculation over submatrices
         for i, m in enumerate(matrices):
@@ -248,7 +249,9 @@ class CovarianceMatrix(np.ndarray):
         return self[..., trii, trij]
 
 
-def calculate(stream, window_duration_sec, average, average_step=None, **kwargs):
+def calculate(
+    stream, window_duration_sec, average, average_step=None, **kwargs
+):
     """Calculate covariance matrix from the streams.
 
     Arguments

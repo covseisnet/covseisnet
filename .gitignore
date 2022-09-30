@@ -2,3 +2,5 @@
 .DS_Store
 *.pyc
 
+docs/build
+docs/source/auto_examples
