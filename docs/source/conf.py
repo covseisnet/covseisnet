@@ -26,7 +26,7 @@ sys.path.insert(0, os.path.abspath("../../"))
 # -------------------
 
 project = "covseisnet"
-copyright = "2022, The CovSeisNet Team"
+copyright = "2022, The Covseisnet Team"
 author = "L. Seydoux, J. Soubestre, C. Journeau, F. Tong & N. Shapiro"
 
 # The short X.Y version
@@ -111,13 +111,13 @@ pygments_style = "tango"
 # Options for HTML output
 # -----------------------
 
-html_theme = "sphinx_rtd_theme"
+html_theme = "pydata_sphinx_theme"
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 
-html_logo = "_static/logo.png"
+html_logo = "_static/logo_square_small.svg"
 
 html_theme_options = {
     "canonical_url": "",
@@ -198,7 +198,9 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, "covseisnet", "covseisnet Documentation", [author], 1)]
+man_pages = [
+    (master_doc, "covseisnet", "covseisnet Documentation", [author], 1)
+]
 
 
 # Options for Texinfo output

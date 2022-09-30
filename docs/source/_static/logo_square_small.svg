@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="233.69909pt" height="69.84pt" viewBox="0 0 233.69909 69.84" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2022-09-30T18:37:17.757528</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.5.3, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 69.84 
+L 233.69909 69.84 
+L 233.69909 0 
+L 0 0 
+L 0 69.84 
+z
+" style="fill: none"/>
+  </g>
+  <g id="axes_1">
+   <g id="line2d_1">
+    <defs>
+     <path id="mc7835bbd09" d="M 0 -6 
+L -6 6 
+L 6 6 
+z
+" style="stroke: #4b8bbe; stroke-linejoin: miter"/>
+    </defs>
+    <g>
+     <use xlink:href="#mc7835bbd09" x="46.778824" y="46.778824" style="fill: #4b8bbe; stroke: #4b8bbe; stroke-linejoin: miter"/>
+    </g>
+   </g>
+   <g id="line2d_2">
+    <g>
+     <use xlink:href="#mc7835bbd09" x="23.061176" y="23.061176" style="fill: #4b8bbe; stroke: #4b8bbe; stroke-linejoin: miter"/>
+    </g>
+   </g>
+   <g id="line2d_3">
+    <defs>
+     <path id="mf5108d7135" d="M 0 -6 
+L -6 6 
+L 6 6 
+z
+" style="stroke: #ffd43b; stroke-linejoin: miter"/>
+    </defs>
+    <g>
+     <use xlink:href="#mf5108d7135" x="46.778824" y="23.061176" style="fill: #ffd43b; stroke: #ffd43b; stroke-linejoin: miter"/>
+    </g>
+   </g>
+   <g id="line2d_4">
+    <path d="M 9.72 60.12 
+L 23.061176 60.12 
+" clip-path="url(#pd15139a7d2)" style="fill: none; stroke: #808080; stroke-width: 4; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_5">
+    <path d="M 60.12 60.12 
+L 46.778824 60.12 
+" clip-path="url(#pd15139a7d2)" style="fill: none; stroke: #808080; stroke-width: 4; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_6">
+    <path d="M 9.72 9.72 
+L 23.061176 9.72 
+" clip-path="url(#pd15139a7d2)" style="fill: none; stroke: #808080; stroke-width: 4; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_7">
+    <path d="M 46.778824 9.72 
+L 60.12 9.72 
+" clip-path="url(#pd15139a7d2)" style="fill: none; stroke: #808080; stroke-width: 4; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_8">
+    <path d="M 9.72 60.12 
+L 9.72 9.72 
+" clip-path="url(#pd15139a7d2)" style="fill: none; stroke: #808080; stroke-width: 4; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_9">
+    <path d="M 60.12 60.12 
+L 60.12 9.72 
+" clip-path="url(#pd15139a7d2)" style="fill: none; stroke: #808080; stroke-width: 4; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_10">
+    <path d="M 17.843294 46.850825 
+L 18.056269 46.834727 
+L 18.269244 46.792844 
+L 18.482218 46.716727 
+L 18.695193 46.600395 
+L 18.908168 46.443091 
+L 19.121143 46.252188 
+L 19.334118 46.045562 
+L 19.547092 45.852609 
+L 19.760067 45.713086 
+L 19.973042 45.673184 
+L 20.186017 45.778768 
+L 20.398992 46.066378 
+L 20.611966 46.553367 
+L 20.824941 47.229128 
+L 21.037916 48.049681 
+L 21.250891 48.937616 
+L 21.463866 49.78859 
+L 21.67684 50.484308 
+L 21.889815 50.910397 
+L 22.10279 50.976225 
+L 22.315765 50.632854 
+L 22.528739 49.885269 
+L 22.741714 48.795879 
+L 22.954689 47.477951 
+L 23.167664 46.079696 
+L 23.380639 44.761768 
+L 23.593613 43.672378 
+L 23.806588 42.924793 
+L 24.019563 42.581422 
+L 24.232538 42.64725 
+L 24.445513 43.073339 
+L 24.658487 43.769057 
+L 24.871462 44.620031 
+L 25.084437 45.507966 
+L 25.297412 46.328519 
+L 25.510387 47.00428 
+L 25.723361 47.491269 
+L 25.936336 47.778879 
+L 26.149311 47.884463 
+L 26.362286 47.844561 
+L 26.575261 47.705038 
+L 26.788235 47.512086 
+L 27.00121 47.305459 
+L 27.214185 47.114556 
+L 27.42716 46.957252 
+L 27.640134 46.84092 
+L 27.853109 46.764803 
+L 28.066084 46.72292 
+L 28.279059 46.706822 
+" clip-path="url(#pd15139a7d2)" style="fill: none; stroke: #808080; stroke-width: 3; stroke-linecap: square"/>
+   </g>
+   <g id="text_1">
+    <!-- covseisnet -->
+    <g style="fill: #808080" transform="translate(64.567059 44.670469)scale(0.33 -0.33)">
+     <defs>
+      <path id="Ubuntu-Medium-63" d="M 307 1670 
+Q 307 2042 422 2365 
+Q 538 2688 752 2925 
+Q 966 3162 1273 3296 
+Q 1581 3430 1965 3430 
+Q 2438 3430 2861 3258 
+L 2694 2624 
+Q 2560 2682 2390 2720 
+Q 2221 2758 2029 2758 
+Q 1574 2758 1337 2473 
+Q 1101 2189 1101 1670 
+Q 1101 1171 1325 880 
+Q 1549 589 2080 589 
+Q 2278 589 2470 627 
+Q 2662 666 2803 723 
+L 2912 83 
+Q 2784 19 2525 -32 
+Q 2266 -83 1990 -83 
+Q 1562 -83 1245 48 
+Q 928 179 720 412 
+Q 512 646 409 969 
+Q 307 1293 307 1670 
+z
+" transform="scale(0.015625)"/>
+      <path id="Ubuntu-Medium-6f" d="M 3520 1677 
+Q 3520 1280 3405 953 
+Q 3290 627 3078 396 
+Q 2867 166 2569 38 
+Q 2272 -90 1914 -90 
+Q 1555 -90 1260 38 
+Q 966 166 755 396 
+Q 544 627 425 953 
+Q 307 1280 307 1677 
+Q 307 2074 425 2397 
+Q 544 2720 758 2950 
+Q 973 3181 1267 3305 
+Q 1562 3430 1914 3430 
+Q 2266 3430 2563 3305 
+Q 2861 3181 3072 2950 
+Q 3283 2720 3401 2397 
+Q 3520 2074 3520 1677 
+z
+M 2726 1677 
+Q 2726 2176 2512 2467 
+Q 2298 2758 1914 2758 
+Q 1530 2758 1315 2467 
+Q 1101 2176 1101 1677 
+Q 1101 1171 1315 876 
+Q 1530 582 1914 582 
+Q 2298 582 2512 876 
+Q 2726 1171 2726 1677 
+z
+" transform="scale(0.015625)"/>
+      <path id="Ubuntu-Medium-76" d="M 1350 0 
+Q 1030 659 694 1513 
+Q 358 2368 83 3347 
+L 909 3347 
+Q 979 3066 1072 2742 
+Q 1165 2419 1270 2096 
+Q 1376 1773 1488 1469 
+Q 1600 1165 1696 922 
+Q 1792 1165 1901 1469 
+Q 2010 1773 2115 2096 
+Q 2221 2419 2317 2742 
+Q 2413 3066 2483 3347 
+L 3283 3347 
+Q 3008 2368 2672 1513 
+Q 2336 659 2016 0 
+L 1350 0 
+z
+" transform="scale(0.015625)"/>
+      <path id="Ubuntu-Medium-73" d="M 1331 557 
+Q 1638 557 1779 630 
+Q 1920 704 1920 883 
+Q 1920 1050 1769 1158 
+Q 1619 1267 1274 1395 
+Q 1062 1472 886 1558 
+Q 710 1645 582 1760 
+Q 454 1875 380 2038 
+Q 307 2202 307 2438 
+Q 307 2899 646 3164 
+Q 986 3430 1568 3430 
+Q 1862 3430 2131 3376 
+Q 2400 3322 2534 3270 
+L 2394 2643 
+Q 2266 2701 2067 2749 
+Q 1869 2797 1606 2797 
+Q 1370 2797 1222 2717 
+Q 1075 2637 1075 2470 
+Q 1075 2387 1104 2323 
+Q 1133 2259 1203 2204 
+Q 1274 2150 1389 2096 
+Q 1504 2042 1670 1984 
+Q 1946 1882 2138 1782 
+Q 2330 1683 2454 1558 
+Q 2579 1434 2636 1274 
+Q 2694 1114 2694 890 
+Q 2694 410 2339 163 
+Q 1984 -83 1325 -83 
+Q 883 -83 614 -9 
+Q 346 64 237 109 
+L 371 755 
+Q 544 685 784 621 
+Q 1024 557 1331 557 
+z
+" transform="scale(0.015625)"/>
+      <path id="Ubuntu-Medium-65" d="M 307 1658 
+Q 307 2099 438 2432 
+Q 570 2765 787 2985 
+Q 1005 3206 1286 3318 
+Q 1568 3430 1862 3430 
+Q 2554 3430 2941 3001 
+Q 3328 2573 3328 1722 
+Q 3328 1658 3325 1578 
+Q 3322 1498 3315 1434 
+L 1107 1434 
+Q 1139 1030 1392 809 
+Q 1645 589 2125 589 
+Q 2406 589 2640 640 
+Q 2874 691 3008 749 
+L 3110 115 
+Q 3046 83 2934 48 
+Q 2822 13 2678 -16 
+Q 2534 -45 2368 -64 
+Q 2202 -83 2029 -83 
+Q 1587 -83 1260 48 
+Q 934 179 723 412 
+Q 512 646 409 963 
+Q 307 1280 307 1658 
+z
+M 2554 2003 
+Q 2554 2163 2509 2307 
+Q 2464 2451 2377 2556 
+Q 2291 2662 2166 2723 
+Q 2042 2784 1869 2784 
+Q 1690 2784 1555 2717 
+Q 1421 2650 1328 2541 
+Q 1235 2432 1184 2291 
+Q 1133 2150 1114 2003 
+L 2554 2003 
+z
+" transform="scale(0.015625)"/>
+      <path id="Ubuntu-Medium-69" d="M 1274 0 
+L 499 0 
+L 499 3347 
+L 1274 3347 
+L 1274 0 
+z
+M 1357 4326 
+Q 1357 4109 1216 3981 
+Q 1075 3853 883 3853 
+Q 685 3853 544 3981 
+Q 403 4109 403 4326 
+Q 403 4550 544 4678 
+Q 685 4806 883 4806 
+Q 1075 4806 1216 4678 
+Q 1357 4550 1357 4326 
+z
+" transform="scale(0.015625)"/>
+      <path id="Ubuntu-Medium-6e" d="M 493 3238 
+Q 717 3302 1075 3360 
+Q 1434 3418 1869 3418 
+Q 2278 3418 2553 3306 
+Q 2829 3194 2992 2992 
+Q 3155 2790 3222 2505 
+Q 3290 2221 3290 1882 
+L 3290 0 
+L 2515 0 
+L 2515 1760 
+Q 2515 2029 2480 2217 
+Q 2445 2406 2365 2524 
+Q 2285 2643 2147 2697 
+Q 2010 2752 1811 2752 
+Q 1664 2752 1504 2733 
+Q 1344 2714 1267 2701 
+L 1267 0 
+L 493 0 
+L 493 3238 
+z
+" transform="scale(0.015625)"/>
+      <path id="Ubuntu-Medium-74" d="M 454 4230 
+L 1229 4358 
+L 1229 3347 
+L 2419 3347 
+L 2419 2701 
+L 1229 2701 
+L 1229 1338 
+Q 1229 934 1357 761 
+Q 1485 589 1792 589 
+Q 2003 589 2166 633 
+Q 2330 678 2426 717 
+L 2554 102 
+Q 2419 45 2201 -16 
+Q 1984 -77 1690 -77 
+Q 1331 -77 1091 19 
+Q 851 115 710 297 
+Q 570 480 512 739 
+Q 454 998 454 1331 
+L 454 4230 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#Ubuntu-Medium-63"/>
+     <use xlink:href="#Ubuntu-Medium-6f" x="46.074997"/>
+     <use xlink:href="#Ubuntu-Medium-76" x="104.624985"/>
+     <use xlink:href="#Ubuntu-Medium-73" x="157.224976"/>
+     <use xlink:href="#Ubuntu-Medium-65" x="202.924973"/>
+     <use xlink:href="#Ubuntu-Medium-69" x="260.024963"/>
+     <use xlink:href="#Ubuntu-Medium-73" x="287.624954"/>
+     <use xlink:href="#Ubuntu-Medium-6e" x="333.324951"/>
+     <use xlink:href="#Ubuntu-Medium-65" x="391.824936"/>
+     <use xlink:href="#Ubuntu-Medium-74" x="448.924927"/>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pd15139a7d2">
+   <rect x="7.2" y="7.2" width="55.44" height="55.44"/>
+  </clipPath>
+ </defs>
+</svg>
