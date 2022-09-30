@@ -125,10 +125,10 @@ html_theme_options = {
     "display_version": True,
     "prev_next_buttons_location": "bottom",
     "style_external_links": False,
-    "collapse_navigation": False,
-    "sticky_navigation": True,
-    "navigation_depth": 2,
-    "includehidden": True,
+    # "collapse_navigation": False,
+    # "sticky_navigation": True,
+    "navigation_depth": 1,
+    # "includehidden": True,
 }
 
 
@@ -142,7 +142,7 @@ def setup(app):
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
-html_sidebars = {"**": ["localtoc.html", "searchbox.html"]}
+html_sidebars = {"**": ["sidebar-nav-bs.html", "searchbox.html"]}
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
