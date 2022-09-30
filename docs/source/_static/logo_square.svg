@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="126.129062pt" height="148.580625pt" viewBox="0 0 126.129062 148.580625" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2022-09-30T17:11:18.620928</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.5.3, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 148.580625 
+L 126.129062 148.580625 
+L 126.129062 0 
+L 0 0 
+L 0 148.580625 
+z
+" style="fill: none"/>
+  </g>
+  <g id="axes_1">
+   <g id="line2d_1">
+    <defs>
+     <path id="mc640205e21" d="M 0 -7.5 
+L -7.5 7.5 
+L 7.5 7.5 
+z
+" style="stroke: #ffd43b; stroke-linejoin: miter"/>
+    </defs>
+    <g>
+     <use xlink:href="#mc640205e21" x="63.064531" y="91.44" style="fill: #ffd43b; stroke: #ffd43b; stroke-linejoin: miter"/>
+    </g>
+   </g>
+   <g id="line2d_2">
+    <defs>
+     <path id="m6742513eb2" d="M 0 -7.5 
+L -7.5 7.5 
+L 7.5 7.5 
+z
+" style="stroke: #4b8bbe; stroke-linejoin: miter"/>
+    </defs>
+    <g>
+     <use xlink:href="#m6742513eb2" x="91.864531" y="91.44" style="fill: #4b8bbe; stroke: #4b8bbe; stroke-linejoin: miter"/>
+    </g>
+   </g>
+   <g id="line2d_3">
+    <g>
+     <use xlink:href="#mc640205e21" x="34.264531" y="62.64" style="fill: #ffd43b; stroke: #ffd43b; stroke-linejoin: miter"/>
+    </g>
+   </g>
+   <g id="line2d_4">
+    <g>
+     <use xlink:href="#m6742513eb2" x="63.064531" y="62.64" style="fill: #4b8bbe; stroke: #4b8bbe; stroke-linejoin: miter"/>
+    </g>
+   </g>
+   <g id="line2d_5">
+    <g>
+     <use xlink:href="#mc640205e21" x="91.864531" y="62.64" style="fill: #ffd43b; stroke: #ffd43b; stroke-linejoin: miter"/>
+    </g>
+   </g>
+   <g id="line2d_6">
+    <g>
+     <use xlink:href="#m6742513eb2" x="34.264531" y="33.84" style="fill: #4b8bbe; stroke: #4b8bbe; stroke-linejoin: miter"/>
+    </g>
+   </g>
+   <g id="line2d_7">
+    <g>
+     <use xlink:href="#mc640205e21" x="63.064531" y="33.84" style="fill: #ffd43b; stroke: #ffd43b; stroke-linejoin: miter"/>
+    </g>
+   </g>
+   <g id="line2d_8">
+    <defs>
+     <path id="m383e4074f2" d="M 0 -7.5 
+L -7.5 7.5 
+L 7.5 7.5 
+z
+" style="stroke: #808080; stroke-linejoin: miter"/>
+    </defs>
+    <g>
+     <use xlink:href="#m383e4074f2" x="91.864531" y="33.84" style="fill: #808080; stroke: #808080; stroke-linejoin: miter"/>
+    </g>
+   </g>
+   <g id="line2d_9">
+    <path d="M 12.664531 113.04 
+L 34.264531 113.04 
+" clip-path="url(#p50f83bc2d5)" style="fill: none; stroke: #808080; stroke-width: 4; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_10">
+    <path d="M 113.464531 113.04 
+L 91.864531 113.04 
+" clip-path="url(#p50f83bc2d5)" style="fill: none; stroke: #808080; stroke-width: 4; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_11">
+    <path d="M 12.664531 12.24 
+L 34.264531 12.24 
+" clip-path="url(#p50f83bc2d5)" style="fill: none; stroke: #808080; stroke-width: 4; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_12">
+    <path d="M 91.864531 12.24 
+L 113.464531 12.24 
+" clip-path="url(#p50f83bc2d5)" style="fill: none; stroke: #808080; stroke-width: 4; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_13">
+    <path d="M 12.664531 113.04 
+L 12.664531 12.24 
+" clip-path="url(#p50f83bc2d5)" style="fill: none; stroke: #808080; stroke-width: 4; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_14">
+    <path d="M 113.464531 113.04 
+L 113.464531 12.24 
+" clip-path="url(#p50f83bc2d5)" style="fill: none; stroke: #808080; stroke-width: 4; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_15">
+    <path d="M 22.744531 91.44 
+L 23.214735 91.437692 
+L 23.684939 91.432382 
+L 24.155143 91.423594 
+L 24.625348 91.413921 
+L 25.095552 91.412032 
+L 25.565756 91.434432 
+L 26.03596 91.502169 
+L 26.506164 91.628447 
+L 26.976368 91.796692 
+L 27.446572 91.937053 
+L 27.916776 91.919661 
+L 28.38698 91.587155 
+L 28.857184 90.837321 
+L 29.327388 89.735644 
+L 29.797592 88.598932 
+L 30.267797 87.972011 
+L 30.738001 88.448452 
+L 31.208205 90.368461 
+L 31.678409 93.526682 
+L 32.148613 97.072615 
+L 32.618817 99.729773 
+L 33.089021 100.299914 
+L 33.559225 98.236729 
+L 34.029429 93.987976 
+L 34.499633 88.892024 
+L 34.969837 84.643271 
+L 35.440041 82.580086 
+L 35.910246 83.150227 
+L 36.38045 85.807385 
+L 36.850654 89.353318 
+L 37.320858 92.511539 
+L 37.791062 94.431548 
+L 38.261266 94.907989 
+L 38.73147 94.281068 
+L 39.201674 93.144356 
+L 39.671878 92.042679 
+L 40.142082 91.292845 
+L 40.612286 90.960339 
+L 41.08249 90.942947 
+L 41.552695 91.083308 
+L 42.022899 91.251553 
+L 42.493103 91.377831 
+L 42.963307 91.445568 
+L 43.433511 91.467968 
+L 43.903715 91.466079 
+L 44.373919 91.456406 
+L 44.844123 91.447618 
+L 45.314327 91.442308 
+L 45.784531 91.44 
+" clip-path="url(#p50f83bc2d5)" style="fill: none; stroke: #808080; stroke-width: 3; stroke-linecap: square"/>
+   </g>
+   <g id="text_1">
+    <!-- covseisnet -->
+    <g style="fill: #808080" transform="translate(7.2 137.310625)scale(0.22 -0.22)">
+     <defs>
+      <path id="Ubuntu-Bold-63" d="M 288 1683 
+Q 288 2048 406 2371 
+Q 525 2694 749 2934 
+Q 973 3174 1293 3315 
+Q 1613 3456 2022 3456 
+Q 2291 3456 2515 3408 
+Q 2739 3360 2950 3270 
+L 2752 2509 
+Q 2618 2560 2458 2598 
+Q 2298 2637 2099 2637 
+Q 1677 2637 1469 2374 
+Q 1261 2112 1261 1683 
+Q 1261 1229 1456 979 
+Q 1651 730 2138 730 
+Q 2310 730 2508 762 
+Q 2707 794 2874 864 
+L 3008 83 
+Q 2842 13 2592 -38 
+Q 2342 -90 2042 -90 
+Q 1581 -90 1248 48 
+Q 915 186 700 422 
+Q 486 659 387 982 
+Q 288 1306 288 1683 
+z
+" transform="scale(0.015625)"/>
+      <path id="Ubuntu-Bold-6f" d="M 3597 1690 
+Q 3597 1293 3481 963 
+Q 3366 634 3148 400 
+Q 2931 166 2627 38 
+Q 2323 -90 1946 -90 
+Q 1574 -90 1270 38 
+Q 966 166 748 400 
+Q 531 634 409 963 
+Q 288 1293 288 1690 
+Q 288 2086 413 2412 
+Q 538 2739 758 2969 
+Q 979 3200 1283 3328 
+Q 1587 3456 1946 3456 
+Q 2310 3456 2614 3328 
+Q 2918 3200 3136 2969 
+Q 3354 2739 3475 2412 
+Q 3597 2086 3597 1690 
+z
+M 2624 1690 
+Q 2624 2131 2448 2384 
+Q 2272 2637 1946 2637 
+Q 1619 2637 1440 2384 
+Q 1261 2131 1261 1690 
+Q 1261 1248 1440 989 
+Q 1619 730 1946 730 
+Q 2272 730 2448 989 
+Q 2624 1248 2624 1690 
+z
+" transform="scale(0.015625)"/>
+      <path id="Ubuntu-Bold-76" d="M 1363 0 
+Q 1037 640 701 1497 
+Q 365 2355 64 3366 
+L 1075 3366 
+Q 1139 3117 1225 2825 
+Q 1312 2534 1405 2236 
+Q 1498 1939 1590 1657 
+Q 1683 1376 1773 1146 
+Q 1856 1376 1952 1657 
+Q 2048 1939 2141 2236 
+Q 2234 2534 2320 2825 
+Q 2406 3117 2470 3366 
+L 3456 3366 
+Q 3155 2355 2819 1497 
+Q 2483 640 2157 0 
+L 1363 0 
+z
+" transform="scale(0.015625)"/>
+      <path id="Ubuntu-Bold-73" d="M 1414 685 
+Q 1677 685 1785 736 
+Q 1894 787 1894 934 
+Q 1894 1050 1753 1136 
+Q 1613 1222 1325 1331 
+Q 1101 1414 918 1504 
+Q 736 1594 608 1718 
+Q 480 1843 409 2016 
+Q 339 2189 339 2432 
+Q 339 2906 691 3181 
+Q 1043 3456 1658 3456 
+Q 1965 3456 2246 3401 
+Q 2528 3347 2694 3283 
+L 2528 2541 
+Q 2362 2598 2166 2643 
+Q 1971 2688 1728 2688 
+Q 1280 2688 1280 2438 
+Q 1280 2381 1299 2336 
+Q 1318 2291 1376 2249 
+Q 1434 2208 1533 2160 
+Q 1632 2112 1786 2054 
+Q 2099 1939 2304 1827 
+Q 2509 1715 2627 1584 
+Q 2746 1453 2794 1293 
+Q 2842 1133 2842 922 
+Q 2842 422 2467 166 
+Q 2093 -90 1408 -90 
+Q 960 -90 662 -13 
+Q 365 64 250 115 
+L 410 890 
+Q 653 794 909 739 
+Q 1165 685 1414 685 
+z
+" transform="scale(0.015625)"/>
+      <path id="Ubuntu-Bold-65" d="M 288 1658 
+Q 288 2106 425 2442 
+Q 563 2778 787 3002 
+Q 1011 3226 1302 3341 
+Q 1594 3456 1901 3456 
+Q 2618 3456 3034 3017 
+Q 3450 2579 3450 1728 
+Q 3450 1645 3443 1545 
+Q 3437 1446 3430 1370 
+L 1267 1370 
+Q 1299 1075 1542 902 
+Q 1786 730 2195 730 
+Q 2458 730 2710 778 
+Q 2963 826 3123 896 
+L 3251 122 
+Q 3174 83 3046 44 
+Q 2918 6 2761 -22 
+Q 2605 -51 2425 -70 
+Q 2246 -90 2067 -90 
+Q 1613 -90 1277 44 
+Q 941 179 720 412 
+Q 499 646 393 966 
+Q 288 1286 288 1658 
+z
+M 2528 2022 
+Q 2522 2144 2486 2259 
+Q 2451 2374 2377 2464 
+Q 2304 2554 2192 2611 
+Q 2080 2669 1914 2669 
+Q 1754 2669 1638 2614 
+Q 1523 2560 1446 2470 
+Q 1370 2381 1328 2262 
+Q 1286 2144 1267 2022 
+L 2528 2022 
+z
+" transform="scale(0.015625)"/>
+      <path id="Ubuntu-Bold-69" d="M 1402 0 
+L 448 0 
+L 448 3366 
+L 1402 3366 
+L 1402 0 
+z
+M 1491 4339 
+Q 1491 4077 1321 3926 
+Q 1152 3776 922 3776 
+Q 691 3776 521 3926 
+Q 352 4077 352 4339 
+Q 352 4602 521 4752 
+Q 691 4902 922 4902 
+Q 1152 4902 1321 4752 
+Q 1491 4602 1491 4339 
+z
+" transform="scale(0.015625)"/>
+      <path id="Ubuntu-Bold-6e" d="M 448 3251 
+Q 691 3322 1075 3382 
+Q 1459 3443 1882 3443 
+Q 2310 3443 2595 3331 
+Q 2880 3219 3046 3014 
+Q 3213 2810 3283 2528 
+Q 3354 2246 3354 1901 
+L 3354 0 
+L 2400 0 
+L 2400 1786 
+Q 2400 2246 2278 2438 
+Q 2157 2630 1824 2630 
+Q 1722 2630 1606 2620 
+Q 1491 2611 1402 2598 
+L 1402 0 
+L 448 0 
+L 448 3251 
+z
+" transform="scale(0.015625)"/>
+      <path id="Ubuntu-Bold-74" d="M 416 4205 
+L 1370 4358 
+L 1370 3366 
+L 2515 3366 
+L 2515 2573 
+L 1370 2573 
+L 1370 1389 
+Q 1370 1088 1475 909 
+Q 1581 730 1901 730 
+Q 2054 730 2217 758 
+Q 2381 787 2515 838 
+L 2650 96 
+Q 2477 26 2265 -25 
+Q 2054 -77 1747 -77 
+Q 1357 -77 1101 28 
+Q 845 134 691 323 
+Q 538 512 477 781 
+Q 416 1050 416 1376 
+L 416 4205 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#Ubuntu-Bold-63"/>
+     <use xlink:href="#Ubuntu-Bold-6f" x="47.499985"/>
+     <use xlink:href="#Ubuntu-Bold-76" x="106.824982"/>
+     <use xlink:href="#Ubuntu-Bold-73" x="161.824966"/>
+     <use xlink:href="#Ubuntu-Bold-65" x="210.324951"/>
+     <use xlink:href="#Ubuntu-Bold-69" x="268.724945"/>
+     <use xlink:href="#Ubuntu-Bold-73" x="297.624939"/>
+     <use xlink:href="#Ubuntu-Bold-6e" x="346.124924"/>
+     <use xlink:href="#Ubuntu-Bold-65" x="405.024918"/>
+     <use xlink:href="#Ubuntu-Bold-74" x="463.424911"/>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p50f83bc2d5">
+   <rect x="7.624531" y="7.2" width="110.88" height="110.88"/>
+  </clipPath>
+ </defs>
+</svg>

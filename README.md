@@ -1,5 +1,7 @@
+# Covseisnet
+
 <br>
-<img src="docs/source/_static/logo.png" width="300px"/>
+<img src="docs/source/_static/logo_square.svg" width="300px"/>
 <br>
 <br>
 
