@@ -149,7 +149,7 @@ class CovarianceMatrix(np.ndarray):
         matrices = self._flat()
         eigenvalues = np.zeros((matrices.shape[0], matrices.shape[-1]))
         for i, matrix in enumerate(matrices):
-            eigenvalues[i] = np.abs(eigvalsh(matrix)[::-1])
+            eigenvalues[i] = np.sort(np.abs(eigvalsh(matrix)))[::-1]
             eigenvalues[i] /= norm(eigenvalues[i])
         return eigenvalues.reshape(self.shape[:-1])
 
