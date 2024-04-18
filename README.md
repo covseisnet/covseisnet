@@ -1,5 +1,7 @@
 <br>
-<img src="docs/source/_static/logo.png" width="200px"/>
+<div align="center">
+<img src="docs/source/_static/logo.png" width="200px" align=center/>
+</div>
 <br>
 <br>
 
