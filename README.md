@@ -1,9 +1,9 @@
 <br>
-<img src="docs/source/_static/logo.png" width="300px"/>
+<img src="docs/source/_static/logo.png" width="200px"/>
 <br>
 <br>
 
-
+[![DOI](https://zenodo.org/badge/263984678.svg)](https://zenodo.org/doi/10.5281/zenodo.10990031)
 [![PyPI Version](https://img.shields.io/pypi/v/covseisnet.svg)](https://pypi.org/project/covseisnet/)
 [![Conda Version](https://img.shields.io/conda/v/conda-forge/covseisnet)](https://anaconda.org/conda-forge/covseisnet)
 [![License](https://img.shields.io/conda/l/conda-forge/covseisnet)](https://www.gnu.org/licenses/lgpl.html)
